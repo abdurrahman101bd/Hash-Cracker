@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documentation - Safe Hash Checker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10.899999618530273 88.3499984741211 38.599998474121094">
+          <path d="M11.30 47Q8.20 47 5.85 46.35Q3.50 45.70 2.50 44.90Q0 42.95 0 40.40Q0 38.25 1.88 36.08Q3.75 33.90 7.60 32.08Q11.45 30.25 17.30 29.20Q19.80 28.75 22.38 28.50Q24.95 28.25 27.55 28.25Q29.75 28.25 31.98 28.45Q34.20 28.65 36.35 29.10Q37.05 29.25 37.95 29.48Q38.85 29.70 39.80 30Q43.95 25.75 47.90 21.55Q51.85 17.35 55.55 14.45Q58.15 12.40 60.40 11.65Q62.65 10.90 64.40 10.90Q66.45 10.90 67.77 11.52Q69.10 12.15 69.50 12.55Q69.65 12.70 69.50 12.85Q69.35 13 69.20 12.85Q68.95 12.55 68 12.20Q67.05 11.85 65.55 11.85Q63.70 11.85 61.20 12.70Q58.70 13.55 55.65 15.90Q51.90 18.85 48.23 22.67Q44.55 26.50 40.75 30.35Q42.70 31.05 44.33 32.25Q45.95 33.45 46.20 35.20L46.20 35.40Q46.20 35.60 46.10 35.60Q45.95 35.60 45.80 35.30Q45.60 34.75 44.68 34.35Q43.75 33.95 42.55 33.70Q41.35 33.45 40.25 33.30Q39.15 33.15 38.60 33.10L38.05 33.05Q33.90 37.05 29.48 40.42Q25.05 43.80 20.10 45.50Q17.75 46.30 15.53 46.65Q13.30 47 11.30 47M49.95 49.45Q47.70 47.85 46.65 45.60Q45.60 43.35 45.60 40.75Q45.60 38.15 46.50 35.55Q47.40 32.90 49.13 30.05Q50.85 27.20 52.90 24.47Q54.95 21.75 56.88 19.47Q58.80 17.20 60.13 15.70Q61.45 14.20 61.70 13.85Q62.00 13.45 62.15 13.45Q62.35 13.45 62.45 13.77Q62.55 14.10 62.55 14.50Q62.55 15.30 62.30 15.65Q61.00 17.30 59.20 19.85Q57.40 22.40 55.55 25.52Q53.70 28.65 52.10 31.95Q50.50 35.25 49.53 38.40Q48.55 41.55 48.55 44.15Q48.55 45.65 48.95 46.90Q49.35 48.15 50.25 49.10Q50.30 49.15 50.30 49.25Q50.30 49.35 50.20 49.45Q50.10 49.55 49.95 49.45M11.45 46.15Q13.30 46.15 15.45 45.83Q17.60 45.50 19.90 44.80Q24.20 43.45 28.45 40.20Q32.70 36.95 36.80 32.95Q36.15 32.90 35.50 32.90Q34.85 32.90 34.15 32.90Q30.65 32.90 26.88 33.25Q23.10 33.60 19.70 34.25Q14.20 35.20 10.72 36.63Q7.25 38.05 5.63 39.60Q4 41.15 4 42.55Q4 43.90 5.35 44.90Q6.05 45.40 7.65 45.77Q9.25 46.15 11.45 46.15ZM52.45 46.95Q52.05 46.95 52.05 46.50Q52.05 46.40 52.08 46.30Q52.10 46.20 52.15 46.05Q52.45 44.90 53.48 42.95Q54.50 41 56.02 38.58Q57.55 36.15 59.30 33.60Q59 32.55 59.05 31.90Q59.10 31.40 59.73 30.73Q60.35 30.05 61.13 29.57Q61.90 29.10 62.35 29.20Q64.30 26.55 66 24.35Q67.70 22.15 68.88 20.85Q70.05 19.55 70.35 19.55Q70.75 19.55 70.95 19.90Q71.15 20.25 71.15 20.55Q71.15 20.55 69.97 22.02Q68.80 23.50 66.92 25.93Q65.05 28.35 62.95 31.25Q63 31.30 63 31.40Q63 31.50 63.05 31.60L64.85 31.45Q67.40 31.25 70.25 30.52Q73.10 29.80 75.85 28.68Q78.60 27.55 80.75 26.10Q83.15 24.45 84.72 22.57Q86.30 20.70 86.30 19.15Q86.30 17.60 84.45 16.57Q82.60 15.55 78.20 15.55Q76.70 15.55 74.50 15.90Q72.30 16.25 69.78 16.85Q67.25 17.45 64.78 18.27Q62.30 19.10 60.28 20.05Q58.25 21 57.05 22Q56.25 22.70 56.50 23.15Q56.60 23.30 56.60 23.45Q56.60 23.55 56.50 23.55Q56.35 23.55 56.10 23.40Q55.30 22.90 54.93 22.13Q54.55 21.35 54.55 20.70Q54.55 20.10 54.75 19.90Q55.65 18.60 57.73 17.40Q59.80 16.20 62.60 15.20Q65.40 14.20 68.55 13.45Q71.70 12.70 74.72 12.30Q77.75 11.90 80.25 11.90Q82.30 11.90 83.70 12.20Q85.65 12.60 87 14.13Q88.35 15.65 88.35 17.85Q88.35 19.90 86.72 22.35Q85.10 24.80 81.15 27.10Q78.95 28.40 76.10 29.52Q73.25 30.65 70.33 31.40Q67.40 32.15 64.90 32.30Q64.50 32.35 64.10 32.35Q63.70 32.35 63.30 32.35Q64.10 34.35 65.83 36.48Q67.55 38.60 69.70 40.42Q71.85 42.25 74 43.38Q76.15 44.50 77.70 44.50Q78.90 44.50 79.88 43.92Q80.85 43.35 81 42.40Q81 42.20 81.20 42.23Q81.40 42.25 81.35 42.50Q81.15 44.25 79.45 45.05Q77.75 45.85 75.65 45.85Q72.95 45.85 70.53 44.85Q68.10 43.85 66.03 42.27Q63.95 40.70 62.43 38.85Q60.90 37 60 35.30Q57.85 38.45 56.02 41.35Q54.20 44.25 53.45 46.15Q53.35 46.50 53.02 46.73Q52.70 46.95 52.45 46.95Z"/>
+        </svg>
+        <span class="brand-name">ARzone</span>
+      </a>
+      
+      <nav id="nav">
+        <a href="index.html">Home</a>
+        <a href="encrypt.html">Encode/Decode</a>
+        <a href="docs.html">Documentation</a>
+      </nav>
+      
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle">
+          <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+            <path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/>
+          </svg>
+          <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+            <path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>
+          </svg>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <svg class="menu-icon hamburger-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+            <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
+          </svg>
+          <svg class="menu-icon close-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+            <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="docs-container">
+    <!-- Table of Contents (Floating) -->
+    <div class="toc-floating" id="tocFloating">
+      <div class="toc-header">
+        <span>📚 Contents</span>
+        <button class="toc-close" id="tocClose">×</button>
+      </div>
+      <nav class="toc-links">
+          <a href="#about">About This Tool</a>
+          <a href="#what-is-hash">What is Hash?</a>
+          <a href="#how-works">How It Works</a>
+          <a href="#algorithms">Hash Algorithms</a>
+          <a href="#wordlist">Wordlist Files</a>
+          <a href="#downloads">Downloads</a>
+          <a href="#usage">How to Use</a>
+          <a href="#security">Security Tips</a>
+          <a href="#encode-decode">Encode/Decode Tool</a>
+          <a href="#encoding-categories">Encoding Categories</a>
+          <a href="#encode-how-to-use">How to Use Encoder</a>
+          <a href="#encode-use-cases">Use Cases</a>
+          <a href="#encode-tips">Pro Tips</a>
+          <a href="#encode-performance">Performance</a>
+          <a href="#encode-resources">Resources</a>
+        </nav>
+    </div>
+
+    <button class="toc-toggle" id="tocToggle">
+      📚 Table of Contents
+    </button>
+
+    <div class="docs-content">
+      <section id="about" class="doc-section">
+        <h1>📖 Safe Hash Checker/Cracker Documentation</h1>
+        <p class="lead">A complete client-side hash generation and verification tool that works locally in your browser.</p>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>100% Client-side</h3>
+            <p>No data is sent to any server</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Multiple Algorithms</h3>
+            <p>MD5, SHA-1, SHA-256, SHA-384, SHA-512</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Wordlist Checking</h3>
+            <p>Hash cracking via dictionary attack</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📜</div>
+            <h3>History Tracking</h3>
+            <p>Save generation and checking history</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="what-is-hash" class="doc-section">
+        <h2>🔐 What is a Hash?</h2>
+        <p>A hash is a one-way cryptographic function that converts any input data into a fixed-size string. It works like a “digital fingerprint.”</p>
+        
+        <div class="code-box">
+          <h4>Example:</h4>
+          <pre>Input:  "password123"
+MD5:    482c811da5d5b4bc6d497ffa98491e38
+SHA256: ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</pre>
+        </div>
+
+        <div class="properties-grid">
+          <div class="property-item">
+            <div class="property-icon">🎯</div>
+            <h4>Deterministic</h4>
+            <p>The same input always produces the same hash</p>
+          </div>
+          <div class="property-item">
+            <div class="property-icon">🔒</div>
+            <h4>One-way</h4>
+            <p>It’s impossible to recover the original data from a hash</p>
+          </div>
+          <div class="property-item">
+            <div class="property-icon">📏</div>
+            <h4>Fixed size</h4>
+            <p>Any size input produces a fixed-length output</p>
+          </div>
+          <div class="property-item">
+            <div class="property-icon">💥</div>
+            <h4>Avalanche effect</h4>
+            <p>A tiny change creates a completely different hash</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-works" class="doc-section">
+        <h2>⚙️ How Hashing Works</h2>
+        
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker">1</div>
+            <div class="timeline-content">
+              <h4>Input Processing</h4>
+              <p>Your text/password is taken and converted into binary data</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-marker">2</div>
+            <div class="timeline-content">
+              <h4>Hash Algorithm Application</h4>
+              <p>The selected algorithm (MD5/SHA etc.) performs mathematical operations</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-marker">3</div>
+            <div class="timeline-content">
+              <h4>Output Generation</h4>
+              <p>A fixed-length hexadecimal hash string is generated</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <h4>⚠️ Important:</h4>
+          <p>Hashing is a one-way process. You cannot directly recover the original password from a hash. The only way to find a match is via brute-force or dictionary attack.</p>
+        </div>
+      </section>
+
+      <section id="algorithms" class="doc-section">
+        <h2>🔢 Supported Hash Algorithms</h2>
+        
+        <div class="algo-grid">
+          <div class="algo-card deprecated">
+            <div class="algo-header">
+              <h3>MD5</h3>
+              <span class="algo-badge warning">⚠️ Not Secure</span>
+            </div>
+            <p class="algo-size">128-bit (32 hex characters)</p>
+            <p>A legacy algorithm — fast but cryptographically broken. Use only for checksums.</p>
+          </div>
+
+          <div class="algo-card deprecated">
+            <div class="algo-header">
+              <h3>SHA-1</h3>
+              <span class="algo-badge warning">⚠️ Deprecated</span>
+            </div>
+            <p class="algo-size">160-bit (40 hex characters)</p>
+            <p>Better than MD5 but now deprecated. Still used internally by Git.</p>
+          </div>
+
+          <div class="algo-card recommended">
+            <div class="algo-header">
+              <h3>SHA-256</h3>
+              <span class="algo-badge success">✅ Recommended</span>
+            </div>
+            <p class="algo-size">256-bit (64 hex characters)</p>
+            <p>Part of the SHA-2 family, currently the most popular and secure. Used in Bitcoin.</p>
+          </div>
+
+          <div class="algo-card">
+            <div class="algo-header">
+              <h3>SHA-384</h3>
+              <span class="algo-badge success">✅ Secure</span>
+            </div>
+            <p class="algo-size">384-bit (96 hex characters)</p>
+            <p>SHA-2 family — use for extra security requirements.</p>
+          </div>
+
+          <div class="algo-card">
+            <div class="algo-header">
+              <h3>SHA-512</h3>
+              <span class="algo-badge success">✅ Secure</span>
+            </div>
+            <p class="algo-size">512-bit (128 hex characters)</p>
+            <p>The strongest version of the SHA-2 family — for maximum security.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="wordlist" class="doc-section">
+        <h2>📝 What are Wordlist Files?</h2>
+        <p>A wordlist is a text file containing possible passwords line by line. These are used for hash cracking.</p>
+
+        <div class="code-box">
+          <h4>Wordlist Format:</h4>
+          <pre>password
+123456
+password123
+admin
+qwerty
+letmein
+welcome
+monkey</pre>
+        </div>
+
+        <div class="wordlist-types">
+          <div class="type-card">
+            <h4>📊 Common Passwords</h4>
+            <p>Most frequently used weak passwords</p>
+          </div>
+          <div class="type-card">
+            <h4>📖 Dictionary</h4>
+            <p>Common words and their variations</p>
+          </div>
+          <div class="type-card">
+            <h4>💾 Leaked Databases</h4>
+            <p>Passwords obtained from data breaches</p>
+          </div>
+          <div class="type-card">
+            <h4>✏️ Custom</h4>
+            <p>User-created specific wordlists</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="downloads" class="doc-section">
+        <h2>⬇️ Wordlist Downloads</h2>
+        
+        <div class="download-grid">
+          <div class="download-card">
+            <h4>SecLists</h4>
+            <p>The most comprehensive collection for security testing</p>
+            <a href="https://github.com/danielmiessler/SecLists" target="_blank" class="btn btn-primary">Download from GitHub</a>
+          </div>
+
+          <div class="download-card">
+            <h4>RockYou</h4>
+            <p>The most famous leaked password list (14M+ passwords)</p>
+            <a href="https://github.com/brannondorsey/naive-hashcat/releases" target="_blank" class="btn btn-primary">Download RockYou</a>
+          </div>
+
+          <div class="download-card">
+            <h4>10K Most Common</h4>
+            <p>Small but effective — perfect for beginners</p>
+            <a href="https://github.com/danielmiessler/SecLists/tree/master/Passwords" target="_blank" class="btn btn-primary">Download 10K List</a>
+          </div>
+          
+          <div class="download-card">
+            <h4>Many More</h4>
+            <p>There are so many password wordlists here.</p>
+            <a href="https://github.com/kkrypt0nn/wordlists/tree/main/wordlists" target="_blank" class="btn btn-primary">Download</a>
+          </div>
+
+          <div class="download-card">
+            <h4>Have I Been Pwned</h4>
+            <p>500M+ compromised password database</p>
+            <a href="https://haveibeenpwned.com/Passwords" target="_blank" class="btn btn-primary">Visit HIBP</a>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <h4>⚠️ Legal Notice:</h4>
+          <p>Use these wordlists only for educational and authorized security testing. Unauthorized access attempts are illegal and punishable by law.</p>
+        </div>
+      </section>
+
+      <section id="usage" class="doc-section">
+        <h2>🚀 How to Use</h2>
+
+        <div class="usage-steps">
+          <div class="usage-step">
+            <div class="usage-number">1</div>
+            <div class="usage-content">
+              <h3>Generate Hash</h3>
+              <ol>
+                <li>Go to the Home page</li>
+                <li>Enter your text in the “Plain text / password” field</li>
+                <li>Select an algorithm (SHA-256 recommended)</li>
+                <li>Click “Compute Hash”</li>
+                <li>Copy the result or it will be automatically saved in history</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="usage-step">
+            <div class="usage-number">2</div>
+            <div class="usage-content">
+              <h3>Verify/Crack Hash</h3>
+              <ol>
+                <li>Go to the “Verify Hash via Wordlist” section</li>
+                <li>Paste the target hash</li>
+                <li>Select the correct algorithm</li>
+                <li>Upload your wordlist file (.txt)</li>
+                <li>Click “Start Check”</li>
+                <li>If a match is found, the password will appear; otherwise, “Not Found.”</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="usage-step">
+            <div class="usage-number">3</div>
+            <div class="usage-content">
+              <h3>View History</h3>
+              <ol>
+                <li>Click the History icon (🕐) in the header</li>
+                <li>View generation history under the “Hash History” tab</li>
+                <li>View verification history under the “Check History” tab</li>
+                <li>Click “Clear History” if needed</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="security" class="doc-section">
+        <h2>🛡️ Security Tips</h2>
+
+        <div class="security-grid">
+          <div class="security-tip success">
+            <h4>✅ DO:</h4>
+            <ul>
+              <li>Only test your own passwords</li>
+              <li>Use strong, unique passwords</li>
+              <li>Use a password manager</li>
+              <li>Enable two-factor authentication</li>
+              <li>Use SHA-256 or SHA-512 for modern applications</li>
+            </ul>
+          </div>
+
+          <div class="security-tip danger">
+            <h4>❌ DON'T:</h4>
+            <ul>
+              <li>Never try to crack someone else’s hash (illegal)</li>
+              <li>Don’t use MD5 or SHA-1 for sensitive data</li>
+              <li>Don’t use common passwords</li>
+              <li>Don’t reuse the same password on multiple sites</li>
+              <li>Don’t generate sensitive hashes on public/shared computers</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h4>🔒 Privacy Guarantee:</h4>
+          <p>This tool works entirely client-side. None of your data, passwords, or hashes are ever sent to any server. Everything is processed locally in your browser.</p>
+        </div>
+      </section>
+      
+      <!-- Encode/Decode Tool Documentation -->
+      <section id="encode-decode" class="doc-section">
+        <h1>🔐 Encode/Decode Tool Documentation</h1>
+        <p class="lead">A comprehensive text encoding, decoding, and transformation toolkit with 40+ different methods — all processing happens locally in your browser.</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h3>Base Encodings</h3>
+            <p>Base16, 32, 58, 62, 64, 85, 91</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔠</div>
+            <h3>ASCII & Numbers</h3>
+            <p>Hex, Binary, Octal, Decimal</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌐</div>
+            <h3>URL & Network</h3>
+            <p>URL encoding, Punycode, UUEncode</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔤</div>
+            <h3>Ciphers & More</h3>
+            <p>ROT13, Caesar, Morse, Atbash</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="encoding-categories" class="doc-section">
+        <h2>📚 Encoding Categories</h2>
+
+        <div class="encoding-category">
+          <h3>📦 Base Encodings</h3>
+          <p>Base encoding schemes are used to represent binary data in ASCII string format. They're commonly used for data transmission and storage.</p>
+          
+          <div class="encoding-list">
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Base64</strong>
+                <span class="encoding-badge popular">Most Popular</span>
+              </div>
+              <p><strong>Use case:</strong> Email attachments, data URLs, JWT tokens</p>
+              <p><strong>Characters:</strong> A-Z, a-z, 0-9, +, /</p>
+              <div class="code-box">
+                <pre>Input:  "Hello World"
+Output: SGVsbG8gV29ybGQ=</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Base64 URL Safe</strong>
+                <span class="encoding-badge">Web Safe</span>
+              </div>
+              <p><strong>Use case:</strong> URLs, filenames, cookies</p>
+              <p><strong>Difference:</strong> Uses - and _ instead of + and /, removes padding</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Base32</strong>
+              </div>
+              <p><strong>Use case:</strong> TOTP tokens, case-insensitive systems</p>
+              <p><strong>Characters:</strong> A-Z, 2-7</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Base58</strong>
+                <span class="encoding-badge">Crypto</span>
+              </div>
+              <p><strong>Use case:</strong> Bitcoin addresses, IPFS hashes</p>
+              <p><strong>Why?:</strong> Removes confusing characters (0, O, I, l)</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Base85 (Ascii85)</strong>
+              </div>
+              <p><strong>Use case:</strong> PDF files, PostScript</p>
+              <p><strong>Efficiency:</strong> 25% more efficient than Base64</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="encoding-category">
+          <h3>🔠 ASCII & Number Systems</h3>
+          <p>Convert text to different number system representations for debugging, analysis, or obfuscation.</p>
+          
+          <div class="encoding-list">
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Hexadecimal (Base16)</strong>
+              </div>
+              <p><strong>Use case:</strong> Color codes, memory addresses, checksums</p>
+              <div class="code-box">
+                <pre>Text: "Hi"
+Hex:  4869</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Binary (Base2)</strong>
+              </div>
+              <p><strong>Use case:</strong> Low-level programming, bitwise operations</p>
+              <div class="code-box">
+                <pre>Text:   "A"
+Binary: 01000001</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Octal (Base8)</strong>
+              </div>
+              <p><strong>Use case:</strong> Unix file permissions, legacy systems</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Decimal (ASCII Codes)</strong>
+              </div>
+              <p><strong>Use case:</strong> Character code analysis, debugging</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="encoding-category">
+          <h3>🌐 URL & Network Encodings</h3>
+          <p>Encodings designed for safe transmission over networks and in URLs.</p>
+          
+          <div class="encoding-list">
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>URL Encoding (Percent Encoding)</strong>
+                <span class="encoding-badge">RFC 1738</span>
+              </div>
+              <p><strong>Use case:</strong> URLs, query parameters, form data</p>
+              <div class="code-box">
+                <pre>Input:  "hello world"
+Output: hello%20world</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Punycode</strong>
+              </div>
+              <p><strong>Use case:</strong> Internationalized domain names (IDN)</p>
+              <div class="code-box">
+                <pre>Input:  "münchen.de"
+Output: "xn--mnchen-3ya.de"</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Quoted-Printable</strong>
+              </div>
+              <p><strong>Use case:</strong> Email content (MIME encoding)</p>
+              <p><strong>Why?:</strong> Makes 8-bit data safe for 7-bit email systems</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>UUEncode / XXEncode</strong>
+              </div>
+              <p><strong>Use case:</strong> Binary files in email (legacy)</p>
+              <p><strong>History:</strong> Unix-to-Unix Copy (UUCP) protocol</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="encoding-category">
+          <h3>💾 Data Format Encodings</h3>
+          <p>Escape and encode data for various programming contexts.</p>
+          
+          <div class="encoding-list">
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>HTML Entity Encoding</strong>
+              </div>
+              <p><strong>Use case:</strong> Display special characters in HTML</p>
+              <div class="code-box">
+                <pre>Input:  &lt;div&gt;Hello&lt;/div&gt;
+Output: &amp;lt;div&amp;gt;Hello&amp;lt;/div&amp;gt;</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>HTML Escape</strong>
+              </div>
+              <p><strong>Use case:</strong> Prevent XSS attacks, display user input safely</p>
+              <p><strong>Security:</strong> Essential for web security</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Unicode Escape</strong>
+              </div>
+              <p><strong>Use case:</strong> JavaScript strings, JSON</p>
+              <div class="code-box">
+                <pre>Input:  "Hello 🎉"
+Output: "Hello \u{1F389}"</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>JSON Escape</strong>
+              </div>
+              <p><strong>Use case:</strong> Escape special characters in JSON strings</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>JWT Decode</strong>
+                <span class="encoding-badge">Decode Only</span>
+              </div>
+              <p><strong>Use case:</strong> Inspect JWT tokens (header + payload)</p>
+              <p><strong>Note:</strong> Does not verify signature</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>SAML Decode</strong>
+                <span class="encoding-badge">Decode Only</span>
+              </div>
+              <p><strong>Use case:</strong> Decode SAML authentication assertions</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="encoding-category">
+          <h3>🔤 Ciphers & Text Transformations</h3>
+          <p>Classical ciphers for fun, learning, and simple obfuscation (not secure!).</p>
+          
+          <div class="encoding-list">
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>ROT13</strong>
+                <span class="encoding-badge">Classic</span>
+              </div>
+              <p><strong>Use case:</strong> Hide spoilers, simple obfuscation</p>
+              <p><strong>How it works:</strong> Shift each letter by 13 positions</p>
+              <div class="code-box">
+                <pre>Input:  "HELLO"
+Output: "URYYB"</pre>
+              </div>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Caesar Cipher</strong>
+              </div>
+              <p><strong>Use case:</strong> Educational, puzzles</p>
+              <p><strong>How it works:</strong> Shift letters by custom amount (1-25)</p>
+              <p><strong>History:</strong> Used by Julius Caesar in 100 BC</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Atbash Cipher</strong>
+              </div>
+              <p><strong>Use case:</strong> Hebrew cryptography, puzzles</p>
+              <p><strong>How it works:</strong> A↔Z, B↔Y, C↔X (reverse alphabet)</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Morse Code</strong>
+              </div>
+              <p><strong>Use case:</strong> Radio communication, SOS signals</p>
+              <div class="code-box">
+                <pre>Input:  "SOS"
+Output: "... --- ..."</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="encoding-category">
+          <h3>⚙️ Text Utilities</h3>
+          <p>Simple but useful text transformation tools.</p>
+          
+          <div class="encoding-list">
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Reverse Text</strong>
+              </div>
+              <p><strong>Use case:</strong> Palindrome checking, fun effects</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Case Converters</strong>
+              </div>
+              <p><strong>Types:</strong> UPPERCASE, lowercase, Title Case</p>
+              <p><strong>Use case:</strong> Data normalization, formatting</p>
+            </div>
+
+            <div class="encoding-item">
+              <div class="encoding-header">
+                <strong>Image ⇄ Base64</strong>
+              </div>
+              <p><strong>Use case:</strong> Data URLs, embedding images in CSS/HTML</p>
+              <p><strong>Supports:</strong> JPG, PNG, GIF, WebP</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="encode-how-to-use" class="doc-section">
+        <h2>🚀 How to Use Encode/Decode Tool</h2>
+
+        <div class="usage-steps">
+          <div class="usage-step">
+            <div class="usage-number">1</div>
+            <div class="usage-content">
+              <h3>Select Your Tool</h3>
+              <ul>
+                <li>Navigate to the <a href="encrypt.html">Encode/Decode page</a></li>
+                <li>Browse through 40+ tools organized by category</li>
+                <li>Use the search box to find specific encodings</li>
+                <li>Click on any tool card to activate it</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="usage-step">
+            <div class="usage-number">2</div>
+            <div class="usage-content">
+              <h3>Enter Your Data</h3>
+              <ul>
+                <li>Type or paste your text in the <strong>Input</strong> field</li>
+                <li>For some tools (like Caesar Cipher), set options if available</li>
+                <li>The tool interface shows clearly what it does</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="usage-step">
+            <div class="usage-number">3</div>
+            <div class="usage-content">
+              <h3>Encode or Decode</h3>
+              <ul>
+                <li>Click <strong>"Encode →"</strong> to encode your input</li>
+                <li>Click <strong>"← Decode"</strong> to decode your input</li>
+                <li>Result appears instantly in the <strong>Output</strong> field</li>
+                <li>Use <strong>"⇄ Swap"</strong> to exchange input and output</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="usage-step">
+            <div class="usage-number">4</div>
+            <div class="usage-content">
+              <h3>Copy & Use</h3>
+              <ul>
+                <li>Click <strong>"📋 Copy Output"</strong> to copy the result</li>
+                <li>Use <strong>"🗑️ Clear All"</strong> to start fresh</li>
+                <li>Try different tools on the same input!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="encode-use-cases" class="doc-section">
+        <h2>💡 Common Use Cases</h2>
+
+        <div class="use-case-grid">
+          <div class="use-case-card">
+            <div class="use-case-icon">👨‍💻</div>
+            <h4>Web Development</h4>
+            <ul>
+              <li>Encode data URLs for images</li>
+              <li>Create Base64 encoded API credentials</li>
+              <li>URL encode query parameters</li>
+              <li>HTML escape user input</li>
+              <li>Inspect JWT tokens</li>
+            </ul>
+          </div>
+
+          <div class="use-case-card">
+            <div class="use-case-icon">🔍</div>
+            <h4>Debugging & Analysis</h4>
+            <ul>
+              <li>Decode Base64 error messages</li>
+              <li>Inspect encoded API responses</li>
+              <li>Convert hex dumps to text</li>
+              <li>Analyze binary data</li>
+              <li>Debug Unicode issues</li>
+            </ul>
+          </div>
+
+          <div class="use-case-card">
+            <div class="use-case-icon">📧</div>
+            <h4>Email & Communications</h4>
+            <ul>
+              <li>Decode email attachments (UUEncode)</li>
+              <li>Quoted-Printable for non-ASCII text</li>
+              <li>Punycode for international domains</li>
+              <li>Base64 for email-safe data</li>
+            </ul>
+          </div>
+
+          <div class="use-case-card">
+            <div class="use-case-icon">🎓</div>
+            <h4>Learning & Fun</h4>
+            <ul>
+              <li>Learn how encodings work</li>
+              <li>Create secret messages (ROT13)</li>
+              <li>Practice Morse code</li>
+              <li>Understand character encodings</li>
+              <li>Explore cryptography basics</li>
+            </ul>
+          </div>
+
+          <div class="use-case-card">
+            <div class="use-case-icon">🔐</div>
+            <h4>Security Testing</h4>
+            <ul>
+              <li>Test XSS payloads (HTML encoding)</li>
+              <li>URL encoding bypass attempts</li>
+              <li>Decode obfuscated data</li>
+              <li>Analyze encoded exploits</li>
+            </ul>
+          </div>
+
+          <div class="use-case-card">
+            <div class="use-case-icon">💾</div>
+            <h4>Data Processing</h4>
+            <ul>
+              <li>Convert between formats</li>
+              <li>Normalize text case</li>
+              <li>Clean and format data</li>
+              <li>Batch text transformations</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="encode-tips" class="doc-section">
+        <h2>💎 Pro Tips & Best Practices</h2>
+
+        <div class="tips-grid">
+          <div class="tip-card success">
+            <h4>✅ Do's</h4>
+            <ul>
+              <li><strong>Use Base64</strong> for binary data in JSON/XML</li>
+              <li><strong>Always URL encode</strong> query parameters</li>
+              <li><strong>HTML escape</strong> all user-generated content</li>
+              <li><strong>Use Base64 URL-safe</strong> for URLs and filenames</li>
+              <li><strong>Test thoroughly</strong> with edge cases and special characters</li>
+              <li><strong>Combine tools</strong> for complex transformations</li>
+            </ul>
+          </div>
+
+          <div class="tip-card warning">
+            <h4>⚠️ Don'ts</h4>
+            <ul>
+              <li><strong>Don't use encoding for security</strong> — it's not encryption!</li>
+              <li><strong>Don't assume Base64 is encrypted</strong> — anyone can decode it</li>
+              <li><strong>Don't use classical ciphers</strong> for real security (ROT13, Caesar)</li>
+              <li><strong>Don't trust decoded JWT</strong> without signature verification</li>
+              <li><strong>Don't double-encode</strong> unless necessary</li>
+            </ul>
+          </div>
+        </div>
+        <div class="info-box">
+          <h4>🔑 Key Difference: Encoding vs Encryption</h4>
+          <div class="comparison-table">
+            <div class="comparison-row">
+              <div class="comparison-col">
+                <h5>Encoding</h5>
+                <ul>
+                  <li>Purpose: Data representation</li>
+                  <li>Reversible: Yes, easily</li>
+                  <li>Security: None</li>
+                  <li>Key needed: No</li>
+                  <li>Example: Base64, URL encoding</li>
+                </ul>
+              </div>
+              <div class="comparison-col">
+                <h5>Encryption</h5>
+                <ul>
+                  <li>Purpose: Data protection</li>
+                  <li>Reversible: Yes, with key</li>
+                  <li>Security: High</li>
+                  <li>Key needed: Yes</li>
+                  <li>Example: AES, RSA</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="encode-performance" class="doc-section">
+        <h2>⚡ Performance & Limitations</h2>
+
+        <div class="info-box">
+          <h4>💻 Browser-Based Processing</h4>
+          <p>All encoding/decoding happens in your browser using JavaScript. This means:</p>
+          <ul>
+            <li>✅ Complete privacy — no data sent to servers</li>
+            <li>✅ Works offline after initial page load</li>
+            <li>✅ Fast for small to medium data (up to 10MB)</li>
+            <li>⚠️ May slow down with very large files (100MB+)</li>
+            <li>⚠️ Memory limited by browser (typically 1-2GB)</li>
+          </ul>
+        </div>
+
+        <div class="warning-box">
+          <h4>📏 Size Considerations</h4>
+          <ul>
+            <li><strong>Base64 increases size by ~33%</strong> — "Hello" (5 bytes) → "SGVsbG8=" (8 bytes)</li>
+            <li><strong>URL encoding varies</strong> — depends on special characters</li>
+            <li><strong>Base85 is more efficient</strong> — only ~25% increase</li>
+            <li><strong>Compression first</strong> — consider gzip before encoding</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="encode-resources" class="doc-section">
+        <h2>📚 Additional Resources</h2>
+
+        <div class="resource-grid">
+          <div class="resource-card">
+            <h4>📖 Standards & RFCs</h4>
+            <ul>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc4648" target="_blank">RFC 4648 - Base Encodings</a></li>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc3986" target="_blank">RFC 3986 - URL Encoding</a></li>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc2045" target="_blank">RFC 2045 - MIME/Quoted-Printable</a></li>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc3492" target="_blank">RFC 3492 - Punycode</a></li>
+            </ul>
+          </div>
+
+          <div class="resource-card">
+            <h4>🛠️ Developer Tools</h4>
+            <ul>
+              <li><a href="https://jwt.io" target="_blank">JWT.io - JWT Debugger</a></li>
+              <li><a href="https://www.base64decode.org" target="_blank">Base64Decode.org</a></li>
+              <li><a href="https://meyerweb.com/eric/tools/dencoder/" target="_blank">URL Encoder/Decoder</a></li>
+              <li><a href="https://cryptii.com" target="_blank">Cryptii - Modular Converter</a></li>
+            </ul>
+          </div>
+
+          <div class="resource-card">
+            <h4>📚 Learning Resources</h4>
+            <ul>
+              <li><a href="https://en.wikipedia.org/wiki/Character_encoding" target="_blank">Character Encoding - Wikipedia</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/btoa" target="_blank">MDN - btoa/atob</a></li>
+              <li><a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/" target="_blank">Unicode & Character Sets</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="back-to-top-section">
+        <button class="btn btn-secondary scroll-to-top">↑ Back to Top</button>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-bottom">
+      <p>&copy; 2025 ARzone. All rights reserved. Made with ❤️ by Abdur Rahman</p>
+    </div>
+  </footer>
+
+
+  <script src="docs.js"></script>
+</body>
+</html>
