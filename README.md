@@ -501,7 +501,7 @@ This tool is provided for **educational and authorized security testing purposes
 ### Get Help
 
 - 📖 Read the [Documentation](docs.html)
-- 🐛 [Report Issues](https://github.com/yourusername/arzone-security-toolkit/issues)
+- 🐛 [Report Issues](https://github.com/abdurrahman101bd/Hash-Cracker/issues)
 - 💬 [Discussions](https://github.com/abdurrahman101bd/Hash-Cracker/discussions)
 - ⭐ Star this repo if you find it useful!
 
