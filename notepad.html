@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notepad</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="notepad.css">
+</head>
+<body>
+        <!-- Floating Shapes Background -->
+<div class="floating-shapes" id="floatingShapes">
+    <div class="shape circle"></div>
+    <div class="shape triangle"></div>
+    <div class="shape square"></div>
+    <div class="shape circle"></div>
+    <div class="shape pentagon"></div>
+    <div class="shape triangle"></div>
+    <div class="shape square"></div>
+    <div class="shape circle"></div>
+    <div class="shape hexagon"></div>
+    <div class="shape triangle"></div>
+</div>    
+<canvas id="matrixCanvas"></canvas>
+
+    <!-- Header -->
+    <div class="header">
+        <a href="#" class="brand-logo">
+            <div class="logo-icon">
+                <img src="logo.png" alt="logo">
+            </div>
+            <span class="brand-name">𝙃𝙖𝙨𝙝 𝘾𝙧𝙖𝙘𝙠𝙚𝙧</span>
+        </a>
+        
+        <div class="header-actions">
+            <button class="icon-btn" id="themeToggle">
+                
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+            <path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>
+          </svg>
+          
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" style="display:none" height="24px" viewBox="0 -960 960 960" width="24px">
+            <path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/>
+          </svg>
+                
+            </button>
+        </div>
+    </div>
+    
+  <header class="app-header">
+    <div class="header-left">
+      <h1 class="app-title">ᑎOTEᑭᗩᗪ</h1>
+      <p class="app-sub">𝐒𝐢𝐦𝐩𝐥𝐞, 𝐟𝐚𝐬𝐭 & 𝐛𝐞𝐚𝐮𝐭𝐢𝐟𝐮𝐥 𝐧𝐨𝐭𝐞𝐬</p>
+    </div>
+
+    <div class="header-right">
+      <input id="searchInput" class="search" type="search" placeholder="🔍 𝘚𝘦𝘢𝘳𝘤𝘩 𝘺𝘰𝘶𝘳 𝘯𝘰𝘵𝘦𝘴" aria-label="Search notes">      
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="notesGrid" class="notes-grid" aria-live="polite">
+      <!-- Notes cards are rendered here by script -->
+    </section>
+  </main>
+
+  <!-- Floating Action Button -->
+  <button id="fabBtn" class="fab" title="Add note" aria-label="Add new note">⊹</button>
+
+  <!-- Add / Edit Modal -->
+  <div id="noteModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-panel">
+      <header class="modal-header">
+        <h2 id="modalTitle">𐤠ƊƊ ƝΘƬƸ</h2>
+        <button id="closeModalBtn" class="icon-btn" aria-label="Close modal">✗</button>
+      </header>
+
+      <form id="noteForm" class="modal-body">
+        <label class="field">
+          <span class="field-label">TITᒪE</span>
+          <input id="noteTitle" type="text" maxlength="120" placeholder="𝘕𝘰𝘵𝘦 𝘵𝘪𝘵𝘭𝘦" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">ᑕOᑎTEᑎT</span>
+          <textarea id="noteContent" rows="8" placeholder="𝘞𝘳𝘪𝘵𝘦 𝘴𝘰𝘮𝘦𝘵𝘩𝘪𝘯𝘨... "></textarea>
+        </label>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelBtn" class="btn btn-secondary">ᑕᗩᑎᑕEᒪ</button>
+          <button type="submit" id="saveBtn" class="btn btn-primary">ƧᗩᐯE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- View Modal -->
+  <div id="viewModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-panel">
+      <header class="modal-header">
+        <h2 id="viewTitle">Title</h2>
+        <button id="closeViewBtn" class="icon-btn" aria-label="Close view">✗</button>
+      </header>
+
+      <div class="modal-body modal-view">
+        <p id="viewContent" class="view-content"></p>
+        <div class="view-meta">
+          <span id="viewDate" class="view-date"></span>
+          <div class="view-actions">
+            <button id="editFromViewBtn" class="btn btn-secondary">EᗪIT</button>
+            <button id="deleteFromViewBtn" class="btn btn-danger">ᗪEᒪETE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div id="confirmModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-panel">
+      <header class="modal-header">
+        <h2>ᗪEᒪETE ᑎOTE?</h2>
+        <button id="closeConfirmBtn" class="icon-btn" aria-label="Close confirm">✗</button>
+      </header>
+      <div class="modal-body">
+        <p>𝐀𝐫𝐞 𝐲𝐨𝐮 𝐬𝐮𝐫𝐞 𝐲𝐨𝐮 𝐰𝐚𝐧𝐭 𝐭𝐨 𝐝𝐞𝐥𝐞𝐭𝐞 𝐭𝐡𝐢𝐬 𝐧𝐨𝐭𝐞?</p>
+        <div class="modal-actions">
+          <button id="cancelDeleteBtn" class="btn btn-secondary">ᑕᗩᑎᑕEᒪ</button>
+          <button id="confirmDeleteBtn" class="btn btn-danger">ᗪEᒪETE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Alert Modal -->
+  <div id="alertModal" class="modal" aria-hidden="true" role="alertdialog" aria-modal="true">
+    <div class="modal-panel small">
+      <h3 id="alertMessage">Alert message here</h3>
+      <div class="modal-actions">
+        <button id="alertOkBtn" class="btn btn-primary">ΘƘ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  
+  <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="nav-label">Home</span>
+        </a>
+        
+        <a href="encrypt.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+            </svg>
+            <span class="nav-label">Encrypt</span>
+        </a>
+        
+        <a href="notepad.html" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h168q13-36 43.5-58t68.5-22q38 0 68.5 22t43.5 58h168q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm80-80h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm200-190q13 0 21.5-8.5T510-820q0-13-8.5-21.5T480-850q-13 0-21.5 8.5T450-820q0 13 8.5 21.5T480-790ZM200-200v-560 560Z"/></svg>
+            <span class="nav-label">Note</span>
+        </a>
+
+        <a href="docs.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+            </svg>
+            <span class="nav-label">Docs</span>
+        </a>               
+        
+    </div>
+  
+  <script src="common.js"></script>
+  <script src="notepad.js"></script>
+</body>
+</html>

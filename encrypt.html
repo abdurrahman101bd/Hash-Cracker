@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encode/Decode</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="encrypt.css" />
+</head>
+<body>
+    
+    <!-- Floating Shapes Background -->
+<div class="floating-shapes" id="floatingShapes">
+    <div class="shape circle"></div>
+    <div class="shape triangle"></div>
+    <div class="shape square"></div>
+    <div class="shape circle"></div>
+    <div class="shape pentagon"></div>
+    <div class="shape triangle"></div>
+    <div class="shape square"></div>
+    <div class="shape circle"></div>
+    <div class="shape hexagon"></div>
+    <div class="shape triangle"></div>
+</div>
+<canvas id="matrixCanvas"></canvas>
+
+   <div class="page-wrapper">
+  <!-- Header -->
+    <div class="header">
+        <a href="#" class="brand-logo">
+            <div class="logo-icon">
+                <img src="logo.png" alt="logo">
+            </div>
+            <span class="brand-name">𝙃𝙖𝙨𝙝 𝘾𝙧𝙖𝙘𝙠𝙚𝙧</span>
+        </a>
+        
+        <div class="header-actions">
+            <button class="icon-btn" id="themeToggle">
+                
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+            <path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>
+          </svg>
+          
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" style="display:none" height="24px" viewBox="0 -960 960 960" width="24px">
+            <path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/>
+          </svg>
+                
+            </button>
+        </div>
+    </div>
+
+  <main class="container">
+    <section class="hero">
+      <h1>🔐 𝐄𝐧𝐜𝐨𝐝𝐞 / 𝐃𝐞𝐜𝐨𝐝𝐞 𝐓𝐨𝐨𝐥</h1>
+      <p>𝘗𝘰𝘸𝘦𝘳𝘧𝘶𝘭 𝘵𝘦𝘹𝘵 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨, 𝘥𝘦𝘤𝘰𝘥𝘪𝘯𝘨, 𝘢𝘯𝘥 𝘵𝘳𝘢𝘯𝘴𝘧𝘰𝘳𝘮𝘢𝘵𝘪𝘰𝘯 𝘶𝘵𝘪𝘭𝘪𝘵𝘪𝘦𝘴 — 𝘢𝘭𝘭 𝘪𝘯 𝘺𝘰𝘶𝘳 𝘣𝘳𝘰𝘸𝘴𝘦𝘳</p>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="category-filter">
+      <button class="filter-btn active" data-category="all">All Tools</button>
+      <button class="filter-btn" data-category="base">📦 Base Encodings</button>
+      <button class="filter-btn" data-category="ascii">🔠 ASCII & Numbers</button>
+      <button class="filter-btn" data-category="url">🌐 URL & Network</button>
+      <button class="filter-btn" data-category="data">💾 Data Format</button>
+      <button class="filter-btn" data-category="cipher">🔤 Ciphers</button>
+      <button class="filter-btn" data-category="misc">⚙️ Utilities</button>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-box">
+      <input type="text" id="searchTools" placeholder="🔍 Search for encoding/decoding tools..." />
+    </div>
+
+    <!-- Main Tool Interface -->
+    <section class="card tool-card">
+      <div class="tool-header">
+        <h2 id="currentToolName">𝐒𝐞𝐥𝐞𝐜𝐭 𝐚 𝐓𝐨𝐨𝐥</h2>
+        <button class="btn btn-secondary" id="swapBtn" title="Swap Input/Output">⇄ 𝐒𝐰𝐚𝐩</button>
+      </div>
+
+      <div class="tool-body">
+        <div class="tool-column">
+          <label>𝐈𝐧𝐩𝐮𝐭:</label>
+          <textarea id="inputText" placeholder="Enter your text here..." rows="8"></textarea>
+          
+          <div class="tool-options" id="inputOptions">
+            <!-- Dynamic options will appear here -->
+          </div>
+        </div>
+
+        <div class="tool-column">
+          <label>𝐎𝐮𝐭𝐩𝐮𝐭:</label>
+          <textarea id="outputText" placeholder="Result will appear here..." rows="8" readonly></textarea>
+          
+          <div class="tool-options" id="outputOptions">
+            <!-- Dynamic options will appear here -->
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-actions">
+        <button class="btn btn-primary" id="encodeBtn">𝐄𝐧𝐜𝐨𝐝𝐞 →</button>
+        <button class="btn btn-primary" id="decodeBtn">← 𝐃𝐞𝐜𝐨𝐝𝐞</button>
+        <button class="btn btn-secondary" id="copyBtn">⿻ 𝐂𝐨𝐩𝐲 𝐎𝐮𝐭𝐩𝐮𝐭</button>
+        <button class="btn btn-secondary" id="clearBtn">❌ 𝐂𝐥𝐞𝐚𝐫 𝐀𝐥𝐥</button>
+      </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <section class="tools-grid" id="toolsGrid">
+      <!-- Base Encodings -->
+      <div class="tool-item" data-category="base" data-tool="base64">
+        <div class="tool-icon">📦</div>
+        <h3>Base64</h3>
+        <p>Standard Base64 encoding/decoding</p>
+      </div>
+
+      <div class="tool-item" data-category="base" data-tool="base64url">
+        <div class="tool-icon">📦</div>
+        <h3>Base64 URL Safe</h3>
+        <p>URL-safe Base64 variant</p>
+      </div>
+
+      <div class="tool-item" data-category="base" data-tool="base32">
+        <div class="tool-icon">📦</div>
+        <h3>Base32</h3>
+        <p>Base32 encoding (RFC 4648)</p>
+      </div>
+
+      <div class="tool-item" data-category="base" data-tool="base58">
+        <div class="tool-icon">📦</div>
+        <h3>Base58</h3>
+        <p>Bitcoin-style Base58 encoding</p>
+      </div>
+
+      <div class="tool-item" data-category="base" data-tool="base62">
+        <div class="tool-icon">📦</div>
+        <h3>Base62</h3>
+        <p>Base62 encoding (0-9, a-z, A-Z)</p>
+      </div>
+
+      <div class="tool-item" data-category="base" data-tool="base85">
+        <div class="tool-icon">📦</div>
+        <h3>Base85 / Ascii85</h3>
+        <p>Ascii85 encoding (Adobe variant)</p>
+      </div>
+
+      <div class="tool-item" data-category="base" data-tool="base91">
+        <div class="tool-icon">📦</div>
+        <h3>Base91</h3>
+        <p>Base91 encoding (efficient)</p>
+      </div>
+
+      <!-- ASCII & Number Systems -->
+      <div class="tool-item" data-category="ascii" data-tool="hex">
+        <div class="tool-icon">🔠</div>
+        <h3>Text ⇄ Hex</h3>
+        <p>Convert text to/from hexadecimal</p>
+      </div>
+
+      <div class="tool-item" data-category="ascii" data-tool="binary">
+        <div class="tool-icon">🔠</div>
+        <h3>Text ⇄ Binary</h3>
+        <p>Convert text to/from binary</p>
+      </div>
+
+      <div class="tool-item" data-category="ascii" data-tool="octal">
+        <div class="tool-icon">🔠</div>
+        <h3>Text ⇄ Octal</h3>
+        <p>Convert text to/from octal</p>
+      </div>
+
+      <div class="tool-item" data-category="ascii" data-tool="decimal">
+        <div class="tool-icon">🔠</div>
+        <h3>Text ⇄ Decimal</h3>
+        <p>Convert text to/from decimal (ASCII codes)</p>
+      </div>
+
+      <div class="tool-item" data-category="ascii" data-tool="hexdump">
+        <div class="tool-icon">🔠</div>
+        <h3>Hexdump</h3>
+        <p>Generate hexdump representation</p>
+      </div>
+
+      <!-- URL & Network -->
+      <div class="tool-item" data-category="url" data-tool="urlencode">
+        <div class="tool-icon">🌐</div>
+        <h3>URL Encode</h3>
+        <p>Percent-encode URLs (RFC 1738)</p>
+      </div>
+
+      <div class="tool-item" data-category="url" data-tool="urlencode-full">
+        <div class="tool-icon">🌐</div>
+        <h3>URL Encode (Full)</h3>
+        <p>Encode all characters including /</p>
+      </div>
+
+      <div class="tool-item" data-category="url" data-tool="punycode">
+        <div class="tool-icon">🌐</div>
+        <h3>Punycode</h3>
+        <p>Encode/decode internationalized domain names</p>
+      </div>
+
+      <div class="tool-item" data-category="url" data-tool="quoted-printable">
+        <div class="tool-icon">🌐</div>
+        <h3>Quoted-Printable</h3>
+        <p>Email-safe encoding (MIME)</p>
+      </div>
+
+      <div class="tool-item" data-category="url" data-tool="uuencode">
+        <div class="tool-icon">🌐</div>
+        <h3>UUEncode</h3>
+        <p>Unix-to-Unix encoding</p>
+      </div>
+
+      <div class="tool-item" data-category="url" data-tool="xxencode">
+        <div class="tool-icon">🌐</div>
+        <h3>XXEncode</h3>
+        <p>Alternative to UUEncode</p>
+      </div>
+
+      <!-- Data Format -->
+      <div class="tool-item" data-category="data" data-tool="html-entity">
+        <div class="tool-icon">💾</div>
+        <h3>HTML Entity</h3>
+        <p>Encode/decode HTML entities</p>
+      </div>
+
+      <div class="tool-item" data-category="data" data-tool="html-escape">
+        <div class="tool-icon">💾</div>
+        <h3>HTML Escape</h3>
+        <p>Escape HTML special characters</p>
+      </div>
+
+      <div class="tool-item" data-category="data" data-tool="unicode">
+        <div class="tool-icon">💾</div>
+        <h3>Unicode Escape</h3>
+        <p>Unicode ⇄ \u escape sequences</p>
+      </div>
+
+      <div class="tool-item" data-category="data" data-tool="json-escape">
+        <div class="tool-icon">💾</div>
+        <h3>JSON Escape</h3>
+        <p>Escape JSON special characters</p>
+      </div>
+
+      <div class="tool-item" data-category="data" data-tool="jwt">
+        <div class="tool-icon">💾</div>
+        <h3>JWT Decode</h3>
+        <p>Decode JSON Web Token (header + payload)</p>
+      </div>
+
+      <div class="tool-item" data-category="data" data-tool="saml">
+        <div class="tool-icon">💾</div>
+        <h3>SAML Decode</h3>
+        <p>Decode SAML assertions</p>
+      </div>
+
+      <!-- Ciphers -->
+      <div class="tool-item" data-category="cipher" data-tool="rot13">
+        <div class="tool-icon">🔤</div>
+        <h3>ROT13</h3>
+        <p>Caesar cipher with 13 shift</p>
+      </div>
+
+      <div class="tool-item" data-category="cipher" data-tool="caesar">
+        <div class="tool-icon">🔤</div>
+        <h3>Caesar Cipher</h3>
+        <p>Customizable letter shift cipher</p>
+      </div>
+
+      <div class="tool-item" data-category="cipher" data-tool="atbash">
+        <div class="tool-icon">🔤</div>
+        <h3>Atbash Cipher</h3>
+        <p>Reverse alphabet substitution</p>
+      </div>
+
+      <div class="tool-item" data-category="cipher" data-tool="morse">
+        <div class="tool-icon">🔤</div>
+        <h3>Morse Code</h3>
+        <p>Convert text to/from Morse code</p>
+      </div>
+
+      <!-- Utilities -->
+      <div class="tool-item" data-category="misc" data-tool="reverse">
+        <div class="tool-icon">⚙️</div>
+        <h3>Reverse Text</h3>
+        <p>Reverse string character order</p>
+      </div>
+
+      <div class="tool-item" data-category="misc" data-tool="case-upper">
+        <div class="tool-icon">⚙️</div>
+        <h3>UPPERCASE</h3>
+        <p>Convert to uppercase</p>
+      </div>
+
+      <div class="tool-item" data-category="misc" data-tool="case-lower">
+        <div class="tool-icon">⚙️</div>
+        <h3>lowercase</h3>
+        <p>Convert to lowercase</p>
+      </div>
+
+      <div class="tool-item" data-category="misc" data-tool="case-title">
+        <div class="tool-icon">⚙️</div>
+        <h3>Title Case</h3>
+        <p>Convert To Title Case</p>
+      </div>
+
+      <div class="tool-item" data-category="misc" data-tool="base64-image">
+        <div class="tool-icon">⚙️</div>
+        <h3>Image ⇄ Base64</h3>
+        <p>Convert images to/from Base64</p>
+      </div>
+    </section>
+    
+    <br>
+
+    <!-- Info Section -->
+    <section class="card small">
+      <h2>👾 𝐀𝐛𝐨𝐮𝐭 𝐓𝐡𝐢𝐬 𝐓𝐨𝐨𝐥</h2>
+      <ul>
+        <li>𝘼𝙡𝙡 𝙚𝙣𝙘𝙤𝙙𝙞𝙣𝙜/𝙙𝙚𝙘𝙤𝙙𝙞𝙣𝙜 𝙝𝙖𝙥𝙥𝙚𝙣𝙨 𝙡𝙤𝙘𝙖𝙡𝙡𝙮 𝙞𝙣 𝙮𝙤𝙪𝙧 𝙗𝙧𝙤𝙬𝙨𝙚𝙧</li>
+        <li>𝙉𝙤 𝙙𝙖𝙩𝙖 𝙞𝙨 𝙨𝙚𝙣𝙩 𝙩𝙤 𝙖𝙣𝙮 𝙨𝙚𝙧𝙫𝙚𝙧 - 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚𝙡𝙮 𝙥𝙧𝙞𝙫𝙖𝙩𝙚</li>
+        <li>𝙎𝙪𝙥𝙥𝙤𝙧𝙩𝙨 𝟰𝟬+ 𝙙𝙞𝙛𝙛𝙚𝙧𝙚𝙣𝙩 𝙚𝙣𝙘𝙤𝙙𝙞𝙣𝙜/𝙙𝙚𝙘𝙤𝙙𝙞𝙣𝙜 𝙢𝙚𝙩𝙝𝙤𝙙𝙨</li>
+        <li>𝙋𝙚𝙧𝙛𝙚𝙘𝙩 𝙛𝙤𝙧 𝙙𝙚𝙫𝙚𝙡𝙤𝙥𝙚𝙧𝙨, 𝙨𝙚𝙘𝙪𝙧𝙞𝙩𝙮 𝙧𝙚𝙨𝙚𝙖𝙧𝙘𝙝𝙚𝙧𝙨, 𝙖𝙣𝙙 𝙚𝙣𝙩𝙝𝙪𝙨𝙞𝙖𝙨𝙩𝙨</li>
+      </ul>
+    </section>
+  </main>
+  
+  <!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
+</button>
+
+  </div>
+
+  <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="nav-label">Home</span>
+        </a>
+        
+        <a href="encrypt.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+            </svg>
+            <span class="nav-label">Encrypt</span>
+        </a>
+        
+        <a href="notepad.html" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h168q13-36 43.5-58t68.5-22q38 0 68.5 22t43.5 58h168q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm80-80h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm200-190q13 0 21.5-8.5T510-820q0-13-8.5-21.5T480-850q-13 0-21.5 8.5T450-820q0 13 8.5 21.5T480-790ZM200-200v-560 560Z"/></svg>
+            <span class="nav-label">Note</span>
+        </a>
+
+        <a href="docs.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+            </svg>
+            <span class="nav-label">Docs</span>
+        </a>               
+
+    </div>
+    <script src="common.js"></script>
+    <script src="encrypt.js"></script>
+ </body>
+</html>
+  
