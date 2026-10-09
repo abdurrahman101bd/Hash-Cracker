@@ -4,18 +4,100 @@ const inputText = document.getElementById('inputText');
 const outputText = document.getElementById('outputText');
 const encodeBtn = document.getElementById('encodeBtn');
 const decodeBtn = document.getElementById('decodeBtn');
+const toolActions = document.getElementById('toolActions');
 const copyBtn = document.getElementById('copyBtn');
+const downloadBtn = document.getElementById('downloadBtn');
 const clearBtn = document.getElementById('clearBtn');
 const swapBtn = document.getElementById('swapBtn');
 const currentToolName = document.getElementById('currentToolName');
 const toolItems = document.querySelectorAll('.tool-item');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const searchTools = document.getElementById('searchTools');
+const searchToolsClear = document.getElementById('searchToolsClear');
+const searchSuggestions = document.getElementById('searchSuggestions');
 const inputOptions = document.getElementById('inputOptions');
 const outputOptions = document.getElementById('outputOptions');
 
 let currentTool = null;
 let currentCategory = 'all';
+
+// ---------- Per-tool action config ----------
+// mode: 'both' (Encode + Decode buttons), 'encode' (single button running encode()),
+// 'decode' (single button running decode())
+const TOOL_CONFIG = {
+  base64:            { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  base64url:         { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  base32:            { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  base58:            { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  base62:            { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  base85:            { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  base91:            { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  hex:               { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  binary:            { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  octal:             { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  decimal:           { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  hexdump:           { mode: 'encode', encode: 'Generate Dump' },
+  urlencode:         { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  'urlencode-full':  { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  punycode:          { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  'quoted-printable':{ mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  uuencode:          { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  xxencode:          { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  'html-entity':     { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  'html-escape':     { mode: 'both',   encode: 'Escape',  decode: 'Unescape' },
+  unicode:           { mode: 'both',   encode: 'Escape',  decode: 'Unescape' },
+  'json-escape':     { mode: 'encode', encode: 'Escape' },
+  jwt:               { mode: 'decode', decode: 'Decode' },
+  saml:              { mode: 'decode', decode: 'Decode' },
+  rot13:             { mode: 'encode', encode: 'Apply ROT13' },
+  caesar:            { mode: 'both',   encode: 'Encrypt', decode: 'Decrypt' },
+  atbash:            { mode: 'encode', encode: 'Apply Atbash' },
+  morse:             { mode: 'both',   encode: 'Encode',  decode: 'Decode' },
+  reverse:           { mode: 'encode', encode: 'Reverse' },
+  'case-upper':      { mode: 'encode', encode: 'Convert' },
+  'case-lower':      { mode: 'encode', encode: 'Convert' },
+  'case-title':      { mode: 'encode', encode: 'Convert' },
+  'base64-image':    { mode: 'decode', decode: 'Show Image' }
+};
+const DEFAULT_CONFIG = { mode: 'both', encode: 'Encode', decode: 'Decode' };
+
+function getToolConfig(toolName) {
+  return TOOL_CONFIG[toolName] || DEFAULT_CONFIG;
+}
+
+// Past-tense label for toasts/history, e.g. "Encode" -> "Encoded", "Generate Dump" -> "Generated Dump"
+const PAST_TENSE = {
+  Encode: 'Encoded', Decode: 'Decoded', Encrypt: 'Encrypted', Decrypt: 'Decrypted',
+  Escape: 'Escaped', Unescape: 'Unescaped', Reverse: 'Reversed', Convert: 'Converted',
+  Apply: 'Applied', Generate: 'Generated', Show: 'Displayed'
+};
+function pastTense(label) {
+  const words = label.split(' ');
+  words[0] = PAST_TENSE[words[0]] || (words[0] + 'ed');
+  return words.join(' ');
+}
+
+// Apply a tool's button configuration to the UI
+function applyToolButtons(toolName) {
+  const config = getToolConfig(toolName);
+  if (config.mode === 'both') {
+    encodeBtn.hidden = false;
+    decodeBtn.hidden = false;
+    encodeBtn.textContent = config.encode + ' →';
+    decodeBtn.textContent = '← ' + config.decode;
+    toolActions.classList.remove('single-action');
+  } else if (config.mode === 'encode') {
+    encodeBtn.hidden = false;
+    decodeBtn.hidden = true;
+    encodeBtn.textContent = config.encode;
+    toolActions.classList.add('single-action');
+  } else {
+    encodeBtn.hidden = true;
+    decodeBtn.hidden = false;
+    decodeBtn.textContent = config.decode;
+    toolActions.classList.add('single-action');
+  }
+}
 
 // Tool Selection
 toolItems.forEach(item => {
@@ -46,7 +128,73 @@ filterBtns.forEach(btn => {
 
 // Search Functionality
 searchTools.addEventListener('input', (e) => {
-  filterTools(e.target.value.toLowerCase());
+  const term = e.target.value;
+  filterTools(term.toLowerCase());
+  renderSuggestions(term.trim());
+  searchToolsClear.hidden = !term;
+});
+searchToolsClear.addEventListener('click', () => {
+  searchTools.value = '';
+  filterTools('');
+  hideSuggestions();
+  searchToolsClear.hidden = true;
+  searchTools.focus();
+});
+searchTools.addEventListener('focus', () => renderSuggestions(searchTools.value.trim()));
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-box')) hideSuggestions();
+});
+searchTools.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { hideSuggestions(); searchTools.blur(); }
+});
+
+function hideSuggestions() {
+  searchSuggestions.hidden = true;
+  searchSuggestions.innerHTML = '';
+}
+
+function renderSuggestions(term) {
+  if (!term) { hideSuggestions(); return; }
+  const q = term.toLowerCase();
+  const matches = Array.from(toolItems).filter(item => {
+    const name = item.querySelector('h3').textContent.toLowerCase();
+    const desc = item.querySelector('p').textContent.toLowerCase();
+    return name.includes(q) || desc.includes(q);
+  }).slice(0, 6);
+
+  if (!matches.length) {
+    searchSuggestions.innerHTML = '<div class="suggestion-empty">No matching tools</div>';
+    searchSuggestions.hidden = false;
+    return;
+  }
+
+  searchSuggestions.innerHTML = matches.map(item => {
+    const icon = item.querySelector('.tool-icon').textContent;
+    const name = item.querySelector('h3').textContent;
+    const desc = item.querySelector('p').textContent;
+    const tool = item.getAttribute('data-tool');
+    return `<button type="button" class="suggestion-item" data-tool="${tool}">
+      <span class="suggestion-icon">${icon}</span>
+      <span class="suggestion-text"><span class="name">${name}</span><span class="desc">${desc}</span></span>
+    </button>`;
+  }).join('');
+  searchSuggestions.hidden = false;
+}
+
+searchSuggestions.addEventListener('click', (e) => {
+  const btn = e.target.closest('.suggestion-item');
+  if (!btn) return;
+  const toolName = btn.getAttribute('data-tool');
+  const item = document.querySelector(`.tool-item[data-tool="${toolName}"]`);
+  if (!item) return;
+  selectTool(toolName);
+  toolItems.forEach(t => t.classList.remove('active'));
+  item.classList.add('active');
+  searchTools.value = '';
+  searchToolsClear.hidden = true;
+  filterTools('');
+  hideSuggestions();
+  document.querySelector('.tool-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 function filterTools(searchTerm = '') {
@@ -72,6 +220,7 @@ function filterTools(searchTerm = '') {
 function selectTool(toolName) {
   currentTool = toolName;
   currentToolName.textContent = getToolDisplayName(toolName);
+  applyToolButtons(toolName);
   
   // Clear previous options
   inputOptions.innerHTML = '';
@@ -203,13 +352,15 @@ encodeBtn.addEventListener('click', () => {
     return;
   }
   
+  const label = getToolConfig(currentTool).encode;
   try {
     const result = encode(currentTool, input);
     outputText.value = result;
-    showMessage('Encoded successfully!', 'success');
+    showMessage(pastTense(label) + '!', 'success');
+    saveEncHistory(label, input, result);
   } catch (err) {
     outputText.value = '';
-    showMessage('Encoding error: ' + err.message, 'error');
+    showMessage(label + ' error: ' + err.message, 'error');
   }
 });
 
@@ -226,13 +377,15 @@ decodeBtn.addEventListener('click', () => {
     return;
   }
   
+  const label = getToolConfig(currentTool).decode;
   try {
     const result = decode(currentTool, input);
     outputText.value = result;
-    showMessage('Decoded successfully!', 'success');
+    showMessage(pastTense(label) + '!', 'success');
+    saveEncHistory(label, input, result);
   } catch (err) {
     outputText.value = '';
-    showMessage('Decoding error: ' + err.message, 'error');
+    showMessage(label + ' error: ' + err.message, 'error');
   }
 });
 
@@ -241,18 +394,62 @@ swapBtn.addEventListener('click', () => {
   const temp = inputText.value;
   inputText.value = outputText.value;
   outputText.value = temp;
+  if (navigator.vibrate) navigator.vibrate(15);
 });
 
 // Copy Button
-copyBtn.addEventListener('click', () => {
+copyBtn.addEventListener('click', async () => {
   if (!outputText.value) {
     showMessage('Nothing to copy', 'error');
     return;
   }
-  
-  outputText.select();
-  document.execCommand('copy');
-  showMessage('Copied to clipboard!', 'success');
+  const ok = await copyToClipboard(outputText.value);
+  if (ok) {
+    if (navigator.vibrate) navigator.vibrate(20);
+    copyBtn.classList.add('is-copied');
+    clearTimeout(copyBtn._t);
+    copyBtn._t = setTimeout(() => copyBtn.classList.remove('is-copied'), 1500);
+    showMessage('Copied to clipboard!', 'success');
+  } else {
+    showMessage("Couldn't copy — select the text manually", 'error');
+  }
+});
+
+async function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch (e) { /* fall through */ }
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none;';
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, text.length);
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+  ta.remove();
+  return ok;
+}
+
+// Download Button — saves the output as a .txt file
+downloadBtn.addEventListener('click', () => {
+  if (!outputText.value) {
+    showMessage('Nothing to download', 'error');
+    return;
+  }
+  const blob = new Blob([outputText.value], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const slug = (currentTool || 'output').replace(/[^a-z0-9]+/gi, '-');
+  a.href = url;
+  a.download = `${slug}-output.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showMessage('Download started', 'success');
 });
 
 // Clear Button
@@ -262,25 +459,192 @@ clearBtn.addEventListener('click', () => {
   showMessage('Cleared!', 'success');
 });
 
-// Show Message
+// ---------- Toast (top-right) ----------
+const toastStack = document.getElementById('toastStack');
+const TOAST_ICONS = {
+  success: '<svg viewBox="0 -960 960 960"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>',
+  error: '<svg viewBox="0 -960 960 960"><path d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>',
+  info: '<svg viewBox="0 -960 960 960"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>'
+};
 function showMessage(text, type = 'success') {
-  // Remove existing messages
-  const existingMsg = document.querySelector('.message');
-  if (existingMsg) existingMsg.remove();
-  
-  const msg = document.createElement('div');
-  msg.className = `message ${type}`;
-  msg.textContent = text;
-  
-  document.querySelector('.tool-actions').appendChild(msg);
-  
-  setTimeout(() => msg.remove(), 3000);
+  const el = document.createElement('div');
+  el.className = `enc-toast ${type}`;
+  el.innerHTML = `${TOAST_ICONS[type] || TOAST_ICONS.info}<span>${escapeHtml(text)}</span>`;
+  toastStack.appendChild(el);
+  requestAnimationFrame(() => el.classList.add('show'));
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.remove(), 250);
+  }, 2400);
+}
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
-// ============================================
-// ENCODING/DECODING FUNCTIONS
-// ============================================
+// ---------- History ----------
+const ENC_HISTORY_KEY = 'encryptHistory';
+const ENC_HISTORY_LIMIT = 50;
+const historyToggle = document.getElementById('historyToggle');
+const historyModal = document.getElementById('historyModal');
+const closeHistoryModal = document.getElementById('closeHistoryModal');
+const encHistoryList = document.getElementById('encHistoryList');
+const clearEncHistory = document.getElementById('clearEncHistory');
 
+function readEncHistory() {
+  try {
+    const v = JSON.parse(localStorage.getItem(ENC_HISTORY_KEY) || '[]');
+    return Array.isArray(v) ? v : [];
+  } catch (e) { return []; }
+}
+function writeEncHistory(list) {
+  try { localStorage.setItem(ENC_HISTORY_KEY, JSON.stringify(list)); } catch (e) { /* ignore */ }
+}
+function truncate(text, max) {
+  const t = String(text == null ? '' : text);
+  return t.length > max ? t.slice(0, max) + '…' : t;
+}
+function saveEncHistory(action, input, output) {
+  if (!currentTool) return;
+  const MAX_STORE = 20000; // keep localStorage usage sane for very large inputs (e.g. images)
+  const list = readEncHistory();
+  list.push({
+    tool: currentTool,
+    toolLabel: getToolDisplayName(currentTool),
+    action,
+    input: truncate(input, MAX_STORE),
+    output: truncate(output, MAX_STORE),
+    time: Date.now()
+  });
+  while (list.length > ENC_HISTORY_LIMIT) list.shift();
+  writeEncHistory(list);
+}
+function relativeTime(ts) {
+  const seconds = Math.floor((Date.now() - ts) / 1000);
+  if (seconds < 45) return 'Just now';
+  if (seconds < 3600) return Math.max(1, Math.round(seconds / 60)) + ' min ago';
+  if (seconds < 86400) return Math.floor(seconds / 3600) + ' h ago';
+  return new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+function renderEncHistory() {
+  const list = readEncHistory();
+  clearEncHistory.disabled = list.length === 0;
+  if (!list.length) {
+    encHistoryList.innerHTML = '<div class="enc-history-empty">No history yet — encode or decode something first.</div>';
+    return;
+  }
+  encHistoryList.innerHTML = list.map((it, i) => `
+    <div class="enc-history-item">
+      <div class="enc-history-top">
+        <span class="enc-history-tool">${escapeHtml(it.toolLabel)}</span>
+        <span class="enc-history-action">${escapeHtml(it.action)}</span>
+        <span class="enc-history-time">${escapeHtml(relativeTime(it.time))}</span>
+        <div class="enc-history-actions">
+          <button type="button" data-act="restore" data-i="${i}" title="Restore" aria-label="Restore">
+            <svg viewBox="0 -960 960 960"><path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Z"/></svg>
+          </button>
+          <button type="button" data-act="copy" data-i="${i}" title="Copy output" aria-label="Copy output">
+            <svg viewBox="0 -960 960 960"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>
+          </button>
+          <button type="button" class="danger" data-act="delete" data-i="${i}" title="Delete" aria-label="Delete">
+            <svg viewBox="0 -960 960 960"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360Z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="enc-history-row"><span class="k">In</span><span class="v">${escapeHtml(truncate(it.input, 90))}</span></div>
+      <div class="enc-history-row"><span class="k">Out</span><span class="v">${escapeHtml(truncate(it.output, 90))}</span></div>
+    </div>
+  `).reverse().join('');
+}
+
+function openHistoryModal() {
+  renderEncHistory();
+  historyModal.classList.add('active');
+  document.body.classList.add('modal-open');
+}
+function closeHistoryModalFn() {
+  historyModal.classList.remove('active');
+  document.body.classList.remove('modal-open');
+}
+historyToggle.addEventListener('click', openHistoryModal);
+closeHistoryModal.addEventListener('click', closeHistoryModalFn);
+historyModal.addEventListener('click', (e) => { if (e.target === historyModal) closeHistoryModalFn(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && historyModal.classList.contains('active') && !document.getElementById('confirmModal').classList.contains('show')) closeHistoryModalFn();
+});
+
+encHistoryList.addEventListener('click', async (e) => {
+  const btn = e.target.closest('[data-act]');
+  if (!btn) return;
+  const list = readEncHistory();
+  const index = list.length - 1 - Number(btn.dataset.i); // list is rendered reversed
+  const item = list[index];
+  if (!item) return;
+
+  if (btn.dataset.act === 'copy') {
+    const ok = await copyToClipboard(item.output);
+    if (navigator.vibrate) navigator.vibrate(20);
+    showMessage(ok ? 'Copied to clipboard!' : "Couldn't copy", ok ? 'success' : 'error');
+  } else if (btn.dataset.act === 'delete') {
+    list.splice(index, 1);
+    writeEncHistory(list);
+    renderEncHistory();
+  } else if (btn.dataset.act === 'restore') {
+    const toolItem = document.querySelector(`.tool-item[data-tool="${item.tool}"]`);
+    if (toolItem) {
+      selectTool(item.tool);
+      toolItems.forEach(t => t.classList.remove('active'));
+      toolItem.classList.add('active');
+    }
+    inputText.value = item.input;
+    outputText.value = item.output;
+    closeHistoryModalFn();
+    document.querySelector('.tool-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showMessage('Restored from history', 'success');
+  }
+});
+
+clearEncHistory.addEventListener('click', () => {
+  if (clearEncHistory.disabled) return;
+  showEncConfirm('Clear all history?', 'This will delete all saved encode/decode history. This action cannot be undone.', () => {
+    writeEncHistory([]);
+    renderEncHistory();
+  });
+});
+
+// ---------- Confirm modal (shared .confirm-modal styles from style.css) ----------
+const confirmModal = document.getElementById('confirmModal');
+const confirmMessage = document.getElementById('confirmMessage');
+const confirmTitleEl = confirmModal.querySelector('.confirm-title');
+const cancelClearHistory = document.getElementById('cancelClearHistory');
+const confirmClearHistory = document.getElementById('confirmClearHistory');
+let pendingConfirmAction = null;
+
+function showEncConfirm(title, message, onConfirm) {
+  confirmTitleEl.textContent = title;
+  confirmMessage.textContent = message;
+  pendingConfirmAction = onConfirm;
+  confirmModal.classList.add('show');
+}
+function hideEncConfirm() {
+  confirmModal.classList.remove('show');
+  pendingConfirmAction = null;
+}
+cancelClearHistory.addEventListener('click', hideEncConfirm);
+confirmClearHistory.addEventListener('click', () => {
+  const action = pendingConfirmAction;
+  hideEncConfirm();
+  if (action) action();
+});
+confirmModal.addEventListener('click', (e) => { if (e.target === confirmModal) hideEncConfirm(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && confirmModal.classList.contains('show')) hideEncConfirm();
+});
+
+
+// ENCODING/DECODING FUNCTIONS
 function encode(tool, input) {
   switch(tool) {
     // Base Encodings
@@ -490,10 +854,7 @@ function decode(tool, input) {
   }
 }
 
-// ============================================
 // HELPER FUNCTIONS - BASE ENCODINGS
-// ============================================
-
 function base32Encode(input) {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
   let bits = '';
@@ -749,10 +1110,7 @@ function base91Decode(input) {
   return result;
 }
 
-// ============================================
 // HELPER FUNCTIONS - ASCII & NUMBERS
-// ============================================
-
 function textToHex(input) {
   let result = '';
   for (let i = 0; i < input.length; i++) {
@@ -847,10 +1205,8 @@ function hexdump(input) {
   }
   return result;
 }
-// ============================================
-// HELPER FUNCTIONS - URL & NETWORK
-// ============================================
 
+// HELPER FUNCTIONS - URL & NETWORK
 function punycodeEncode(input) {
   try {
     // Simple punycode implementation for domain names
@@ -1086,10 +1442,7 @@ function xxdecode(input) {
   return result;
 }
 
-// ============================================
 // HELPER FUNCTIONS - DATA FORMAT
-// ============================================
-
 function htmlEntityEncode(input) {
   const entities = {
     '&': '&amp;',
@@ -1177,10 +1530,7 @@ function samlDecode(input) {
   }
 }
 
-// ============================================
 // HELPER FUNCTIONS - CIPHERS
-// ============================================
-
 function rot13(input) {
   return input.replace(/[a-zA-Z]/g, char => {
     const start = char <= 'Z' ? 65 : 97;

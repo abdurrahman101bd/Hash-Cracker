@@ -1,3 +1,60 @@
+// ---------- Shared helpers ----------
+const ICONS = {
+    copy: '<svg class="i-copy" viewBox="0 -960 960 960" aria-hidden="true"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg><svg class="i-check" viewBox="0 -960 960 960" aria-hidden="true"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>',
+    trash: '<svg viewBox="0 -960 960 960" aria-hidden="true"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360Z"/></svg>',
+    history: '<svg viewBox="0 -960 960 960" aria-hidden="true"><path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/></svg>'
+};
+
+let toastTimer;
+function showToast(message) {
+    const el = document.getElementById('toast');
+    if (!el) return;
+    el.textContent = message;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+async function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (e) { /* fall through to the fallback */ }
+    }
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none;';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    ta.remove();
+    return ok;
+}
+
+function flashCopied(btn, ok) {
+    if (!ok) {
+        showToast("Couldn't copy. Select the text and copy it manually.");
+        return;
+    }
+    if (navigator.vibrate) navigator.vibrate(20);
+    const label = btn.querySelector('.copy-label');
+    if (label && !btn.dataset.label) btn.dataset.label = label.textContent;
+    btn.classList.add('is-copied');
+    if (label) label.textContent = 'Copied';
+    clearTimeout(btn._copyTimer);
+    btn._copyTimer = setTimeout(() => {
+        btn.classList.remove('is-copied');
+        if (label) label.textContent = btn.dataset.label;
+    }, 1500);
+}
+
+function escapeAttr(text) {
+    return escapeHtml(String(text)).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
 
 // Tab Switching
 const tabBtns = document.querySelectorAll('.tab-btn');
@@ -30,44 +87,73 @@ tabBtns.forEach(btn => {
 const historyToggle = document.getElementById('historyToggle');
 const historyModal = document.getElementById('historyModal');
 const closeModal = document.getElementById('closeModal');
-
-historyToggle.addEventListener('click', () => {
-    historyModal.classList.add('active');
-    loadHistory();
-});
-
-closeModal.addEventListener('click', () => {
-    historyModal.classList.remove('active');
-});
-
-historyModal.addEventListener('click', (e) => {
-    if (e.target === historyModal) {
-        historyModal.classList.remove('active');
-    }
-});
-
-// History Tabs
 const historyTabs = document.querySelectorAll('.history-tab');
-const hashHistoryContent = document.getElementById('hashHistoryContent');
-const checkHistoryContent = document.getElementById('checkHistoryContent');
+const HISTORY_PANES = { hash: 'hashHistoryContent', check: 'checkHistoryContent', analyze: 'analyzeHistoryContent' };
+let activeHistoryTab = 'hash';
+let historyReturnFocus = null;
 
-historyTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        const targetTab = tab.getAttribute('data-tab');
-        
-        historyTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        if (targetTab === 'hash') {
-            hashHistoryContent.classList.add('active');
-            checkHistoryContent.classList.remove('active');
-            loadHistory();
-        } else if (targetTab === 'check') {
-            checkHistoryContent.classList.add('active');
-            hashHistoryContent.classList.remove('active');
-            loadCheckHistory();
-        }
+function openHistory() {
+    historyReturnFocus = document.activeElement;
+    historyModal.classList.add('active');
+    document.body.classList.add('modal-open');
+    switchHistoryTab(activeHistoryTab);
+    closeModal.focus();
+}
+
+function closeHistory() {
+    historyModal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+    if (historyReturnFocus && historyReturnFocus.focus) historyReturnFocus.focus();
+}
+
+function switchHistoryTab(type) {
+    activeHistoryTab = type;
+    historyTabs.forEach(t => {
+        const on = t.dataset.tab === type;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
     });
+    Object.entries(HISTORY_PANES).forEach(([key, id]) => {
+        document.getElementById(id).classList.toggle('active', key === type);
+    });
+    updateHistoryCounts();
+    renderHistory(type);
+    updateHistoryFooter();
+}
+
+historyToggle.addEventListener('click', openHistory);
+closeModal.addEventListener('click', closeHistory);
+historyTabs.forEach(tab => tab.addEventListener('click', () => switchHistoryTab(tab.dataset.tab)));
+
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('confirmModal').classList.contains('show')) return;
+    if (historyModal.classList.contains('active')) closeHistory();
+});
+
+// Clicks inside the history dialog: backdrop, copy, delete
+historyModal.addEventListener('click', async (e) => {
+    if (e.target === historyModal) { closeHistory(); return; }
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+
+    const type = btn.dataset.type;
+    const index = Number(btn.dataset.i);
+    const list = readList(type);
+    const item = list[index];
+    if (!item) return;
+
+    if (btn.dataset.action === 'copy') {
+        const text = btn.dataset.field === 'password' ? item.password : item.hash;
+        flashCopied(btn, await copyToClipboard(String(text || '')));
+    } else if (btn.dataset.action === 'delete') {
+        list.splice(index, 1);
+        writeList(type, list);
+        renderHistory(type);
+        updateHistoryCounts();
+        updateHistoryFooter();
+        showToast('Entry deleted');
+    }
 });
 
 // File Input Display
@@ -105,127 +191,216 @@ document.getElementById('clearHashBtn').addEventListener('click', () => {
     document.getElementById('fileName').textContent = 'No file chosen';
     
     // Result clear
-    document.getElementById('checkOut').textContent = 'Idle.';
+    setCheckState('idle');
     
     // Focus back to input
     document.getElementById('targetHash').focus();
 });
 
-// Load and Display History
-function loadHistory() {
-    const history = JSON.parse(localStorage.getItem('hashHistory') || '[]');
-    const historyList = document.getElementById('historyList');
-    
-    if (history.length === 0) {
-        historyList.innerHTML = '<div class="no-history">No history yet. Generate some hashes!</div>';
-        return;
-    }
+// ---------- History storage ----------
+const HISTORY_KEYS = { hash: 'hashHistory', check: 'checkHistory', analyze: 'analyzeHistory' };
+const HISTORY_LIST_IDS = { hash: 'historyList', check: 'checkHistoryList', analyze: 'analyzeHistoryList' };
+const HISTORY_NAMES = { hash: 'Generate', check: 'Crack', analyze: 'Analyze' };
+const HISTORY_LIMIT = 50;
 
-    historyList.innerHTML = history.map(item => `
-        <div class="history-item">
-            <div class="history-item-header">
-                <span class="history-algo">${item.algorithm}</span>
-                <span class="history-time">${item.time}</span>
-            </div>
-            <div class="history-text">Text: ${escapeHtml(item.text.substring(0, 50))}${item.text.length > 50 ? '...' : ''}</div>
-            <div class="history-hash">${item.hash}</div>
-        </div>
-    `).reverse().join('');
+function readList(type) {
+    try {
+        const value = JSON.parse(localStorage.getItem(HISTORY_KEYS[type]) || '[]');
+        return Array.isArray(value) ? value : [];
+    } catch (e) {
+        return [];
+    }
 }
 
-// Load and Display Check History
-function loadCheckHistory() {
-    const checkHistory = JSON.parse(localStorage.getItem('checkHistory') || '[]');
-    const checkHistoryList = document.getElementById('checkHistoryList');
-    
-    if (checkHistory.length === 0) {
-        checkHistoryList.innerHTML = '<div class="no-history">No check history yet. Check some hashes!</div>';
-        return;
-    }
-
-    checkHistoryList.innerHTML = checkHistory.map(item => {
-        const statusClass = item.found ? 'found' : 'not-found';
-        const statusText = item.found ? '✅ Match Found' : '❌ Not Found';
-        const passwordInfo = item.found ? `<div class="found-password">Result: ${escapeHtml(item.password)}</div>` : '';
-        
-        return `
-            <div class="check-history-item">
-                <div class="history-item-header">
-                    <span class="check-status ${statusClass}">${statusText}</span>
-                    <span class="history-time">${item.time}</span>
-                </div>
-                <div class="history-algo">${item.algorithm}</div>
-                <div class="history-hash">${item.hash}</div>
-                ${passwordInfo}
-                <div class="wordlist-info">📁 Wordlist: ${escapeHtml(item.wordlistName)} (${item.totalLines} lines checked)</div>
-            </div>
-        `;
-    }).reverse().join('');
+function writeList(type, list) {
+    try {
+        localStorage.setItem(HISTORY_KEYS[type], JSON.stringify(list));
+    } catch (e) { /* storage full or blocked */ }
 }
 
-// Save to History
+function stamp() {
+    const now = new Date();
+    return {
+        time: now.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        timestamp: now.getTime()
+    };
+}
+
+function relativeTime(item) {
+    if (!item.timestamp) return item.time || '';
+    const seconds = Math.floor((Date.now() - item.timestamp) / 1000);
+    if (seconds < 45) return 'Just now';
+    if (seconds < 3600) return Math.max(1, Math.round(seconds / 60)) + ' min ago';
+    if (seconds < 86400) return Math.floor(seconds / 3600) + ' h ago';
+    return item.time || new Date(item.timestamp).toLocaleDateString();
+}
+
+function fullTime(item) {
+    return item.timestamp ? new Date(item.timestamp).toLocaleString() : (item.time || '');
+}
+
+function truncate(text, max) {
+    const t = String(text == null ? '' : text);
+    return t.length > max ? t.slice(0, max) + '…' : t;
+}
+
+// Save to History (generate)
 function saveToHistory(text, algorithm, hash) {
-    const history = JSON.parse(localStorage.getItem('hashHistory') || '[]');
-    const now = new Date();
-    const time = now.toLocaleString('en-US', { 
-        month: 'short', 
-        day: 'numeric', 
-        hour: '2-digit', 
-        minute: '2-digit' 
-    });
-
-    history.push({
-        text,
-        algorithm,
-        hash,
-        time,
-        timestamp: now.getTime()
-    });
-
-    if (history.length > 50) {
-        history.shift();
-    }
-
-    localStorage.setItem('hashHistory', JSON.stringify(history));
+    const list = readList('hash');
+    list.push({ text, algorithm, hash, ...stamp() });
+    while (list.length > HISTORY_LIMIT) list.shift();
+    writeList('hash', list);
 }
 
-// Save to Check History
-function saveToCheckHistory(hash, algorithm, wordlistName, totalLines, found, password = null) {
-    const checkHistory = JSON.parse(localStorage.getItem('checkHistory') || '[]');
-    const now = new Date();
-    const time = now.toLocaleString('en-US', { 
-        month: 'short', 
-        day: 'numeric', 
-        hour: '2-digit', 
-        minute: '2-digit' 
+// Save to Check History (crack). status: 'found' | 'notfound' | 'cancelled'
+function saveToCheckHistory(hash, algorithm, wordlistName, totalLines, found, password = null, status = null) {
+    const list = readList('check');
+    list.push({
+        hash, algorithm, wordlistName, totalLines, found, password,
+        status: status || (found ? 'found' : 'notfound'),
+        ...stamp()
     });
-
-    checkHistory.push({
-        hash,
-        algorithm,
-        wordlistName,
-        totalLines,
-        found,
-        password,
-        time,
-        timestamp: now.getTime()
-    });
-
-    if (checkHistory.length > 50) {
-        checkHistory.shift();
-    }
-
-    localStorage.setItem('checkHistory', JSON.stringify(checkHistory));
+    while (list.length > HISTORY_LIMIT) list.shift();
+    writeList('check', list);
 }
 
-// Clear History
+// Save to Analyze History
+function saveToAnalyzeHistory(results) {
+    if (!results.length) return;
+    const list = readList('analyze');
+    const now = stamp();
+    results.forEach(r => {
+        const last = list[list.length - 1];
+        if (last && last.hash === r.hash) return; // don't repeat the same hash back-to-back
+        list.push({ hash: r.hash, type: r.type, bitLength: r.bitLength, length: r.length, charType: r.charType, salt: r.salt, ...now });
+    });
+    while (list.length > HISTORY_LIMIT) list.shift();
+    writeList('analyze', list);
+}
+
+// ---------- History rendering ----------
+function copyBtn(type, i, label, field, text) {
+    return `<button type="button" class="icon-mini${text ? ' labeled' : ''}" data-action="copy" data-type="${type}" data-i="${i}"${field ? ` data-field="${field}"` : ''} title="${label}" aria-label="${label}">${ICONS.copy}${text ? `<span>${text}</span>` : ''}</button>`;
+}
+
+function deleteBtn(type, i) {
+    return `<button type="button" class="icon-mini danger" data-action="delete" data-type="${type}" data-i="${i}" title="Delete entry" aria-label="Delete entry">${ICONS.trash}</button>`;
+}
+
+function timeTag(item) {
+    return `<time class="h-time" title="${escapeAttr(fullTime(item))}">${escapeHtml(relativeTime(item))}</time>`;
+}
+
+const HISTORY_RENDERERS = {
+    hash: (it, i) => `
+        <article class="h-item">
+            <div class="h-top">
+                <span class="badge badge-accent">${escapeHtml(it.algorithm)}</span>
+                ${timeTag(it)}
+                <div class="h-actions">${copyBtn('hash', i, 'Copy hash')}${deleteBtn('hash', i)}</div>
+            </div>
+            <div class="h-row"><span class="h-key">Input</span><span class="h-val">${escapeHtml(truncate(it.text, 80))}</span></div>
+            <div class="h-row"><span class="h-key">Hash</span><code class="h-val">${escapeHtml(it.hash)}</code></div>
+        </article>`,
+
+    check: (it, i) => {
+        const status = it.status || (it.found ? 'found' : 'notfound');
+        const badge = {
+            found: '<span class="badge badge-success">Match found</span>',
+            notfound: '<span class="badge badge-danger">Not found</span>',
+            cancelled: '<span class="badge badge-warn">Cancelled</span>'
+        }[status] || '';
+        const password = it.found && it.password != null
+            ? `<div class="h-row"><span class="h-key">Password</span><code class="h-val found">${escapeHtml(it.password)}</code></div>` : '';
+        const passwordCopy = it.found && it.password != null ? copyBtn('check', i, 'Copy password', 'password', 'Password') : '';
+        return `
+        <article class="h-item">
+            <div class="h-top">
+                ${badge}
+                <span class="badge">${escapeHtml(it.algorithm)}</span>
+                ${timeTag(it)}
+                <div class="h-actions">${passwordCopy}${copyBtn('check', i, 'Copy hash', '', it.found && it.password != null ? 'Hash' : '')}${deleteBtn('check', i)}</div>
+            </div>
+            <div class="h-row"><span class="h-key">Hash</span><code class="h-val">${escapeHtml(it.hash)}</code></div>
+            ${password}
+            <div class="h-row"><span class="h-key">Wordlist</span><span class="h-val">${escapeHtml(it.wordlistName)} · ${Number(it.totalLines || 0).toLocaleString()} lines checked</span></div>
+        </article>`;
+    },
+
+    analyze: (it, i) => {
+        const parts = [];
+        if (typeof it.bitLength === 'number') parts.push(it.bitLength + '-bit');
+        parts.push(it.length + ' chars');
+        if (it.charType) parts.push(it.charType);
+        const salt = it.salt && it.salt !== 'N/A'
+            ? `<div class="h-row"><span class="h-key">Salt</span><code class="h-val">${escapeHtml(it.salt)}</code></div>` : '';
+        return `
+        <article class="h-item">
+            <div class="h-top">
+                <span class="badge ${it.type === 'Unknown' ? '' : 'badge-accent'}">${escapeHtml(it.type)}</span>
+                ${timeTag(it)}
+                <div class="h-actions">${copyBtn('analyze', i, 'Copy hash')}${deleteBtn('analyze', i)}</div>
+            </div>
+            <div class="h-row"><span class="h-key">Hash</span><code class="h-val">${escapeHtml(it.hash)}</code></div>
+            <div class="h-row"><span class="h-key">Details</span><span class="h-val">${escapeHtml(parts.join(' · '))}</span></div>
+            ${salt}
+        </article>`;
+    }
+};
+
+const HISTORY_EMPTY = {
+    hash: ['No generated hashes yet', 'Hashes you create in the Generate tab will show up here.'],
+    check: ['No crack attempts yet', 'Runs from the Crack tab, found or not, will show up here.'],
+    analyze: ['No analyzed hashes yet', 'Hashes you check in the Analyze tab will show up here.']
+};
+
+function renderHistory(type) {
+    const list = readList(type);
+    const el = document.getElementById(HISTORY_LIST_IDS[type]);
+    if (!list.length) {
+        const [title, hint] = HISTORY_EMPTY[type];
+        el.innerHTML = `<div class="h-empty">${ICONS.history}<p>${title}</p><span>${hint}</span></div>`;
+        return;
+    }
+    // newest first; the index refers to the position in the stored list
+    el.innerHTML = list.map((item, i) => HISTORY_RENDERERS[type](item, i)).reverse().join('');
+}
+
+function updateHistoryCounts() {
+    Object.keys(HISTORY_KEYS).forEach(type => {
+        const badge = document.querySelector(`[data-count="${type}"]`);
+        if (badge) badge.textContent = readList(type).length;
+    });
+}
+
+function updateHistoryFooter() {
+    const tabCount = readList(activeHistoryTab).length;
+    const total = Object.keys(HISTORY_KEYS).reduce((sum, t) => sum + readList(t).length, 0);
+    document.getElementById('clearTabHistory').disabled = tabCount === 0;
+    document.getElementById('clearHistory').disabled = total === 0;
+}
+
+// Clear this list
+document.getElementById('clearTabHistory').addEventListener('click', () => {
+    const type = activeHistoryTab;
+    showConfirm(`Clear all ${HISTORY_NAMES[type]} history? This cannot be undone.`, () => {
+        writeList(type, []);
+        renderHistory(type);
+        updateHistoryCounts();
+        updateHistoryFooter();
+        showToast(`${HISTORY_NAMES[type]} history cleared`);
+    });
+});
+
+// Clear everything
 document.getElementById('clearHistory').addEventListener('click', () => {
-  showConfirm('Are you sure you want to clear all history?', () => {
-    localStorage.removeItem('hashHistory');
-    localStorage.removeItem('checkHistory');
-    loadHistory();
-    loadCheckHistory();
-  });
+    showConfirm('Clear all history (Generate, Crack and Analyze)? This cannot be undone.', () => {
+        Object.keys(HISTORY_KEYS).forEach(type => writeList(type, []));
+        renderHistory(activeHistoryTab);
+        updateHistoryCounts();
+        updateHistoryFooter();
+        showToast('All history cleared');
+    });
 });
 
 // Custom Confirm Modal Function
@@ -272,6 +447,54 @@ const checkOut = $('checkOut');
 
 let checking = false;
 let cancelRequested = false;
+
+// ---------- Result panels ----------
+const hashPanel = $('hashResult');
+const hashBadge = $('hashBadge');
+const hashMeta = $('hashMeta');
+const copyHashBtn = $('copyHashBtn');
+
+// state: 'empty' | 'busy' | 'ok' | 'error'
+function setHashState(state, text, alg) {
+    hashPanel.dataset.state = state;
+    hashOut.textContent = text || '';
+    copyHashBtn.disabled = state !== 'ok';
+    const ok = state === 'ok';
+    hashBadge.hidden = !ok;
+    hashMeta.hidden = !ok;
+    if (ok) {
+        hashBadge.textContent = alg;
+        hashMeta.textContent = `${text.length} hex characters · ${text.length * 4}-bit`;
+    }
+}
+
+const checkPanel = $('checkResult');
+const checkBadge = $('checkBadge');
+const checkProgress = $('checkProgress');
+const checkBar = $('checkProgressBar');
+const copyCheckBtn = $('copyCheckBtn');
+let foundPassword = null;
+
+const CHECK_BADGES = {
+    idle: 'Idle', running: 'Running', success: 'Match found', fail: 'No match',
+    cancelled: 'Cancelled', warn: 'Check input', error: 'Error'
+};
+
+function setCheckProgress(pct) {
+    checkBar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+}
+
+// state: 'idle' | 'running' | 'success' | 'fail' | 'cancelled' | 'warn' | 'error'
+function setCheckState(state, text, html) {
+    checkPanel.dataset.state = state;
+    checkBadge.textContent = CHECK_BADGES[state];
+    if (html) checkOut.innerHTML = html;
+    else checkOut.textContent = text || '';
+    checkProgress.hidden = !['running', 'success', 'fail', 'cancelled'].includes(state);
+    if (['idle', 'warn', 'error'].includes(state)) setCheckProgress(0);
+    if (state !== 'success') foundPassword = null;
+    copyCheckBtn.disabled = state !== 'success';
+}
 
 // MD5 Implementation
 function md5(str) {
@@ -388,45 +611,52 @@ async function computeHash(alg, text) {
 hashBtn.addEventListener('click', async () => {
     const txt = plainInput.value || '';
     if (!txt) {
-        hashOut.textContent = 'Please enter some text!';
+        setHashState('error', 'Enter some text to hash first.');
         return;
     }
     const alg = algSelect.value;
-    hashOut.textContent = 'Computing...';
+    setHashState('busy', 'Computing…');
     try {
         const h = await computeHash(alg, txt);
-        hashOut.textContent = alg + ' (hex):\n' + h;
+        setHashState('ok', h, alg);
         saveToHistory(txt, alg, h);
     } catch (err) {
-        hashOut.textContent = 'Error: ' + err;
+        setHashState('error', 'Error: ' + (err && err.message ? err.message : err));
     }
 });
 
 // Clear Button Event
 clearBtn.addEventListener('click', () => {
-    plainInput.value = ''; 
-    hashOut.textContent = '—';
+    plainInput.value = '';
+    setHashState('empty');
 });
 
 // Wordlist Checking Logic
 async function checkWordlist(targetHex, alg, file) {
-    checkOut.textContent = 'Reading file...';
+    setCheckState('running', 'Reading wordlist…');
+    setCheckProgress(0);
     const text = await file.text();
     const lines = text.split(/\r?\n/).map(s => s.replace(/\r/g,'')).filter(Boolean);
     const total = lines.length;
     const wordlistName = file.name;
-    
-    checkOut.textContent = `Loaded ${total} lines. Starting check... (algorithm: ${alg})`;
+
+    if (!total) {
+        setCheckState('warn', 'The wordlist is empty.');
+        checking = false;
+        return null;
+    }
+
+    checkOut.textContent = `Loaded ${total.toLocaleString()} lines · algorithm ${alg}`;
     const batchSize = 500;
     let idx = 0;
     const start = performance.now();
-    
+
     while (idx < total) {
         if (cancelRequested) {
-            checkOut.textContent = 'Cancelled by user.';
+            setCheckState('cancelled', `Stopped after ${idx.toLocaleString()} of ${total.toLocaleString()} lines.`);
             cancelRequested = false;
             checking = false;
-            saveToCheckHistory(targetHex, alg, wordlistName, idx, false);
+            saveToCheckHistory(targetHex, alg, wordlistName, idx, false, null, 'cancelled');
             return null;
         }
         const end = Math.min(idx + batchSize, total);
@@ -440,18 +670,28 @@ async function checkWordlist(targetHex, alg, file) {
             }
             if (h.toLowerCase() === targetHex.toLowerCase()) {
                 const took = ((performance.now() - start)/1000).toFixed(2);
-                checkOut.textContent = `✅ MATCH FOUND!\nLine ${i+1}: "${candidate}"\nAlgorithm: ${alg}\nTime: ${took}s\n(Total checked: ${i+1})`;
+                setCheckState('success', null,
+                    `<div class="found-grid">` +
+                    `<span>Password</span><strong class="found-pass">${escapeHtml(candidate)}</strong>` +
+                    `<span>Line</span><span>${(i + 1).toLocaleString()} of ${total.toLocaleString()}</span>` +
+                    `<span>Algorithm</span><span>${escapeHtml(alg)}</span>` +
+                    `<span>Time</span><span>${took}s</span></div>`);
+                foundPassword = candidate;
+                setCheckProgress(100);
                 checking = false;
                 saveToCheckHistory(targetHex, alg, wordlistName, i+1, true, candidate);
                 return {line: i+1, candidate};
             }
         }
         idx = end;
-        checkOut.textContent = `Checked ${idx}/${total} lines...`;
+        const pct = Math.floor((idx / total) * 100);
+        setCheckProgress(pct);
+        checkOut.textContent = `Checked ${idx.toLocaleString()} of ${total.toLocaleString()} lines (${pct}%)`;
         await new Promise(r => setTimeout(r, 0));
     }
     const took = ((performance.now() - start)/1000).toFixed(2);
-    checkOut.textContent = `❌ No match after cracking ${total} entries. Time: ${took}s`;
+    setCheckState('fail', `No match found in ${total.toLocaleString()} entries (${took}s).`);
+    setCheckProgress(100);
     checking = false;
     saveToCheckHistory(targetHex, alg, wordlistName, total, false);
     return null;
@@ -466,7 +706,7 @@ document.getElementById('hashFile').addEventListener('change', async (e) => {
             document.getElementById('targetHash').value = hash;
             document.getElementById('hashFileName').textContent = file.name;
         } catch (err) {
-            alert('Failed to read hash file');
+            showToast('Failed to read the hash file');
         }
     }
 });
@@ -485,64 +725,54 @@ startCheck.addEventListener('click', async () => {
                 target = text.trim().split('\n')[0].trim();
                 targetHashInput.value = target; 
             } catch (err) {
-                checkOut.textContent = 'Failed to read hash file.';
+                setCheckState('error', 'Failed to read the hash file.');
                 return;
             }
         }
     }
     
     if (!target) { 
-        checkOut.textContent = 'Enter target hash or upload hash file first.'; 
+        setCheckState('warn', 'Enter a target hash or upload a hash file first.');
         return; 
     }
     
     const alg = targetAlg.value;
     const f = wordFile.files[0];
     if (!f) { 
-        checkOut.textContent = 'Select a local .txt wordlist first.'; 
+        setCheckState('warn', 'Select a wordlist (.txt) first.');
         return; 
     }
     checking = true;
     cancelRequested = false;
-    checkOut.textContent = 'Preparing to check...';
+    setCheckState('running', 'Preparing…');
     try {
         await checkWordlist(target, alg, f);
     } catch (err) {
-        checkOut.textContent = 'Error during check: ' + err;
+        setCheckState('error', 'Error during check: ' + (err && err.message ? err.message : err));
         checking = false;
     }
 });
 
 // Copy Hash Result
-document.getElementById('copyHashBtn').addEventListener('click', async () => {
-    const hashText = document.getElementById('hashOut').textContent;
-    if (hashText === '—' || hashText === 'Please enter some text!') {
-        alert('No hash to copy!');
-        return;
-    }
-    try {        
-        const hashOnly = hashText.split('\n').pop().trim();
-        await navigator.clipboard.writeText(hashOnly);
-        
-        // Visual feedback
-        const btn = document.getElementById('copyHashBtn');
-        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="white"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>';
-        setTimeout(() => {
-            btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="white"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>';
-        }, 1500);
-    } catch (err) {
-        alert('Failed to copy to clipboard');
-    }
+copyHashBtn.addEventListener('click', async () => {
+    if (copyHashBtn.disabled) return;
+    flashCopied(copyHashBtn, await copyToClipboard(hashOut.textContent.trim()));
+});
+
+// Copy found password
+copyCheckBtn.addEventListener('click', async () => {
+    if (!foundPassword) return;
+    flashCopied(copyCheckBtn, await copyToClipboard(foundPassword));
 });
 
 // Cancel Check Button Event
 cancelCheck.addEventListener('click', () => {
     if (!checking) { 
-        checkOut.textContent = 'No active check to cancel.'; 
+        showToast('No active check to cancel.');
         return; 
     }
     cancelRequested = true;
-    checkOut.textContent = 'Cancellation requested...';
+    checkOut.textContent = 'Stopping…';
 });
 
 
@@ -610,33 +840,67 @@ cancelCheck.addEventListener('click', () => {
         };
     }
 
+    const panel = document.getElementById('analyzeResult');
+    const badge = document.getElementById('analyzeBadge');
+    const MAX_SHOWN = 100;   // keep the page responsive for huge files
+    const MAX_SAVED = 25;    // entries added to history per run
+    let lastResults = [];
+
+    // state: 'empty' | 'warn' | 'ok'
+    function setAnalyzeState(state, text) {
+        panel.dataset.state = state;
+        badge.hidden = state !== 'ok';
+        if (text !== undefined) outDiv.textContent = text;
+    }
+
+    function cardHtml(r, i) {
+        const details = [
+            ['Bit length', r.bitLength === 'Unknown' ? 'Unknown' : r.bitLength + '-bit'],
+            ['Length', r.length + ' characters'],
+            ['Character type', r.charType],
+            ['Salt', r.salt]
+        ].map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHtml(String(v))}</dd></div>`).join('');
+
+        return `<div class="analysis-card">` +
+            `<div class="analysis-head"><span class="badge ${r.type === 'Unknown' ? '' : 'badge-accent'}">${escapeHtml(r.type)}</span>` +
+            `<button type="button" class="icon-mini" data-copy-i="${i}" title="Copy hash" aria-label="Copy hash">${ICONS.copy}</button></div>` +
+            `<code class="analysis-hash">${escapeHtml(r.hash)}</code>` +
+            `<dl class="analysis-grid">${details}</dl></div>`;
+    }
+
     document.getElementById('analyzeBtn').addEventListener('click', () => {
-        const lines = input.value.trim().split(/\r?\n/).filter(Boolean);
-        if (!lines.length) { 
-            outDiv.innerHTML = `<p class="warn">⚠️ Please enter or upload a hash.</p>`; 
-            return; 
+        const lines = input.value.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+        if (!lines.length) {
+            lastResults = [];
+            setAnalyzeState('warn', 'Enter or upload a hash first.');
+            return;
         }
 
-        const results = lines.map(h => {
-            const r = detectHashType(h);
-            if(!r) return '';
-            return `
-<div class="result-box">
-  <p><strong>Hash:</strong> <code>${r.hash}</code></p>
-  <p><strong>Hash type:</strong> ${r.type}</p>
-  <p><strong>Bit length:</strong> ${r.bitLength}</p>
-  <p><strong>Character length:</strong> ${r.length}</p>
-  <p><strong>Character type:</strong> ${r.charType}</p>
-  <p><strong>Salt:</strong> ${r.salt}</p>
-</div>
-`;
-        }).join('');
-        outDiv.innerHTML = results || `<p>No results found.</p>`;
+        const shown = lines.slice(0, MAX_SHOWN);
+        lastResults = shown.map(h => detectHashType(h)).filter(Boolean);
+        const note = lines.length > shown.length
+            ? `<div class="analysis-note">Showing the first ${MAX_SHOWN} of ${lines.length} hashes.</div>` : '';
+
+        outDiv.innerHTML = lastResults.map(cardHtml).join('') + note;
+        setAnalyzeState('ok');
+        badge.textContent = lastResults.length === 1 ? '1 hash' : lastResults.length + ' hashes';
+
+        saveToAnalyzeHistory(lastResults.slice(0, MAX_SAVED));
+    });
+
+    // Copy buttons inside the result cards
+    outDiv.addEventListener('click', async (e) => {
+        const btn = e.target.closest('[data-copy-i]');
+        if (!btn) return;
+        const r = lastResults[Number(btn.dataset.copyI)];
+        if (r) flashCopied(btn, await copyToClipboard(r.hash));
     });
 
     document.getElementById('clearAnalyzeBtn').addEventListener('click', () => {
         input.value = '';
-        outDiv.innerHTML = '<p>#</p>';
+        lastResults = [];
+        outDiv.textContent = '';
+        setAnalyzeState('empty');
         fileInput.value = '';
         fileName.textContent = 'No file chosen';
     });

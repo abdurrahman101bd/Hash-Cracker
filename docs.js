@@ -1,91 +1,6 @@
-
-
-// Add Copy Button to Code Boxes
-document.querySelectorAll('.code-box pre').forEach((codeBlock, index) => {
-    // Create wrapper if not exists
-    if (!codeBlock.parentElement.classList.contains('code-wrapper')) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'code-wrapper';
-        wrapper.style.position = 'relative';
-        
-        codeBlock.parentNode.insertBefore(wrapper, codeBlock);
-        wrapper.appendChild(codeBlock);
-        
-        // Create copy button
-        const copyBtn = document.createElement('button');
-        copyBtn.className = 'code-copy-btn';
-        copyBtn.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="currentColor">
-                <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
-            </svg>
-        `;
-        copyBtn.title = 'Copy code';
-        
-        // Add CSS for button
-        copyBtn.style.cssText = `
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 8px;
-            background: #0af70a;
-            background: radial-gradient(circle, rgba(10, 247, 10, 1) 0%, rgba(141, 222, 75, 1) 100%);
-            color: white;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        `;
-        
-        copyBtn.addEventListener('mouseenter', () => {
-            copyBtn.style.opacity = '1';
-        });
-        
-        copyBtn.addEventListener('mouseleave', () => {
-            copyBtn.style.opacity = '0.7';
-        });
-        
-        copyBtn.addEventListener('click', async () => {
-            const code = codeBlock.textContent;
-            try {
-                await navigator.clipboard.writeText(code);
-                
-                // Show success feedback
-                copyBtn.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="currentColor">
-                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
-                    </svg>
-                `;
-                
-                setTimeout(() => {
-                    copyBtn.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="currentColor">
-                            <path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/>
-                        </svg>
-                    `;
-                }, 1500);
-            } catch (err) {
-                console.error('Failed to copy:', err);
-            }
-        });
-        
-        wrapper.appendChild(copyBtn);
-    }
-});
-
-// Show/Hide Scroll Progress Indicator (Optional)
+// Show/Hide Scroll Progress Indicator
 let scrollProgress = document.createElement('div');
 scrollProgress.className = 'scroll-progress';
-scrollProgress.style.cssText = `
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: var(--primary-color);
-    z-index: 999;
-    transition: width 0.1s ease;
-`;
 document.body.appendChild(scrollProgress);
 
 window.addEventListener('scroll', () => {
@@ -132,7 +47,7 @@ document.querySelectorAll('a[target="_blank"]').forEach(link => {
     }
 });
 
-// Back to Top Button 
+// Floating Back to Top Button
 const backToTopBtn = document.getElementById('backToTop');
 
 if (backToTopBtn) {
@@ -142,19 +57,8 @@ if (backToTopBtn) {
         } else {
             backToTopBtn.classList.remove('show');
         }
-    });    
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
     });
-}
-
-const scrollToTopBtn = document.querySelector('.scroll-to-top');
-
-if (scrollToTopBtn) {
-    scrollToTopBtn.addEventListener('click', () => {
+    backToTopBtn.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'

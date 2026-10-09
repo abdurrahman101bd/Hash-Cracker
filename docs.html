@@ -4,47 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0b0d14">
+  <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="docs.css" />
 </head>
-<body>
-    
-    <!-- Floating Shapes Background -->
-<div class="floating-shapes" id="floatingShapes">
-    <div class="shape circle"></div>
-    <div class="shape triangle"></div>
-    <div class="shape square"></div>
-    <div class="shape circle"></div>
-    <div class="shape pentagon"></div>
-    <div class="shape triangle"></div>
-    <div class="shape square"></div>
-    <div class="shape circle"></div>
-    <div class="shape hexagon"></div>
-    <div class="shape triangle"></div>
-</div>
-<canvas id="matrixCanvas"></canvas>
-
-
-  <!-- Header -->
+<body class="page-docs">
     <div class="header">
         <a href="#" class="brand-logo">
             <div class="logo-icon">
-                <img src="logo.png" alt="logo">
+                <img src="assets/logo.png" alt="logo">
             </div>
-            <span class="brand-name">𝙃𝙖𝙨𝙝 𝘾𝙧𝙖𝙘𝙠𝙚𝙧</span>
+            <span class="brand-name">Hash Cracker</span>
         </a>
         
         <div class="header-actions">
             <button class="icon-btn" id="themeToggle">
-                
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
-            <path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>
-          </svg>
-          
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" style="display:none" height="24px" viewBox="0 -960 960 960" width="24px">
-            <path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/>
-          </svg>
-                
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"></path></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" style="display:none" viewBox="0 0 24 24" width="24"><path d="M11.3807 2.01886C9.91573 3.38768 9 5.3369 9 7.49999C9 11.6421 12.3579 15 16.5 15C18.6631 15 20.6123 14.0843 21.9811 12.6193C21.6613 17.8537 17.3149 22 12 22C6.47715 22 2 17.5228 2 12C2 6.68514 6.14629 2.33869 11.3807 2.01886Z"></path></svg>               
             </button>
         </div>
     </div>
@@ -52,8 +32,8 @@
   <main class="docs-container">    
     <div class="docs-content">
       <section id="about" class="doc-section">
-        <h1>𝐇𝐚𝐬𝐡 𝐂𝐫𝐚𝐜𝐤𝐞𝐫 𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐚𝐭𝐢𝐨𝐧</h1>
-        <p class="lead">𝘈 𝘤𝘰𝘮𝘱𝘭𝘦𝘵𝘦 𝘤𝘭𝘪𝘦𝘯𝘵-𝘴𝘪𝘥𝘦 𝘩𝘢𝘴𝘩 𝘨𝘦𝘯𝘦𝘳𝘢𝘵𝘪𝘰𝘯 𝘢𝘯𝘥 𝘷𝘦𝘳𝘪𝘧𝘪𝘤𝘢𝘵𝘪𝘰𝘯 𝘵𝘰𝘰𝘭 𝘵𝘩𝘢𝘵 𝘸𝘰𝘳𝘬𝘴 𝘭𝘰𝘤𝘢𝘭𝘭𝘺 𝘪𝘯 𝘺𝘰𝘶𝘳 𝘣𝘳𝘰𝘸𝘴𝘦𝘳.</p>
+        <h1>Hash Cracker Documentation</h1>
+        <p class="lead">A complete client-side hash generation and verification tool that works locally in your browser.</p>
         
         <div class="feature-grid">
           <div class="feature-card">
@@ -80,8 +60,8 @@
       </section>
 
       <section id="what-is-hash" class="doc-section">
-        <h2>♯ 𝐖𝐡𝐚𝐭 𝐢𝐬 𝐚 𝐇𝐚𝐬𝐡?</h2>
-        <p>𝘈 𝘩𝘢𝘴𝘩 𝘪𝘴 𝘢 𝘰𝘯𝘦-𝘸𝘢𝘺 𝘤𝘳𝘺𝘱𝘵𝘰𝘨𝘳𝘢𝘱𝘩𝘪𝘤 𝘧𝘶𝘯𝘤𝘵𝘪𝘰𝘯 𝘵𝘩𝘢𝘵 𝘤𝘰𝘯𝘷𝘦𝘳𝘵𝘴 𝘢𝘯𝘺 𝘪𝘯𝘱𝘶𝘵 𝘥𝘢𝘵𝘢 𝘪𝘯𝘵𝘰 𝘢 𝘧𝘪𝘹𝘦𝘥-𝘴𝘪𝘻𝘦 𝘴𝘵𝘳𝘪𝘯𝘨. 𝘐𝘵 𝘸𝘰𝘳𝘬𝘴 𝘭𝘪𝘬𝘦 𝘢 “𝘥𝘪𝘨𝘪𝘵𝘢𝘭 𝘧𝘪𝘯𝘨𝘦𝘳𝘱𝘳𝘪𝘯𝘵”</p>
+        <h2>What is a Hash?</h2>
+        <p>A hash is a one-way cryptographic function that converts any input data into a fixed-size string. It works like a “digital fingerprint”</p>
         
         <div class="code-box">
           <h4>Example:</h4>
@@ -115,7 +95,7 @@ SHA256: ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</pre>
       </section>
 
       <section id="how-works" class="doc-section">
-        <h2>⚙️ 𝐇𝐨𝐰 𝐇𝐚𝐬𝐡𝐢𝐧𝐠 𝐖𝐨𝐫𝐤𝐬</h2>
+        <h2>⚙️ How Hashing Works</h2>
         
         <div class="timeline">
           <div class="timeline-item">
@@ -144,13 +124,13 @@ SHA256: ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</pre>
         </div>
 
         <div class="warning-box">
-          <h4>⚠️ 𝐈𝐦𝐩𝐨𝐫𝐭𝐚𝐧𝐭:</h4>
-          <p>𝘏𝘢𝘴𝘩𝘪𝘯𝘨 𝘪𝘴 𝘢 𝘰𝘯𝘦-𝘸𝘢𝘺 𝘱𝘳𝘰𝘤𝘦𝘴𝘴. 𝘠𝘰𝘶 𝘤𝘢𝘯𝘯𝘰𝘵 𝘥𝘪𝘳𝘦𝘤𝘵𝘭𝘺 𝘳𝘦𝘤𝘰𝘷𝘦𝘳 𝘵𝘩𝘦 𝘰𝘳𝘪𝘨𝘪𝘯𝘢𝘭 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥 𝘧𝘳𝘰𝘮 𝘢 𝘩𝘢𝘴𝘩. 𝘛𝘩𝘦 𝘰𝘯𝘭𝘺 𝘸𝘢𝘺 𝘵𝘰 𝘧𝘪𝘯𝘥 𝘢 𝘮𝘢𝘵𝘤𝘩 𝘪𝘴 𝘷𝘪𝘢 𝘣𝘳𝘶𝘵𝘦-𝘧𝘰𝘳𝘤𝘦 𝘰𝘳 𝘥𝘪𝘤𝘵𝘪𝘰𝘯𝘢𝘳𝘺 𝘢𝘵𝘵𝘢𝘤𝘬.</p>
+          <h4>⚠️ Important:</h4>
+          <p>Hashing is a one-way process. You cannot directly recover the original password from a hash. The only way to find a match is via brute-force or dictionary attack.</p>
         </div>
       </section>
 
       <section id="algorithms" class="doc-section">
-        <h2>🔢 𝐒𝐮𝐩𝐩𝐨𝐫𝐭𝐞𝐝 𝐇𝐚𝐬𝐡 𝐀𝐥𝐠𝐨𝐫𝐢𝐭𝐡𝐦𝐬</h2>
+        <h2>🔢 Supported Hash Algorithms</h2>
         
         <div class="algo-grid">
           <div class="algo-card deprecated">
@@ -201,8 +181,8 @@ SHA256: ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</pre>
       </section>
 
       <section id="wordlist" class="doc-section">
-        <h2>📝 𝐖𝐡𝐚𝐭 𝐚𝐫𝐞 𝐖𝐨𝐫𝐝𝐥𝐢𝐬𝐭 𝐅𝐢𝐥𝐞𝐬?</h2>
-        <p>𝘈 𝘸𝘰𝘳𝘥𝘭𝘪𝘴𝘵 𝘪𝘴 𝘢 𝘵𝘦𝘹𝘵 𝘧𝘪𝘭𝘦 𝘤𝘰𝘯𝘵𝘢𝘪𝘯𝘪𝘯𝘨 𝘱𝘰𝘴𝘴𝘪𝘣𝘭𝘦 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥𝘴 𝘭𝘪𝘯𝘦 𝘣𝘺 𝘭𝘪𝘯𝘦. 𝘛𝘩𝘦𝘴𝘦 𝘢𝘳𝘦 𝘶𝘴𝘦𝘥 𝘧𝘰𝘳 𝘩𝘢𝘴𝘩 𝘤𝘳𝘢𝘤𝘬𝘪𝘯𝘨.</p>
+        <h2>📝 What are Wordlist Files?</h2>
+        <p>A wordlist is a text file containing possible passwords line by line. These are used for hash cracking.</p>
 
         <div class="code-box">
           <h4>Wordlist Format:</h4>
@@ -237,7 +217,7 @@ monkey</pre>
       </section>
 
       <section id="downloads" class="doc-section">
-        <h2>⬇️ 𝐖𝐨𝐫𝐝𝐥𝐢𝐬𝐭 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐬 </h2>
+        <h2>⬇️ Wordlist Downloads </h2>
         
         <div class="download-grid">
           <div class="download-card">
@@ -272,25 +252,25 @@ monkey</pre>
         </div>
 
         <div class="warning-box">
-          <h4>⚠️ 𝐋𝐞𝐠𝐚𝐥 𝐍𝐨𝐭𝐢𝐜𝐞:</h4>
-          <p>𝘜𝘴𝘦 𝘵𝘩𝘦𝘴𝘦 𝘸𝘰𝘳𝘥𝘭𝘪𝘴𝘵𝘴 𝘰𝘯𝘭𝘺 𝘧𝘰𝘳 𝘦𝘥𝘶𝘤𝘢𝘵𝘪𝘰𝘯𝘢𝘭 𝘢𝘯𝘥 𝘢𝘶𝘵𝘩𝘰𝘳𝘪𝘻𝘦𝘥 𝘴𝘦𝘤𝘶𝘳𝘪𝘵𝘺 𝘵𝘦𝘴𝘵𝘪𝘯𝘨. 𝘜𝘯𝘢𝘶𝘵𝘩𝘰𝘳𝘪𝘻𝘦𝘥 𝘢𝘤𝘤𝘦𝘴𝘴 𝘢𝘵𝘵𝘦𝘮𝘱𝘵𝘴 𝘢𝘳𝘦 𝘪𝘭𝘭𝘦𝘨𝘢𝘭 𝘢𝘯𝘥 𝘱𝘶𝘯𝘪𝘴𝘩𝘢𝘣𝘭𝘦 𝘣𝘺 𝘭𝘢𝘸.</p>
+          <h4>⚠️ Legal Notice:</h4>
+          <p>Use these wordlists only for educational and authorized security testing. Unauthorized access attempts are illegal and punishable by law.</p>
         </div>
       </section>
 
       <section id="usage" class="doc-section">
-        <h2>🚀 𝐇𝐨𝐰 𝐭𝐨 𝐔𝐬𝐞</h2>
+        <h2>🚀 How to Use</h2>
 
         <div class="usage-steps">
           <div class="usage-step">
             <div class="usage-number">1</div>
             <div class="usage-content">
-              <h3>𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐞 𝐇𝐚𝐬𝐡</h3>
+              <h3>Generate Hash</h3>
               <ol>
-                <li>𝘎𝘰 𝘵𝘰 𝘵𝘩𝘦 𝘏𝘰𝘮𝘦 𝘱𝘢𝘨𝘦</li>
-                <li>𝘌𝘯𝘵𝘦𝘳 𝘺𝘰𝘶𝘳 𝘵𝘦𝘹𝘵 𝘪𝘯 𝘵𝘩𝘦 “𝘗𝘭𝘢𝘪𝘯 𝘵𝘦𝘹𝘵 / 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥” 𝘧𝘪𝘦𝘭𝘥</li>
-                <li>𝘚𝘦𝘭𝘦𝘤𝘵 𝘢𝘯 𝘢𝘭𝘨𝘰𝘳𝘪𝘵𝘩𝘮 (𝘚𝘏𝘈-256 𝘳𝘦𝘤𝘰𝘮𝘮𝘦𝘯𝘥𝘦𝘥)</li>
-                <li>𝘊𝘭𝘪𝘤𝘬 “𝘊𝘰𝘮𝘱𝘶𝘵𝘦 𝘏𝘢𝘴𝘩”</li>
-                <li>𝘊𝘰𝘱𝘺 𝘵𝘩𝘦 𝘳𝘦𝘴𝘶𝘭𝘵 𝘰𝘳 𝘪𝘵 𝘸𝘪𝘭𝘭 𝘣𝘦 𝘢𝘶𝘵𝘰𝘮𝘢𝘵𝘪𝘤𝘢𝘭𝘭𝘺 𝘴𝘢𝘷𝘦𝘥 𝘪𝘯 𝘩𝘪𝘴𝘵𝘰𝘳𝘺</li>
+                <li>Go to the Home page</li>
+                <li>Enter your text in the “Plain text / password” field</li>
+                <li>Select an algorithm (SHA-256 recommended)</li>
+                <li>Click “Compute Hash”</li>
+                <li>Copy the result or it will be automatically saved in history</li>
               </ol>
             </div>
           </div>
@@ -298,13 +278,13 @@ monkey</pre>
           <div class="usage-step">
             <div class="usage-number">2</div>
             <div class="usage-content">
-              <h3>𝐕𝐞𝐫𝐢𝐟𝐲/𝐂𝐫𝐚𝐜𝐤 𝐇𝐚𝐬𝐡</h3>
+              <h3>Verify/Crack Hash</h3>
               <ol>
-                <li>𝘎𝘰 𝘵𝘰 𝘵𝘩𝘦 “𝘝𝘦𝘳𝘪𝘧𝘺 𝘏𝘢𝘴𝘩 𝘷𝘪𝘢 𝘞𝘰𝘳𝘥𝘭𝘪𝘴𝘵” 𝘴𝘦𝘤𝘵𝘪𝘰𝘯</li>
-                <li>𝘗𝘢𝘴𝘵𝘦 𝘵𝘩𝘦 𝘵𝘢𝘳𝘨𝘦𝘵 𝘩𝘢𝘴𝘩</li>                <li>𝘚𝘦𝘭𝘦𝘤𝘵 𝘵𝘩𝘦 𝘤𝘰𝘳𝘳𝘦𝘤𝘵 𝘢𝘭𝘨𝘰𝘳𝘪𝘵𝘩𝘮</li>
-                <li>𝘜𝘱𝘭𝘰𝘢𝘥 𝘺𝘰𝘶𝘳 𝘸𝘰𝘳𝘥𝘭𝘪𝘴𝘵 𝘧𝘪𝘭𝘦 (.𝘵𝘹𝘵)</li>
-                <li>𝘊𝘭𝘪𝘤𝘬 “𝘚𝘵𝘢𝘳𝘵 𝘊𝘩𝘦𝘤𝘬”</li>
-                <li>𝘐𝘧 𝘢 𝘮𝘢𝘵𝘤𝘩 𝘪𝘴 𝘧𝘰𝘶𝘯𝘥, 𝘵𝘩𝘦 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥 𝘸𝘪𝘭𝘭 𝘢𝘱𝘱𝘦𝘢𝘳; 𝘰𝘵𝘩𝘦𝘳𝘸𝘪𝘴𝘦, “𝘕𝘰𝘵 𝘍𝘰𝘶𝘯𝘥.”</li>
+                <li>Go to the “Verify Hash via Wordlist” section</li>
+                <li>Paste the target hash</li>                <li>Select the correct algorithm</li>
+                <li>Upload your wordlist file (.txt)</li>
+                <li>Click “Start Check”</li>
+                <li>If a match is found, the password will appear; otherwise, “Not Found.”</li>
               </ol>
             </div>
           </div>
@@ -312,12 +292,12 @@ monkey</pre>
           <div class="usage-step">
             <div class="usage-number">3</div>
             <div class="usage-content">
-              <h3>𝐕𝐢𝐞𝐰 𝐇𝐢𝐬𝐭𝐨𝐫𝐲</h3>
+              <h3>View History</h3>
               <ol>
-                <li>𝘊𝘭𝘪𝘤𝘬 𝘵𝘩𝘦 𝘏𝘪𝘴𝘵𝘰𝘳𝘺 𝘪𝘤𝘰𝘯 (🕐) 𝘪𝘯 𝘵𝘩𝘦 𝘩𝘦𝘢𝘥𝘦𝘳</li>
-                <li>𝘝𝘪𝘦𝘸 𝘨𝘦𝘯𝘦𝘳𝘢𝘵𝘪𝘰𝘯 𝘩𝘪𝘴𝘵𝘰𝘳𝘺 𝘶𝘯𝘥𝘦𝘳 𝘵𝘩𝘦 “𝘏𝘢𝘴𝘩 𝘏𝘪𝘴𝘵𝘰𝘳𝘺” 𝘵𝘢𝘣</li>
-                <li>𝘝𝘪𝘦𝘸 𝘷𝘦𝘳𝘪𝘧𝘪𝘤𝘢𝘵𝘪𝘰𝘯 𝘩𝘪𝘴𝘵𝘰𝘳𝘺 𝘶𝘯𝘥𝘦𝘳 𝘵𝘩𝘦 “𝘊𝘩𝘦𝘤𝘬 𝘏𝘪𝘴𝘵𝘰𝘳𝘺” 𝘵𝘢𝘣</li>
-                <li>𝘊𝘭𝘪𝘤𝘬 “𝘊𝘭𝘦𝘢𝘳 𝘏𝘪𝘴𝘵𝘰𝘳𝘺” 𝘪𝘧 𝘯𝘦𝘦𝘥𝘦𝘥</li>
+                <li>Click the History icon (🕐) in the header</li>
+                <li>View generation history under the “Hash History” tab</li>
+                <li>View verification history under the “Check History” tab</li>
+                <li>Click “Clear History” if needed</li>
               </ol>
             </div>
           </div>
@@ -325,42 +305,42 @@ monkey</pre>
       </section>
 
       <section id="security" class="doc-section">
-        <h2>🛡️ 𝐒𝐞𝐜𝐮𝐫𝐢𝐭𝐲 𝐓𝐢𝐩𝐬</h2>
+        <h2>🛡️ Security Tips</h2>
 
         <div class="security-grid">
           <div class="security-tip success">
-            <h4>✅ 𝐃𝐎:</h4>
+            <h4>✅ DO:</h4>
             <ul>
-              <𝘭li>𝘖𝘯𝘭𝘺 𝘵𝘦𝘴𝘵 𝘺𝘰𝘶𝘳 𝘰𝘸𝘯 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥𝘴</li>
-              <li>𝘜𝘴𝘦 𝘴𝘵𝘳𝘰𝘯𝘨, 𝘶𝘯𝘪𝘲𝘶𝘦 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥𝘴</li>
-              <li>𝘜𝘴𝘦 𝘢 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥 𝘮𝘢𝘯𝘢𝘨𝘦𝘳</li>
-              <li>𝘌𝘯𝘢𝘣𝘭𝘦 𝘵𝘸𝘰-𝘧𝘢𝘤𝘵𝘰𝘳 𝘢𝘶𝘵𝘩𝘦𝘯𝘵𝘪𝘤𝘢𝘵𝘪𝘰𝘯</li>
-              <li>𝘜𝘴𝘦 𝘚𝘏𝘈-256 𝘰𝘳 𝘚𝘏𝘈-512 𝘧𝘰𝘳 𝘮𝘰𝘥𝘦𝘳𝘯 𝘢𝘱𝘱𝘭𝘪𝘤𝘢𝘵𝘪𝘰𝘯𝘴</li>
-             </𝘶𝘭>
+              <lli>Only test your own passwords</li>
+              <li>Use strong, unique passwords</li>
+              <li>Use a password manager</li>
+              <li>Enable two-factor authentication</li>
+              <li>Use SHA-256 or SHA-512 for modern applications</li>
+             </ul>
           </div>
 
           <div class="security-tip danger">
-            <h4>❌ 𝐃𝐎𝐍'𝐓:</h4>
+            <h4>DON'T:</h4>
             <ul>
-              <li>𝘕𝘦𝘷𝘦𝘳 𝘵𝘳𝘺 𝘵𝘰 𝘤𝘳𝘢𝘤𝘬 𝘴𝘰𝘮𝘦𝘰𝘯𝘦 𝘦𝘭𝘴𝘦’𝘴 𝘩𝘢𝘴𝘩 (𝘪𝘭𝘭𝘦𝘨𝘢𝘭)</li>
-              <li>𝘋𝘰𝘯’𝘵 𝘶𝘴𝘦 𝘔𝘋5 𝘰𝘳 𝘚𝘏𝘈-1 𝘧𝘰𝘳 𝘴𝘦𝘯𝘴𝘪𝘵𝘪𝘷𝘦 𝘥𝘢𝘵𝘢</li>
-              <li>𝘋𝘰𝘯’𝘵 𝘶𝘴𝘦 𝘤𝘰𝘮𝘮𝘰𝘯 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥𝘴</li>
-              <li>𝘋𝘰𝘯’𝘵 𝘳𝘦𝘶𝘴𝘦 𝘵𝘩𝘦 𝘴𝘢𝘮𝘦 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥 𝘰𝘯 𝘮𝘶𝘭𝘵𝘪𝘱𝘭𝘦 𝘴𝘪𝘵𝘦𝘴</li>
-              <li>𝘋𝘰𝘯’𝘵 𝘨𝘦𝘯𝘦𝘳𝘢𝘵𝘦 𝘴𝘦𝘯𝘴𝘪𝘵𝘪𝘷𝘦 𝘩𝘢𝘴𝘩𝘦𝘴 𝘰𝘯 𝘱𝘶𝘣𝘭𝘪𝘤/𝘴𝘩𝘢𝘳𝘦𝘥 𝘤𝘰𝘮𝘱𝘶𝘵𝘦𝘳𝘴</li>
+              <li>Never try to crack someone else’s hash (illegal)</li>
+              <li>Don’t use MD5 or SHA-1 for sensitive data</li>
+              <li>Don’t use common passwords</li>
+              <li>Don’t reuse the same password on multiple sites</li>
+              <li>Don’t generate sensitive hashes on public/shared computers</li>
             </ul>
           </div>
         </div>
 
         <div class="info-box">
-          <h4>🔒𝐏𝐫𝐢𝐯𝐚𝐜𝐲 𝐆𝐮𝐚𝐫𝐚𝐧𝐭𝐞𝐞:</h4>
-          <p>𝘛𝘩𝘪𝘴 𝘵𝘰𝘰𝘭 𝘸𝘰𝘳𝘬𝘴 𝘦𝘯𝘵𝘪𝘳𝘦𝘭𝘺 𝘤𝘭𝘪𝘦𝘯𝘵-𝘴𝘪𝘥𝘦. 𝘕𝘰𝘯𝘦 𝘰𝘧 𝘺𝘰𝘶𝘳 𝘥𝘢𝘵𝘢, 𝘱𝘢𝘴𝘴𝘸𝘰𝘳𝘥𝘴, 𝘰𝘳 𝘩𝘢𝘴𝘩𝘦𝘴 𝘢𝘳𝘦 𝘦𝘷𝘦𝘳 𝘴𝘦𝘯𝘵 𝘵𝘰 𝘢𝘯𝘺 𝘴𝘦𝘳𝘷𝘦𝘳. 𝘌𝘷𝘦𝘳𝘺𝘵𝘩𝘪𝘯𝘨 𝘪𝘴 𝘱𝘳𝘰𝘤𝘦𝘴𝘴𝘦𝘥 𝘭𝘰𝘤𝘢𝘭𝘭𝘺 𝘪𝘯 𝘺𝘰𝘶𝘳 𝘣𝘳𝘰𝘸𝘴𝘦𝘳.</p>
+          <h4>🔒Privacy Guarantee:</h4>
+          <p>This tool works entirely client-side. None of your data, passwords, or hashes are ever sent to any server. Everything is processed locally in your browser.</p>
         </div>
       </section>
       
       <!-- Encode/Decode Tool Documentation -->
       <section id="encode-decode" class="doc-section">
-        <h1>🔐 𝐄𝐧𝐜𝐨𝐝𝐞/𝐃𝐞𝐜𝐨𝐝𝐞 𝐓𝐨𝐨𝐥 𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐚𝐭𝐢𝐨𝐧</h1>
-        <p class="lead">𝘈 𝘤𝘰𝘮𝘱𝘳𝘦𝘩𝘦𝘯𝘴𝘪𝘷𝘦 𝘵𝘦𝘹𝘵 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨, 𝘥𝘦𝘤𝘰𝘥𝘪𝘯𝘨, 𝘢𝘯𝘥 𝘵𝘳𝘢𝘯𝘴𝘧𝘰𝘳𝘮𝘢𝘵𝘪𝘰𝘯 𝘵𝘰𝘰𝘭𝘬𝘪𝘵 𝘸𝘪𝘵𝘩 40+ 𝘥𝘪𝘧𝘧𝘦𝘳𝘦𝘯𝘵 𝘮𝘦𝘵𝘩𝘰𝘥𝘴 — 𝘢𝘭𝘭 𝘱𝘳𝘰𝘤𝘦𝘴𝘴𝘪𝘯𝘨 𝘩𝘢𝘱𝘱𝘦𝘯𝘴 𝘭𝘰𝘤𝘢𝘭𝘭𝘺 𝘪𝘯 𝘺𝘰𝘶𝘳 𝘣𝘳𝘰𝘸𝘴𝘦𝘳.</p>
+        <h2>🔐 Encode/Decode Tool Documentation</h2>
+        <p class="lead">A comprehensive text encoding, decoding, and transformation toolkit with 40+ different methods — all processing happens locally in your browser.</p>
 
         <div class="feature-grid">
           <div class="feature-card">
@@ -387,17 +367,17 @@ monkey</pre>
       </section>
 
       <section id="encoding-categories" class="doc-section">
-        <h2>📚 𝐄𝐧𝐜𝐨𝐝𝐢𝐧𝐠 𝐂𝐚𝐭𝐞𝐠𝐨𝐫𝐢𝐞𝐬</h2>
+        <h2>📚 Encoding Categories</h2>
 
         <div class="encoding-category">
-          <h3>📦 𝐁𝐚𝐬𝐞 𝐄𝐧𝐜𝐨𝐝𝐢𝐧𝐠𝐬</h3>
-          <p>𝘉𝘢𝘴𝘦 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨 𝘴𝘤𝘩𝘦𝘮𝘦𝘴 𝘢𝘳𝘦 𝘶𝘴𝘦𝘥 𝘵𝘰 𝘳𝘦𝘱𝘳𝘦𝘴𝘦𝘯𝘵 𝘣𝘪𝘯𝘢𝘳𝘺 𝘥𝘢𝘵𝘢 𝘪𝘯 𝘈𝘚𝘊𝘐𝘐 𝘴𝘵𝘳𝘪𝘯𝘨 𝘧𝘰𝘳𝘮𝘢𝘵. 𝘛𝘩𝘦𝘺'𝘳𝘦 𝘤𝘰𝘮𝘮𝘰𝘯𝘭𝘺 𝘶𝘴𝘦𝘥 𝘧𝘰𝘳 𝘥𝘢𝘵𝘢 𝘵𝘳𝘢𝘯𝘴𝘮𝘪𝘴𝘴𝘪𝘰𝘯 𝘢𝘯𝘥 𝘴𝘵𝘰𝘳𝘢𝘨𝘦.</p>
+          <h3>📦 Base Encodings</h3>
+          <p>Base encoding schemes are used to represent binary data in ASCII string format. They're commonly used for data transmission and storage.</p>
           
           <div class="encoding-list">
             <div class="encoding-item">
               <div class="encoding-header">
                 <strong>Base64</strong>
-                <span class="encoding-badge popular">𝘔𝘰𝘴𝘵 𝘗𝘰𝘱𝘶𝘭𝘢𝘳</span>
+                <span class="encoding-badge popular">Most Popular</span>
               </div>
               <p><strong>Use case:</strong> Email attachments, data URLs, JWT tokens</p>
               <p><strong>Characters:</strong> A-Z, a-z, 0-9, +, /</p>
@@ -444,8 +424,8 @@ Output: SGVsbG8gV29ybGQ=</pre>
         </div>
 
         <div class="encoding-category">
-          <h3>🔠 𝐀𝐒𝐂𝐈𝐈 & 𝐍𝐮𝐦𝐛𝐞𝐫 𝐒𝐲𝐬𝐭𝐞𝐦𝐬</h3>
-          <p>𝘊𝘰𝘯𝘷𝘦𝘳𝘵 𝘵𝘦𝘹𝘵 𝘵𝘰 𝘥𝘪𝘧𝘧𝘦𝘳𝘦𝘯𝘵 𝘯𝘶𝘮𝘣𝘦𝘳 𝘴𝘺𝘴𝘵𝘦𝘮 𝘳𝘦𝘱𝘳𝘦𝘴𝘦𝘯𝘵𝘢𝘵𝘪𝘰𝘯𝘴 𝘧𝘰𝘳 𝘥𝘦𝘣𝘶𝘨𝘨𝘪𝘯𝘨, 𝘢𝘯𝘢𝘭𝘺𝘴𝘪𝘴, 𝘰𝘳 𝘰𝘣𝘧𝘶𝘴𝘤𝘢𝘵𝘪𝘰𝘯.</p>
+          <h3>🔠 ASCII & Number Systems</h3>
+          <p>Convert text to different number system representations for debugging, analysis, or obfuscation.</p>
           
           <div class="encoding-list">
             <div class="encoding-item">
@@ -487,8 +467,8 @@ Binary: 01000001</pre>
         </div>
 
         <div class="encoding-category">
-          <h3>🌐 𝐔𝐑𝐋 & 𝐍𝐞𝐭𝐰𝐨𝐫𝐤 𝐄𝐧𝐜𝐨𝐝𝐢𝐧𝐠𝐬</h3>
-          <p>𝘌𝘯𝘤𝘰𝘥𝘪𝘯𝘨𝘴 𝘥𝘦𝘴𝘪𝘨𝘯𝘦𝘥 𝘧𝘰𝘳 𝘴𝘢𝘧𝘦 𝘵𝘳𝘢𝘯𝘴𝘮𝘪𝘴𝘴𝘪𝘰𝘯 𝘰𝘷𝘦𝘳 𝘯𝘦𝘵𝘸𝘰𝘳𝘬𝘴 𝘢𝘯𝘥 𝘪𝘯 𝘜𝘙𝘓𝘴.</p>
+          <h3>🌐 URL & Network Encodings</h3>
+          <p>Encodings designed for safe transmission over networks and in URLs.</p>
           
           <div class="encoding-list">
             <div class="encoding-item">
@@ -533,8 +513,8 @@ Output: "xn--mnchen-3ya.de"</pre>
         </div>
 
         <div class="encoding-category">
-          <h3>💾 𝐃𝐚𝐭𝐚 𝐅𝐨𝐫𝐦𝐚𝐭 𝐄𝐧𝐜𝐨𝐝𝐢𝐧𝐠𝐬</h3>
-          <p>𝘌𝘴𝘤𝘢𝘱𝘦 𝘢𝘯𝘥 𝘦𝘯𝘤𝘰𝘥𝘦 𝘥𝘢𝘵𝘢 𝘧𝘰𝘳 𝘷𝘢𝘳𝘪𝘰𝘶𝘴 𝘱𝘳𝘰𝘨𝘳𝘢𝘮𝘮𝘪𝘯𝘨 𝘤𝘰𝘯𝘵𝘦𝘹𝘵𝘴.</p>
+          <h3>💾 Data Format Encodings</h3>
+          <p>Escape and encode data for various programming contexts.</p>
           
           <div class="encoding-list">
             <div class="encoding-item">
@@ -594,8 +574,8 @@ Output: "Hello \u{1F389}"</pre>
         </div>
 
         <div class="encoding-category">
-          <h3>🔤 𝐂𝐢𝐩𝐡𝐞𝐫𝐬 & 𝐓𝐞𝐱𝐭 𝐓𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧𝐬</h3>
-          <p>𝘊𝘭𝘢𝘴𝘴𝘪𝘤𝘢𝘭 𝘤𝘪𝘱𝘩𝘦𝘳𝘴 𝘧𝘰𝘳 𝘧𝘶𝘯, 𝘭𝘦𝘢𝘳𝘯𝘪𝘯𝘨, 𝘢𝘯𝘥 𝘴𝘪𝘮𝘱𝘭𝘦 𝘰𝘣𝘧𝘶𝘴𝘤𝘢𝘵𝘪𝘰𝘯 (𝘯𝘰𝘵 𝘴𝘦𝘤𝘶𝘳𝘦!).</p>
+          <h3>🔤 Ciphers & Text Transformations</h3>
+          <p>Classical ciphers for fun, learning, and simple obfuscation (not secure!).</p>
           
           <div class="encoding-list">
             <div class="encoding-item">
@@ -642,8 +622,8 @@ Output: "... --- ..."</pre>
         </div>
 
         <div class="encoding-category">
-          <h3>⚙️ 𝐓𝐞𝐱𝐭 𝐔𝐭𝐢𝐥𝐢𝐭𝐢𝐞𝐬</h3>
-          <p>𝘚𝘪𝘮𝘱𝘭𝘦 𝘣𝘶𝘵 𝘶𝘴𝘦𝘧𝘶𝘭 𝘵𝘦𝘹𝘵 𝘵𝘳𝘢𝘯𝘴𝘧𝘰𝘳𝘮𝘢𝘵𝘪𝘰𝘯 𝘵𝘰𝘰𝘭𝘴.</p>
+          <h3>⚙️ Text Utilities</h3>
+          <p>Simple but useful text transformation tools.</p>
           
           <div class="encoding-list">
             <div class="encoding-item">
@@ -673,18 +653,18 @@ Output: "... --- ..."</pre>
       </section>
 
       <section id="encode-how-to-use" class="doc-section">
-        <h2>🚀 𝐇𝐨𝐰 𝐭𝐨 𝐔𝐬𝐞 𝐄𝐧𝐜𝐨𝐝𝐞/𝐃𝐞𝐜𝐨𝐝𝐞 𝐓𝐨𝐨𝐥</h2>
+        <h2>🚀 How to Use Encode/Decode Tool</h2>
 
         <div class="usage-steps">
           <div class="usage-step">
             <div class="usage-number">1</div>
             <div class="usage-content">
-              <h3>𝐒𝐞𝐥𝐞𝐜𝐭 𝐘𝐨𝐮𝐫 𝐓𝐨𝐨𝐥</h3>
+              <h3>Select Your Tool</h3>
               <ul>
-                <li>𝘕𝘢𝘷𝘪𝘨𝘢𝘵𝘦 𝘵𝘰 𝘵𝘩𝘦 <a herf="encrypt.html">𝘌𝘯𝘤𝘰𝘥𝘦/𝘋𝘦𝘤𝘰𝘥𝘦 𝘱𝘢𝘨𝘦</a></li>
-                <li>𝘉𝘳𝘰𝘸𝘴𝘦 𝘵𝘩𝘳𝘰𝘶𝘨𝘩 40+ 𝘵𝘰𝘰𝘭𝘴 𝘰𝘳𝘨𝘢𝘯𝘪𝘻𝘦𝘥 𝘣𝘺 𝘤𝘢𝘵𝘦𝘨𝘰𝘳𝘺 </li>
-                <li>𝘜𝘴𝘦 𝘵𝘩𝘦 𝘴𝘦𝘢𝘳𝘤𝘩 𝘣𝘰𝘹 𝘵𝘰 𝘧𝘪𝘯𝘥 𝘴𝘱𝘦𝘤𝘪𝘧𝘪𝘤 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨𝘴</li>
-                <li>𝘊𝘭𝘪𝘤𝘬 𝘰𝘯 𝘢𝘯𝘺 𝘵𝘰𝘰𝘭 𝘤𝘢𝘳𝘥 𝘵𝘰 𝘢𝘤𝘵𝘪𝘷𝘢𝘵𝘦 𝘪𝘵</li>
+                <li>Navigate to the <a herf="encrypt.html">Encode/Decode page</a></li>
+                <li>Browse through 40+ tools organized by category </li>
+                <li>Use the search box to find specific encodings</li>
+                <li>Click on any tool card to activate it</li>
               </ul>
             </div>
           </div>
@@ -692,11 +672,11 @@ Output: "... --- ..."</pre>
           <div class="usage-step">
             <div class="usage-number">2</div>
             <div class="usage-content">
-              <h3>𝐄𝐧𝐭𝐞𝐫 𝐘𝐨𝐮𝐫 𝐃𝐚𝐭𝐚</h3>
+              <h3>Enter Your Data</h3>
               <ul>
-                <li>𝘛𝘺𝘱𝘦 𝘰𝘳 𝘱𝘢𝘴𝘵𝘦 𝘺𝘰𝘶𝘳 𝘵𝘦𝘹𝘵 𝘪𝘯 𝘵𝘩𝘦 <strong>𝘐𝘯𝘱𝘶𝘵</strong> 𝘧𝘪𝘦𝘭𝘥</li>
-                <li>𝘍𝘰𝘳 𝘴𝘰𝘮𝘦 𝘵𝘰𝘰𝘭𝘴 (𝘭𝘪𝘬𝘦 𝘊𝘢𝘦𝘴𝘢𝘳 𝘊𝘪𝘱𝘩𝘦𝘳), 𝘴𝘦𝘵 𝘰𝘱𝘵𝘪𝘰𝘯𝘴 𝘪𝘧 𝘢𝘷𝘢𝘪𝘭𝘢𝘣𝘭𝘦</li>            
-                <li>𝘛𝘩𝘦 𝘵𝘰𝘰𝘭 𝘪𝘯𝘵𝘦𝘳𝘧𝘢𝘤𝘦 𝘴𝘩𝘰𝘸𝘴 𝘤𝘭𝘦𝘢𝘳𝘭𝘺 𝘸𝘩𝘢𝘵 𝘪𝘵 𝘥𝘰𝘦𝘴</li>
+                <li>Type or paste your text in the <strong>Input</strong> field</li>
+                <li>For some tools (like Caesar Cipher), set options if available</li>            
+                <li>The tool interface shows clearly what it does</li>
               </ul>
             </div>
           </div>
@@ -704,12 +684,12 @@ Output: "... --- ..."</pre>
           <div class="usage-step">
             <div class="usage-number">3</div>
             <div class="usage-content">
-              <h3>𝐄𝐧𝐜𝐨𝐝𝐞 𝐨𝐫 𝐃𝐞𝐜𝐨𝐝𝐞</h3>
+              <h3>Encode or Decode</h3>
               <ul>
-                <li>𝘊𝘭𝘪𝘤𝘬 <strong>"𝘌𝘯𝘤𝘰𝘥𝘦 →"</strong> 𝘵𝘰 𝘦𝘯𝘤𝘰𝘥𝘦 𝘺𝘰𝘶𝘳 𝘪𝘯𝘱𝘶𝘵</li> 
-                <li>𝘊𝘭𝘪𝘤𝘬 <strong>"← 𝘋𝘦𝘤𝘰𝘥𝘦"</strong> 𝘵𝘰 𝘥𝘦𝘤𝘰𝘥𝘦 𝘺𝘰𝘶𝘳 𝘪𝘯𝘱𝘶𝘵</li>
-                <li>𝘙𝘦𝘴𝘶𝘭𝘵 𝘢𝘱𝘱𝘦𝘢𝘳𝘴 𝘪𝘯𝘴𝘵𝘢𝘯𝘵𝘭𝘺 𝘪𝘯 𝘵𝘩𝘦 <strong>𝘖𝘶𝘵𝘱𝘶𝘵</strong> 𝘧𝘪𝘦𝘭𝘥</li>
-                <li>𝘜𝘴𝘦 <strong>"⇄ 𝘚𝘸𝘢𝘱"</strong> 𝘵𝘰 𝘦𝘹𝘤𝘩𝘢𝘯𝘨𝘦 𝘪𝘯𝘱𝘶𝘵 𝘢𝘯𝘥 𝘰𝘶𝘵𝘱𝘶𝘵</li>
+                <li>Click <strong>"Encode →"</strong> to encode your input</li> 
+                <li>Click <strong>"← Decode"</strong> to decode your input</li>
+                <li>Result appears instantly in the <strong>Output</strong> field</li>
+                <li>Use <strong>"⇄ Swap"</strong> to exchange input and output</li>
               </ul>
             </div>
           </div>
@@ -717,12 +697,12 @@ Output: "... --- ..."</pre>
           <div class="usage-step">
             <div class="usage-number">4</div>
             <div class="usage-content">
-              <h3>𝐂𝐨𝐩𝐲 & 𝐔𝐬𝐞</h3>
+              <h3>Copy & Use</h3>
               <ul>
-                <li>𝘊𝘭𝘪𝘤𝘬 <strong>"📋𝘊𝘰𝘱𝘺 𝘖𝘶𝘵𝘱𝘶𝘵"</𝘴𝘵𝘳𝘰𝘯𝘨> 𝘵𝘰 𝘤𝘰𝘱𝘺 𝘵𝘩𝘦 𝘳𝘦𝘴𝘶𝘭𝘵</li>
-                <li>𝘜𝘴𝘦 <strong>"🗑️𝘊𝘭𝘦𝘢𝘳 𝘈𝘭𝘭"</strong> 𝘵𝘰 𝘴𝘵𝘢𝘳𝘵 𝘧𝘳𝘦𝘴𝘩</li>
+                <li>Click <strong>"📋Copy Output"</strong> to copy the result</li>
+                <li>Use <strong>"🗑️Clear All"</strong> to start fresh</li>
                 
-                <li>𝘛𝘳𝘺 𝘥𝘪𝘧𝘧𝘦𝘳𝘦𝘯𝘵 𝘵𝘰𝘰𝘭𝘴 𝘰𝘯 𝘵𝘩𝘦 𝘴𝘢𝘮𝘦 𝘪𝘯𝘱𝘶𝘵!</li>
+                <li>Try different tools on the same input!</li>
               </ul>
             </div>
           </div>
@@ -730,128 +710,128 @@ Output: "... --- ..."</pre>
       </section>
 
       <section id="encode-use-cases" class="doc-section">
-        <h2>💡 𝐂𝐨𝐦𝐦𝐨𝐧 𝐔𝐬𝐞 𝐂𝐚𝐬𝐞𝐬</h2>
+        <h2>💡 Common Use Cases</h2>
 
         <div class="use-case-grid">
           <div class="use-case-card">
             <div class="use-case-icon">👨‍💻</div>
-            <h4>𝐖𝐞𝐛 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐦𝐞𝐧𝐭</h4>
+            <h4>Web Development</h4>
             <ul>
-              <li>𝘌𝘯𝘤𝘰𝘥𝘦 𝘥𝘢𝘵𝘢 𝘜𝘙𝘓𝘴 𝘧𝘰𝘳 𝘪𝘮𝘢𝘨𝘦𝘴</li>              <li>𝘊𝘳𝘦𝘢𝘵𝘦 𝘉𝘢𝘴𝘦64 𝘦𝘯𝘤𝘰𝘥𝘦𝘥 𝘈𝘗𝘐 𝘤𝘳𝘦𝘥𝘦𝘯𝘵𝘪𝘢𝘭𝘴</li>
-              <li>𝘜𝘙𝘓 𝘦𝘯𝘤𝘰𝘥𝘦 𝘲𝘶𝘦𝘳𝘺 𝘱𝘢𝘳𝘢𝘮𝘦𝘵𝘦𝘳𝘴 </li>
-              <li>𝘏𝘛𝘔𝘓 𝘦𝘴𝘤𝘢𝘱𝘦 𝘶𝘴𝘦𝘳 𝘪𝘯𝘱𝘶𝘵</li>
-              <li>𝘐𝘯𝘴𝘱𝘦𝘤𝘵 𝘑𝘞𝘛 𝘵𝘰𝘬𝘦𝘯𝘴</li>
+              <li>Encode data URLs for images</li>              <li>Create Base64 encoded API credentials</li>
+              <li>URL encode query parameters </li>
+              <li>HTML escape user input</li>
+              <li>Inspect JWT tokens</li>
             </ul>
           </div>
 
           <div class="use-case-card">
             <div class="use-case-icon">🔍</div>
-            <h4>𝐃𝐞𝐛𝐮𝐠𝐠𝐢𝐧𝐠 & 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬</h4>
+            <h4>Debugging & Analysis</h4>
             <ul>
-              <li>𝘋𝘦𝘤𝘰𝘥𝘦 𝘉𝘢𝘴𝘦64 𝘦𝘳𝘳𝘰𝘳 𝘮𝘦𝘴𝘴𝘢𝘨𝘦𝘴</li>
-              <li>𝘐𝘯𝘴𝘱𝘦𝘤𝘵 𝘦𝘯𝘤𝘰𝘥𝘦𝘥 𝘈𝘗𝘐 𝘳𝘦𝘴𝘱𝘰𝘯𝘴𝘦𝘴</li>
-              <li>𝘊𝘰𝘯𝘷𝘦𝘳𝘵 𝘩𝘦𝘹 𝘥𝘶𝘮𝘱𝘴 𝘵𝘰 𝘵𝘦𝘹𝘵</li>
-              <li>𝘈𝘯𝘢𝘭𝘺𝘻𝘦 𝘣𝘪𝘯𝘢𝘳𝘺 𝘥𝘢𝘵𝘢</li>
-              <li>𝘋𝘦𝘣𝘶𝘨 𝘜𝘯𝘪𝘤𝘰𝘥𝘦 𝘪𝘴𝘴𝘶𝘦𝘴</li>
+              <li>Decode Base64 error messages</li>
+              <li>Inspect encoded API responses</li>
+              <li>Convert hex dumps to text</li>
+              <li>Analyze binary data</li>
+              <li>Debug Unicode issues</li>
             </ul>
           </div>
 
           <div class="use-case-card">
             <div class="use-case-icon">📧</div>
-            <h4>𝐄𝐦𝐚𝐢𝐥 & 𝐂𝐨𝐦𝐦𝐮𝐧𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</h4>
+            <h4>Email & Communications</h4>
             <ul>
-              <li>𝘋𝘦𝘤𝘰𝘥𝘦 𝘦𝘮𝘢𝘪𝘭 𝘢𝘵𝘵𝘢𝘤𝘩𝘮𝘦𝘯𝘵𝘴 (𝘜𝘜𝘌𝘯𝘤𝘰𝘥𝘦)</li>
-              <li>𝘘𝘶𝘰𝘵𝘦𝘥-𝘗𝘳𝘪𝘯𝘵𝘢𝘣𝘭𝘦 𝘧𝘰𝘳 𝘯𝘰𝘯-𝘈𝘚𝘊𝘐𝘐 𝘵𝘦𝘹𝘵</li>
-              <li>𝘗𝘶𝘯𝘺𝘤𝘰𝘥𝘦 𝘧𝘰𝘳 𝘪𝘯𝘵𝘦𝘳𝘯𝘢𝘵𝘪𝘰𝘯𝘢𝘭 𝘥𝘰𝘮𝘢𝘪𝘯𝘴</li>
-              <li>𝘉𝘢𝘴𝘦64 𝘧𝘰𝘳 𝘦𝘮𝘢𝘪𝘭-𝘴𝘢𝘧𝘦 𝘥𝘢𝘵𝘢</li>
+              <li>Decode email attachments (UUEncode)</li>
+              <li>Quoted-Printable for non-ASCII text</li>
+              <li>Punycode for international domains</li>
+              <li>Base64 for email-safe data</li>
             </ul>
           </div>
 
           <div class="use-case-card">
             <div class="use-case-icon">🎓</div>
-            <h4>𝐋𝐞𝐚𝐫𝐧𝐢𝐧𝐠 & 𝐅𝐮𝐧</h4>
+            <h4>Learning & Fun</h4>
             <ul>
-              <li>𝘓𝘦𝘢𝘳𝘯 𝘩𝘰𝘸 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨𝘴 𝘸𝘰𝘳𝘬</li>
-              <li>𝘊𝘳𝘦𝘢𝘵𝘦 𝘴𝘦𝘤𝘳𝘦𝘵 𝘮𝘦𝘴𝘴𝘢𝘨𝘦𝘴 (𝘙𝘖𝘛13)</li>
-              <li>𝘗𝘳𝘢𝘤𝘵𝘪𝘤𝘦 𝘔𝘰𝘳𝘴𝘦 𝘤𝘰𝘥𝘦</li>
-              <li>𝘜𝘯𝘥𝘦𝘳𝘴𝘵𝘢𝘯𝘥 𝘤𝘩𝘢𝘳𝘢𝘤𝘵𝘦𝘳 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨𝘴</li>
-              <li>𝘌𝘹𝘱𝘭𝘰𝘳𝘦 𝘤𝘳𝘺𝘱𝘵𝘰𝘨𝘳𝘢𝘱𝘩𝘺 𝘣𝘢𝘴𝘪𝘤𝘴</li>
+              <li>Learn how encodings work</li>
+              <li>Create secret messages (ROT13)</li>
+              <li>Practice Morse code</li>
+              <li>Understand character encodings</li>
+              <li>Explore cryptography basics</li>
             </ul>
           </div>
 
           <div class="use-case-card">
             <div class="use-case-icon">🔐</div>
-            <h4>𝐒𝐞𝐜𝐮𝐫𝐢𝐭𝐲 𝐓𝐞𝐬𝐭𝐢𝐧𝐠</h4>
+            <h4>Security Testing</h4>
             <ul>
-              <li>𝘛𝘦𝘴𝘵 𝘟𝘚𝘚 𝘱𝘢𝘺𝘭𝘰𝘢𝘥𝘴 (𝘏𝘛𝘔𝘓 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨)</li>
-              <li>𝘜𝘙𝘓 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨 𝘣𝘺𝘱𝘢𝘴𝘴 𝘢𝘵𝘵𝘦𝘮𝘱𝘵𝘴</li>
-              <li>𝘋𝘦𝘤𝘰𝘥𝘦 𝘰𝘣𝘧𝘶𝘴𝘤𝘢𝘵𝘦𝘥 𝘥𝘢𝘵𝘢</li>
-              <li>𝘈𝘯𝘢𝘭𝘺𝘻𝘦 𝘦𝘯𝘤𝘰𝘥𝘦𝘥 𝘦𝘹𝘱𝘭𝘰𝘪𝘵𝘴</li>
+              <li>Test XSS payloads (HTML encoding)</li>
+              <li>URL encoding bypass attempts</li>
+              <li>Decode obfuscated data</li>
+              <li>Analyze encoded exploits</li>
             </ul>
           </div>
 
           <div class="use-case-card">
             <div class="use-case-icon">💾</div>
-            <h4>𝐃𝐚𝐭𝐚 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠</h4>
+            <h4>Data Processing</h4>
             <ul>
-              <li>𝘊𝘰𝘯𝘷𝘦𝘳𝘵 𝘣𝘦𝘵𝘸𝘦𝘦𝘯 𝘧𝘰𝘳𝘮𝘢𝘵𝘴</li>
-              <li>𝘕𝘰𝘳𝘮𝘢𝘭𝘪𝘻𝘦 𝘵𝘦𝘹𝘵 𝘤𝘢𝘴𝘦</li>
-              <li>𝘊𝘭𝘦𝘢𝘯 𝘢𝘯𝘥 𝘧𝘰𝘳𝘮𝘢𝘵 𝘥𝘢𝘵𝘢</li>
-              <li>𝘉𝘢𝘵𝘤𝘩 𝘵𝘦𝘹𝘵 𝘵𝘳𝘢𝘯𝘴𝘧𝘰𝘳𝘮𝘢𝘵𝘪𝘰𝘯𝘴</li>
+              <li>Convert between formats</li>
+              <li>Normalize text case</li>
+              <li>Clean and format data</li>
+              <li>Batch text transformations</li>
             </ul>
           </div>
         </div>
       </section>
 
       <section id="encode-tips" class="doc-section">
-        <h2>💎 𝐏𝐫𝐨 𝐓𝐢𝐩𝐬 & 𝐁𝐞𝐬𝐭 𝐏𝐫𝐚𝐜𝐭𝐢𝐜𝐞𝐬</h2>
+        <h2>💎 Pro Tips & Best Practices</h2>
 
         <div class="tips-grid">
           <div class="tip-card success">
-            <h4>✅ 𝐃𝐨'𝐬</h4>
+            <h4>✅ Do's</h4>
             <ul>
-              <li><strong>𝐔𝐬𝐞 𝐁𝐚𝐬𝐞𝟔𝟒</strong> 𝘧𝘰𝘳 𝘣𝘪𝘯𝘢𝘳𝘺 𝘥𝘢𝘵𝘢 𝘪𝘯 𝘑𝘚𝘖𝘕/𝘟𝘔𝘓</li>
-              <li><strong>𝐀𝐥𝐰𝐚𝐲𝐬 𝐔𝐑𝐋 𝐞𝐧𝐜𝐨𝐝𝐞</strong> 𝘲𝘶𝘦𝘳𝘺 𝘱𝘢𝘳𝘢𝘮𝘦𝘵𝘦𝘳𝘴</li>
-              <li><strong>𝐇𝐓𝐌𝐋 𝐞𝐬𝐜𝐚𝐩𝐞</strong> 𝘢𝘭𝘭 𝘶𝘴𝘦𝘳-𝘨𝘦𝘯𝘦𝘳𝘢𝘵𝘦𝘥 𝘤𝘰𝘯𝘵𝘦𝘯𝘵</li>
-              <li><strong>𝐔𝐬𝐞 𝐁𝐚𝐬𝐞𝟔𝟒 𝐔𝐑𝐋-𝐬𝐚𝐟𝐞</strong> 𝘧𝘰𝘳 𝘜𝘙𝘓𝘴 𝘢𝘯𝘥 𝘧𝘪𝘭𝘦𝘯𝘢𝘮𝘦𝘴</li>
-              <li><strong>𝐓𝐞𝐬𝐭 𝐭𝐡𝐨𝐫𝐨𝐮𝐠𝐡𝐥𝐲</strong> 𝘸𝘪𝘵𝘩 𝘦𝘥𝘨𝘦 𝘤𝘢𝘴𝘦𝘴 𝘢𝘯𝘥 𝘴𝘱𝘦𝘤𝘪𝘢𝘭 𝘤𝘩𝘢𝘳𝘢𝘤𝘵𝘦𝘳𝘴</li>
-              <li><strong>𝐂𝐨𝐦𝐛𝐢𝐧𝐞 𝐭𝐨𝐨𝐥𝐬</strong> 𝘧𝘰𝘳 𝘤𝘰𝘮𝘱𝘭𝘦𝘹 𝘵𝘳𝘢𝘯𝘴𝘧𝘰𝘳𝘮𝘢𝘵𝘪𝘰𝘯𝘴</li>
+              <li><strong>Use Base64</strong> for binary data in JSON/XML</li>
+              <li><strong>Always URL encode</strong> query parameters</li>
+              <li><strong>HTML escape</strong> all user-generated content</li>
+              <li><strong>Use Base64 URL-safe</strong> for URLs and filenames</li>
+              <li><strong>Test thoroughly</strong> with edge cases and special characters</li>
+              <li><strong>Combine tools</strong> for complex transformations</li>
             </ul>
           </div>
 
           <div class="tip-card warning">
-            <h4>⚠️ 𝐃𝐨𝐧'𝐭𝐬</h4>
+            <h4>⚠️ Don'ts</h4>
             <ul>
-              <li><strong>𝐃𝐨𝐧'𝐭 𝐮𝐬𝐞 𝐞𝐧𝐜𝐨𝐝𝐢𝐧𝐠 𝐟𝐨𝐫 𝐬𝐞𝐜𝐮𝐫𝐢𝐭𝐲 </strong> — 𝘪𝘵'𝘴 𝘯𝘰𝘵 𝘦𝘯𝘤𝘳𝘺𝘱𝘵𝘪𝘰𝘯!</li>
-              <li><strong>𝐃𝐨𝐧'𝐭 𝐚𝐬𝐬𝐮𝐦𝐞 𝐁𝐚𝐬𝐞𝟔𝟒 𝐢𝐬 𝐞𝐧𝐜𝐫𝐲𝐩𝐭𝐞𝐝</strong> — 𝘢𝘯𝘺𝘰𝘯𝘦 𝘤𝘢𝘯 𝘥𝘦𝘤𝘰𝘥𝘦 𝘪𝘵</li>
-              <li><strong>𝐃𝐨𝐧'𝐭 𝐮𝐬𝐞 𝐜𝐥𝐚𝐬𝐬𝐢𝐜𝐚𝐥 𝐜𝐢𝐩𝐡𝐞𝐫𝐬</strong> 𝘧𝘰𝘳 𝘳𝘦𝘢𝘭 𝘴𝘦𝘤𝘶𝘳𝘪𝘵𝘺 (𝘙𝘖𝘛13, 𝘊𝘢𝘦𝘴𝘢𝘳)</li>
-              <li><strong>𝐃𝐨𝐧'𝐭 𝐭𝐫𝐮𝐬𝐭 𝐝𝐞𝐜𝐨𝐝𝐞𝐝 𝐉𝐖𝐓</strong> 𝘸𝘪𝘵𝘩𝘰𝘶𝘵 𝘴𝘪𝘨𝘯𝘢𝘵𝘶𝘳𝘦 𝘷𝘦𝘳𝘪𝘧𝘪𝘤𝘢𝘵𝘪𝘰𝘯</li>
-              <li><strong>𝐃𝐨𝐧'𝐭 𝐝𝐨𝐮𝐛𝐥𝐞-𝐞𝐧𝐜𝐨𝐝𝐞</strong> 𝘶𝘯𝘭𝘦𝘴𝘴 𝘯𝘦𝘤𝘦𝘴𝘴𝘢𝘳𝘺</li>
+              <li><strong>Don't use encoding for security </strong> — it's not encryption!</li>
+              <li><strong>Don't assume Base64 is encrypted</strong> — anyone can decode it</li>
+              <li><strong>Don't use classical ciphers</strong> for real security (ROT13, Caesar)</li>
+              <li><strong>Don't trust decoded JWT</strong> without signature verification</li>
+              <li><strong>Don't double-encode</strong> unless necessary</li>
             </ul>
           </div>
         </div>
         <div class="info-box">
-          <h4>🔑 𝐊𝐞𝐲 𝐃𝐢𝐟𝐟𝐞𝐫𝐞𝐧𝐜𝐞: 𝐄𝐧𝐜𝐨𝐝𝐢𝐧𝐠 𝐯𝐬 𝐄𝐧𝐜𝐫𝐲𝐩𝐭𝐢𝐨𝐧</h4>
+          <h4>🔑 Key Difference: Encoding vs Encryption</h4>
           <div class="comparison-table">
             <div class="comparison-row">
               <div class="comparison-col">
-                <h5>𝐄𝐧𝐜𝐨𝐝𝐢𝐧𝐠</h5>
+                <h5>Encoding</h5>
                 <ul>
-                  <li>𝘗𝘶𝘳𝘱𝘰𝘴𝘦: 𝘋𝘢𝘵𝘢 𝘳𝘦𝘱𝘳𝘦𝘴𝘦𝘯𝘵𝘢𝘵𝘪𝘰𝘯</li>
-                  <li>𝘙𝘦𝘷𝘦𝘳𝘴𝘪𝘣𝘭𝘦: 𝘠𝘦𝘴, 𝘦𝘢𝘴𝘪𝘭𝘺</li>
-                  <li>𝘚𝘦𝘤𝘶𝘳𝘪𝘵𝘺: 𝘕𝘰𝘯𝘦</li>
-                  <li>𝘒𝘦𝘺 𝘯𝘦𝘦𝘥𝘦𝘥: 𝘕𝘰</li>
-                  <li>𝘌𝘹𝘢𝘮𝘱𝘭𝘦: 𝘉𝘢𝘴𝘦64, 𝘜𝘙𝘓 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨</li>
+                  <li>Purpose: Data representation</li>
+                  <li>Reversible: Yes, easily</li>
+                  <li>Security: None</li>
+                  <li>Key needed: No</li>
+                  <li>Example: Base64, URL encoding</li>
                 </ul>
               </div>
               <div class="comparison-col">
-                <h5> 𝐄𝐧𝐜𝐫𝐲𝐩𝐭𝐢𝐨𝐧</h5>
+                <h5> Encryption</h5>
                 <ul>
-                  <li>𝘗𝘶𝘳𝘱𝘰𝘴𝘦: 𝘋𝘢𝘵𝘢 𝘱𝘳𝘰𝘵𝘦𝘤𝘵𝘪𝘰𝘯</li>
-                  <li>𝘙𝘦𝘷𝘦𝘳𝘴𝘪𝘣𝘭𝘦: 𝘠𝘦𝘴, 𝘸𝘪𝘵𝘩 𝘬𝘦𝘺</li>
-                  <li>𝘚𝘦𝘤𝘶𝘳𝘪𝘵𝘺: 𝘏𝘪𝘨𝘩</li>
-                  <li>𝘒𝘦𝘺 𝘯𝘦𝘦𝘥𝘦𝘥: 𝘠𝘦𝘴</li>
-                  <li>𝘌𝘹𝘢𝘮𝘱𝘭𝘦: 𝘈𝘌𝘚, 𝘙𝘚𝘈</li>
+                  <li>Purpose: Data protection</li>
+                  <li>Reversible: Yes, with key</li>
+                  <li>Security: High</li>
+                  <li>Key needed: Yes</li>
+                  <li>Example: AES, RSA</li>
                 </ul>
               </div>
             </div>
@@ -860,69 +840,69 @@ Output: "... --- ..."</pre>
       </section>
 
       <section id="encode-performance" class="doc-section">
-        <h2>⚡ 𝐏𝐞𝐫𝐟𝐨𝐫𝐦𝐚𝐧𝐜𝐞 & 𝐋𝐢𝐦𝐢𝐭𝐚𝐭𝐢𝐨𝐧𝐬 </h2>
+        <h2>⚡ Performance & Limitations </h2>
 
         <div class="info-box">
-          <h4>💻 𝐁𝐫𝐨𝐰𝐬𝐞𝐫-𝐁𝐚𝐬𝐞𝐝 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠</h4>
-          <p> 𝘈𝘭𝘭 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨/𝘥𝘦𝘤𝘰𝘥𝘪𝘯𝘨 𝘩𝘢𝘱𝘱𝘦𝘯𝘴 𝘪𝘯 𝘺𝘰𝘶𝘳 𝘣𝘳𝘰𝘸𝘴𝘦𝘳 𝘶𝘴𝘪𝘯𝘨 𝘑𝘢𝘷𝘢𝘚𝘤𝘳𝘪𝘱𝘵. 𝘛𝘩𝘪𝘴 𝘮𝘦𝘢𝘯𝘴:</p>
+          <h4>💻 Browser-Based Processing</h4>
+          <p> All encoding/decoding happens in your browser using JavaScript. This means:</p>
           <ul>
-            <li>✅ 𝘊𝘰𝘮𝘱𝘭𝘦𝘵𝘦 𝘱𝘳𝘪𝘷𝘢𝘤𝘺 — 𝘯𝘰 𝘥𝘢𝘵𝘢 𝘴𝘦𝘯𝘵 𝘵𝘰 𝘴𝘦𝘳𝘷𝘦𝘳𝘴</li>
-            <li>✅ 𝘞𝘰𝘳𝘬𝘴 𝘰𝘧𝘧𝘭𝘪𝘯𝘦 𝘢𝘧𝘵𝘦𝘳 𝘪𝘯𝘪𝘵𝘪𝘢𝘭 𝘱𝘢𝘨𝘦 𝘭𝘰𝘢𝘥</li>
-            <li>✅ 𝘍𝘢𝘴𝘵 𝘧𝘰𝘳 𝘴𝘮𝘢𝘭𝘭 𝘵𝘰 𝘮𝘦𝘥𝘪𝘶𝘮 𝘥𝘢𝘵𝘢 (𝘶𝘱 𝘵𝘰 10𝘔𝘉)</li>
-            <li>⚠️ 𝘔𝘢𝘺 𝘴𝘭𝘰𝘸 𝘥𝘰𝘸𝘯 𝘸𝘪𝘵𝘩 𝘷𝘦𝘳𝘺 𝘭𝘢𝘳𝘨𝘦 𝘧𝘪𝘭𝘦𝘴 (100𝘔𝘉+)</li>
-            <li>⚠️ 𝘔𝘦𝘮𝘰𝘳𝘺 𝘭𝘪𝘮𝘪𝘵𝘦𝘥 𝘣𝘺 𝘣𝘳𝘰𝘸𝘴𝘦𝘳 (𝘵𝘺𝘱𝘪𝘤𝘢𝘭𝘭𝘺 1-2𝘎𝘉)</li>
+            <li>✅ Complete privacy — no data sent to servers</li>
+            <li>✅ Works offline after initial page load</li>
+            <li>✅ Fast for small to medium data (up to 10MB)</li>
+            <li>⚠️ May slow down with very large files (100MB+)</li>
+            <li>⚠️ Memory limited by browser (typically 1-2GB)</li>
           </ul>
         </div>
 
         <div class="warning-box">
-          <h4>📏 𝐒𝐢𝐳𝐞 𝐂𝐨𝐧𝐬𝐢𝐝𝐞𝐫𝐚𝐭𝐢𝐨𝐧𝐬</h4>
+          <h4>📏 Size Considerations</h4>
           <ul>
-            <li><strong>𝐁𝐚𝐬𝐞𝟔𝟒 𝐢𝐧𝐜𝐫𝐞𝐚𝐬𝐞𝐬 𝐬𝐢𝐳𝐞 𝐛𝐲 ~𝟑𝟑% </strong> — "𝘏𝘦𝘭𝘭𝘰" (5 𝘣𝘺𝘵𝘦𝘴) → "𝘚𝘎𝘝𝘴𝘣𝘎8=" (8 𝘣𝘺𝘵𝘦𝘴)</li>
-            <li><strong>𝐔𝐑𝐋 𝐞𝐧𝐜𝐨𝐝𝐢𝐧𝐠 𝐯𝐚𝐫𝐢𝐞𝐬 </strong> — 𝘥𝘦𝘱𝘦𝘯𝘥𝘴 𝘰𝘯 𝘴𝘱𝘦𝘤𝘪𝘢𝘭 𝘤𝘩𝘢𝘳𝘢𝘤𝘵𝘦𝘳𝘴</li>
-            <li><strong>𝐁𝐚𝐬𝐞𝟖𝟓 𝐢𝐬 𝐦𝐨𝐫𝐞 𝐞𝐟𝐟𝐢𝐜𝐢𝐞𝐧𝐭</strong> — 𝘰𝘯𝘭𝘺 ~25% 𝘪𝘯𝘤𝘳𝘦𝘢𝘴𝘦</li>
-            <li><strong>𝐂𝐨𝐦𝐩𝐫𝐞𝐬𝐬𝐢𝐨𝐧 𝐟𝐢𝐫𝐬𝐭</strong> — 𝘤𝘰𝘯𝘴𝘪𝘥𝘦𝘳 𝘨𝘻𝘪𝘱 𝘣𝘦𝘧𝘰𝘳𝘦 𝘦𝘯𝘤𝘰𝘥𝘪𝘯𝘨</li>
+            <li><strong>Base64 increases size by ~33% </strong> — "Hello" (5 bytes) → "SGVsbG8=" (8 bytes)</li>
+            <li><strong>URL encoding varies </strong> — depends on special characters</li>
+            <li><strong>Base85 is more efficient</strong> — only ~25% increase</li>
+            <li><strong>Compression first</strong> — consider gzip before encoding</li>
           </ul>
         </div>
       </section>
 
       <section id="encode-resources" class="doc-section">
-        <h2>📚 𝐀𝐝𝐝𝐢𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐬𝐨𝐮𝐫𝐜𝐞𝐬</h2>
+        <h2>📚 Additional Resources</h2>
 
         <div class="resource-grid">
           <div class="resource-card">
-            <h4>📖 𝐒𝐭𝐚𝐧𝐝𝐚𝐫𝐝𝐬 & 𝐑𝐅𝐂𝐬</h4>
+            <h4>📖 Standards & RFCs</h4>
             <ul>
-              <li><a href="https://datatracker.ietf.org/doc/html/rfc4648" target="_blank">𝘙𝘍𝘊 4648 - 𝘉𝘢𝘴𝘦 𝘌𝘯𝘤𝘰𝘥𝘪𝘯𝘨𝘴</a></li>
-              <li><a href="https://datatracker.ietf.org/doc/html/rfc3986" target="_blank">𝘙𝘍𝘊 3986 - 𝘜𝘙𝘓 𝘌𝘯𝘤𝘰𝘥𝘪𝘯𝘨</a></li>
-              <li><a href="https://datatracker.ietf.org/doc/html/rfc2045" target="_blank">𝘙𝘍𝘊 2045 - 𝘔𝘐𝘔𝘌/𝘘𝘶𝘰𝘵𝘦𝘥-𝘗𝘳𝘪𝘯𝘵𝘢𝘣𝘭𝘦</a></li>
-              <li><a href="https://datatracker.ietf.org/doc/html/rfc3492" target="_blank">𝘙𝘍𝘊 3492 - 𝘗𝘶𝘯𝘺𝘤𝘰𝘥𝘦</a></li>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc4648" target="_blank">RFC 4648 - Base Encodings</a></li>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc3986" target="_blank">RFC 3986 - URL Encoding</a></li>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc2045" target="_blank">RFC 2045 - MIME/Quoted-Printable</a></li>
+              <li><a href="https://datatracker.ietf.org/doc/html/rfc3492" target="_blank">RFC 3492 - Punycode</a></li>
             </ul>
           </div>
 
           <div class="resource-card">
-            <h4>🛠️ 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐓𝐨𝐨𝐥𝐬</h4>
+            <h4>🛠️ Developer Tools</h4>
             <ul>
-              <li><a href="https://jwt.io" target="_blank">𝘑𝘞𝘛.𝘪𝘰 - 𝘑𝘞𝘛 𝘋𝘦𝘣𝘶𝘨𝘨𝘦𝘳</a></li>
-              <li><a href="https://www.base64decode.org" target="_blank">𝘉𝘢𝘴𝘦64𝘋𝘦𝘤𝘰𝘥𝘦.𝘰𝘳𝘨</a></li>
-              <li><a href="https://meyerweb.com/eric/tools/dencoder/" target="_blank">𝘜𝘙𝘓 𝘌𝘯𝘤𝘰𝘥𝘦𝘳/𝘋𝘦𝘤𝘰𝘥𝘦𝘳</a></li>
-              <li><a href="https://cryptii.com" target="_blank">𝘊𝘳𝘺𝘱𝘵𝘪𝘪 - 𝘔𝘰𝘥𝘶𝘭𝘢𝘳 𝘊𝘰𝘯𝘷𝘦𝘳𝘵𝘦𝘳</a></li>
+              <li><a href="https://jwt.io" target="_blank">JWT.io - JWT Debugger</a></li>
+              <li><a href="https://www.base64decode.org" target="_blank">Base64Decode.org</a></li>
+              <li><a href="https://meyerweb.com/eric/tools/dencoder/" target="_blank">URL Encoder/Decoder</a></li>
+              <li><a href="https://cryptii.com" target="_blank">Cryptii - Modular Converter</a></li>
             </ul>
           </div>
 
           <div class="resource-card">
-            <h4>📚 𝐋𝐞𝐚𝐫𝐧𝐢𝐧𝐠 𝐑𝐞𝐬𝐨𝐮𝐫𝐜𝐞𝐬 </h4>
+            <h4>📚 Learning Resources </h4>
             <ul>
-              <li><a href="https://en.wikipedia.org/wiki/Character_encoding" target="_blank">𝘊𝘩𝘢𝘳𝘢𝘤𝘵𝘦𝘳 𝘌𝘯𝘤𝘰𝘥𝘪𝘯𝘨 - 𝘞𝘪𝘬𝘪𝘱𝘦𝘥𝘪𝘢</a></li>
-              <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/btoa" target="_blank">𝘔𝘋𝘕 - 𝘣𝘵𝘰𝘢/𝘢𝘵𝘰𝘣</a></li>
-              <li><a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/" target="_blank">𝘜𝘯𝘪𝘤𝘰𝘥𝘦 & 𝘊𝘩𝘢𝘳𝘢𝘤𝘵𝘦𝘳 𝘚𝘦𝘵𝘴</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Character_encoding" target="_blank">Character Encoding - Wikipedia</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/btoa" target="_blank">MDN - btoa/atob</a></li>
+              <li><a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/" target="_blank">Unicode & Character Sets</a></li>
             </ul>
           </div>
         </div>
       </section>
       
       <section id="analyzer-doc" class="doc-section">
-      <h2>🔍 𝐇𝐚𝐬𝐡 𝐀𝐧𝐚𝐥𝐲𝐳𝐞𝐫 𝐓𝐨𝐨𝐥</h2>
-      <p>𝘛𝘩𝘦 𝘏𝘢𝘴𝘩 𝘈𝘯𝘢𝘭𝘺𝘻𝘦𝘳 𝘵𝘰𝘰𝘭 𝘩𝘦𝘭𝘱𝘴 𝘪𝘥𝘦𝘯𝘵𝘪𝘧𝘺 𝘵𝘩𝘦 𝘵𝘺𝘱𝘦, 𝘭𝘦𝘯𝘨𝘵𝘩, 𝘤𝘩𝘢𝘳𝘢𝘤𝘵𝘦𝘳 𝘴𝘦𝘵, 𝘢𝘯𝘥 𝘴𝘢𝘭𝘵 𝘶𝘴𝘦𝘥 𝘪𝘯 𝘢 𝘩𝘢𝘴𝘩 𝘷𝘢𝘭𝘶𝘦. 𝘐𝘵 𝘢𝘶𝘵𝘰-𝘥𝘦𝘵𝘦𝘤𝘵𝘴 𝘤𝘰𝘮𝘮𝘰𝘯 𝘧𝘰𝘳𝘮𝘢𝘵𝘴 𝘭𝘪𝘬𝘦 𝘔𝘋𝟻, 𝘚𝘏𝘈, 𝘉𝘊𝘙𝘠𝘗𝘛, 𝘢𝘯𝘥 𝘤𝘳𝘺𝘱𝘵-𝘣𝘢𝘴𝘦𝘥 𝘩𝘢𝘴𝘩𝘦𝘴.</p>
+      <h2>Hash Analyzer Tool</h2>
+      <p>The Hash Analyzer tool helps identify the type, length, character set, and salt used in a hash value. It auto-detects common formats like MD5, SHA, BCRYPT, and crypt-based hashes.</p>
 
       <div class="code-box">
         <h4>Example:</h4>
@@ -957,7 +937,7 @@ Character type:  hexadecimal</pre>
       </section>
 
       <section id="how-analyzer-works" class="doc-section">
-      <h2>⚙️ 𝐇𝐨𝐰 𝐈𝐭 𝐖𝐨𝐫𝐤𝐬</h2>
+      <h2>⚙️ How It Works</h2>
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-marker">1</div>
@@ -984,7 +964,7 @@ Character type:  hexadecimal</pre>
       </section>
 
       <section id="supported-hashes" class="doc-section">
-      <h2>📚 𝐒𝐮𝐩𝐩𝐨𝐫𝐭𝐞𝐝 𝐇𝐚𝐬𝐡 𝐅𝐨𝐫𝐦𝐚𝐭𝐬</h2>
+      <h2>📚 Supported Hash Formats</h2>
       <div class="algo-grid">
         <div class="algo-card">
           <div class="algo-header"><h3>MD5 / MD4</h3></div>
@@ -1014,15 +994,15 @@ Character type:  hexadecimal</pre>
       </section>
 
       <section id="analyzer-usage" class="doc-section">
-      <h2>🚀 𝐇𝐨𝐰 𝐭𝐨 𝐔𝐬𝐞 𝐓𝐡𝐞 𝐀𝐧𝐚𝐥𝐲𝐳𝐞𝐫</h2>
+      <h2>🚀 How to Use The Analyzer</h2>
 
       <div class="usage-steps">
         <div class="usage-step">
           <div class="usage-number">1</div>
           <div class="usage-content">
-            <h3>𝐄𝐧𝐭𝐞𝐫 𝐇𝐚𝐬𝐡</h3>
+            <h3>Enter Hash</h3>
             <ol>
-              <li>𝘗𝘢𝘴𝘵𝘦 𝘺𝘰𝘶𝘳 𝘩𝘢𝘴𝘩 𝘪𝘯𝘵𝘰 𝘵𝘩𝘦 𝘪𝘯𝘱𝘶𝘵 𝘣𝘰𝘹</li>          <li>𝘖𝘳 𝘶𝘱𝘭𝘰𝘢𝘥 𝘢 𝘵𝘦𝘹𝘵 𝘧𝘪𝘭𝘦 (.𝘵𝘹𝘵) 𝘤𝘰𝘯𝘵𝘢𝘪𝘯𝘪𝘯𝘨 𝘩𝘢𝘴𝘩𝘦𝘴</li>
+              <li>Paste your hash into the input box</li>          <li>Or upload a text file (.txt) containing hashes</li>
             </ol>
           </div>
         </div>
@@ -1030,10 +1010,10 @@ Character type:  hexadecimal</pre>
         <div class="usage-step">
           <div class="usage-number">2</div>
           <div class="usage-content">
-            <h3>𝐀𝐧𝐚𝐥𝐲𝐳𝐞</h3>
+            <h3>Analyze</h3>
             <ol>
-              <li>𝘊𝘭𝘪𝘤𝘬 𝘵𝘩𝘦 “𝘈𝘯𝘢𝘭𝘺𝘻𝘦” 𝘣𝘶𝘵𝘵𝘰𝘯</li>
-              <li>𝘛𝘩𝘦 𝘵𝘰𝘰𝘭 𝘪𝘯𝘴𝘵𝘢𝘯𝘵𝘭𝘺 𝘥𝘦𝘵𝘦𝘤𝘵𝘴 𝘩𝘢𝘴𝘩 𝘵𝘺𝘱𝘦 𝘢𝘯𝘥 𝘳𝘦𝘭𝘢𝘵𝘦𝘥 𝘱𝘳𝘰𝘱𝘦𝘳𝘵𝘪𝘦𝘴</li>
+              <li>Click the “Analyze” button</li>
+              <li>The tool instantly detects hash type and related properties</li>
             </ol>
           </div>
         </div>
@@ -1041,10 +1021,10 @@ Character type:  hexadecimal</pre>
         <div class="usage-step">
           <div class="usage-number">3</div>
           <div class="usage-content">
-            <h3>𝐂𝐥𝐞𝐚𝐫 / 𝐑𝐞𝐬𝐞𝐭</h3>
+            <h3>Clear / Reset</h3>
             <ol>
-              <li>𝘊𝘭𝘪𝘤𝘬 “𝘊𝘭𝘦𝘢𝘳” 𝘵𝘰 𝘳𝘦𝘴𝘦𝘵 𝘪𝘯𝘱𝘶𝘵𝘴</li>
-              <li>𝘠𝘰𝘶 𝘤𝘢𝘯 𝘳𝘦-𝘶𝘱𝘭𝘰𝘢𝘥 𝘰𝘳 𝘵𝘦𝘴𝘵 𝘢 𝘯𝘦𝘸 𝘩𝘢𝘴𝘩 𝘢𝘯𝘺𝘵𝘪𝘮𝘦</li>
+              <li>Click “Clear” to reset inputs</li>
+              <li>You can re-upload or test a new hash anytime</li>
             </ol>
           </div>
         </div>
@@ -1052,25 +1032,27 @@ Character type:  hexadecimal</pre>
       </section>
 
       <section id="analyzer-tips" class="doc-section">
-      <h2>💡 𝐓𝐢𝐩𝐬 & 𝐁𝐞𝐬𝐭 𝐏𝐫𝐚𝐜𝐭𝐢𝐜𝐞𝐬</h2>
-      <ul style="text-align: center;">
-        <li>𝘼𝙡𝙬𝙖𝙮𝙨 𝙫𝙚𝙧𝙞𝙛𝙮 𝙝𝙖𝙨𝙝 𝙡𝙚𝙣𝙜𝙩𝙝𝙨 — 𝙢𝙤𝙨𝙩 𝙛𝙤𝙧𝙢𝙖𝙩𝙨 𝙝𝙖𝙫𝙚 𝙛𝙞𝙭𝙚𝙙 𝙨𝙞𝙯𝙚𝙨.</li>
-        <li>𝙐𝙨𝙚 𝙛𝙞𝙡𝙚 𝙪𝙥𝙡𝙤𝙖𝙙 𝙛𝙤𝙧 𝙡𝙖𝙧𝙜𝙚 𝙙𝙖𝙩𝙖𝙨𝙚𝙩𝙨 𝙞𝙣𝙨𝙩𝙚𝙖𝙙 𝙤𝙛 𝙢𝙖𝙣𝙪𝙖𝙡 𝙞𝙣𝙥𝙪𝙩.</li>
-        <li>𝙏𝙝𝙚 𝙩𝙤𝙤𝙡 𝙤𝙣𝙡𝙮 𝙞𝙙𝙚𝙣𝙩𝙞𝙛𝙞𝙚𝙨 — 𝙞𝙩 𝙙𝙤𝙚𝙨 𝙣𝙤𝙩 𝙘𝙧𝙖𝙘𝙠 𝙤𝙧 𝙙𝙚𝙘𝙤𝙙𝙚 𝙝𝙖𝙨𝙝𝙚𝙨.</li>
-        <li>𝙁𝙤𝙧 𝙨𝙚𝙘𝙪𝙧𝙞𝙩𝙮 𝙩𝙚𝙨𝙩𝙞𝙣𝙜, 𝙖𝙡𝙬𝙖𝙮𝙨 𝙪𝙨𝙚 𝙖𝙪𝙩𝙝𝙤𝙧𝙞𝙯𝙚𝙙 𝙖𝙣𝙙 𝙚𝙩𝙝𝙞𝙘𝙖𝙡 𝙢𝙚𝙩𝙝𝙤𝙙𝙨.</li>
+      <h2>💡 Tips & Best Practices</h2>
+      <ul>
+        <li>Always verify hash lengths — most formats have fixed sizes.</li>
+        <li>Use file upload for large datasets instead of manual input.</li>
+        <li>The tool only identifies — it does not crack or decode hashes.</li>
+        <li>For security testing, always use authorized and ethical methods.</li>
       </ul>
       </section>
       
 
-      <div class="back-to-top-section">
-        <button class="btn back btn-secondary scroll-to-top">↑ Ɓ𐤠ƇƘ ƬΘ ƬΘꝒ</button>
-      </div>
     </div>
   </main>
+
+  <!-- Floating Back to Top -->
+  <button id="backToTop" class="back-to-top" title="Back to top" aria-label="Back to top">
+    <svg viewBox="0 -960 960 960" aria-hidden="true"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
+  </button>
   
   <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <a href="index.html" class="nav-item active">
+        <a href="index.html" class="nav-item">
             <svg viewBox="0 0 24 24">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             </svg>
@@ -1078,14 +1060,12 @@ Character type:  hexadecimal</pre>
         </a>
                         
         <a href="encrypt.html" class="nav-item">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-            </svg>
+            <svg viewBox="0 -960 960 960" width="24px"><path d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q97-30 162-118.5T718-480H480v-315l-240 90v207q0 7 2 18h238v316Z"/></svg>
             <span class="nav-label">Encrypt</span>
         </a>
         
         <a href="notepad.html" class="nav-item">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h168q13-36 43.5-58t68.5-22q38 0 68.5 22t43.5 58h168q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm80-80h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm200-190q13 0 21.5-8.5T510-820q0-13-8.5-21.5T480-850q-13 0-21.5 8.5T450-820q0 13 8.5 21.5T480-790ZM200-200v-560 560Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h168q13-36 43.5-58t68.5-22q38 0 68.5 22t43.5 58h168q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm80-80h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm200-190q13 0 21.5-8.5T510-820q0-13-8.5-21.5T480-850q-13 0-21.5 8.5T450-820q0 13 8.5 21.5T480-790ZM200-200v-560 560Z"/></svg>
             <span class="nav-label">Note</span>
         </a>
 

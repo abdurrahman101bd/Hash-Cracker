@@ -1,15 +1,16 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-# 🔐 Hash-Cracker
+<h1 align="center">🔐 Hash Cracker</h1>
 
-<p><img src="https://komarev.com/ghpvc/?username=abdurrahman101bd" alt="Profile Views"> <img src="https://custom-icon-badges.herokuapp.com/badge/Repo-blue.svg?logo=repo" alt="Repository Count Badge">
-<img src="https://custom-icon-badges.herokuapp.com/badge/Star-yellow.svg?logo=star" alt="Stars Badge">
-<img src="https://custom-icon-badges.herokuapp.com/badge/Issue-red.svg?logo=issue" alt="Issue Badge">
-<img src="https://custom-icon-badges.herokuapp.com/badge/Fork-orange.svg?logo=fork" alt="Fork Badge">
-<img src="https://custom-icon-badges.herokuapp.com/badge/Commit-green.svg?logo=commit" alt="Commit Badge">
-<img src="https://custom-icon-badges.herokuapp.com/badge/Pull Request-purple.svg?logo=pr" alt="Pull Badge"></p>
+<p align="center">
+  <img src="assets/logo.png" width="100" alt="logo"/>
+</p>
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
+<p align="center">
+  <strong>Web based security and cryptography toolkit.</strong>
+</p>
+
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/abdurrahman101bd/Hash-Cracker)
 ![GitHub issues](https://img.shields.io/github/issues-raw/abdurrahman101bd/Hash-Cracker)
 ![GitHub stars](https://img.shields.io/github/stars/abdurrahman101bd/Hash-Cracker?style=social)
@@ -17,14 +18,38 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/abdurrahman101bd/Hash-Cracker)
 ![GitHub issues](https://img.shields.io/github/issues/abdurrahman101bd/Hash-Cracker)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/abdurrahman101bd/Hash-Cracker)
-
-![Version](https://img.shields.io/badge/version-2.0.0-green.svg)
+![Version](https://img.shields.io/badge/version-2.5.0-green.svg)
 
 A comprehensive web-based security and cryptography toolkit featuring hash generation, verification, analysis, 40+ encoding/decoding methods, and a built-in notepad. All operations are performed locally in your browser - no data is ever sent to any server.
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+> **🎉 v2.5.0** is a full interface redesign — same tools and logic, a cleaner and more professional look. See "What's New in v2.5.0" below.
+
+<p align="center">
+  <a href="https://abdurrahman101bd.github.io/Hash-Cracker">
+    <img src="https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=google-chrome" alt="Live Demo">
+  </a>
+  <img src="https://img.shields.io/badge/Made%20with-HTML%20%7C%20CSS%20%7C%20JS-orange?style=for-the-badge" alt="Tech">
+</p>
+
+
+---
+
+## 🎉 What's New in v2.5.0
+
+This release is a complete visual redesign of the whole app — no tool or logic was changed, every page just looks and feels more professional now.
+
+- **New design system** – Proper typography (Inter for the UI, JetBrains Mono for hashes/code) replacing the old copy-pasted fancy-Unicode text, plus a consistent color system across every page
+- **Removed the Matrix rain / floating-shapes background** for a cleaner, modern look
+- **Terms & Notes dialog** – A clear first-visit notice explaining what the app does and what it stores, with an "I understand" confirmation; reopenable anytime from the footer
+- **Redesigned result panels** – Status-aware result boxes (Idle/Running/Success/Error) with reliable one-click **copy** and **download as .txt**
+- **Full history system** – Separate history for Hash Generation, Cracking, Analysis, and the Encode/Decode tool, each with restore, copy, delete, and a confirm dialog before clearing
+- **Context-aware tool actions** – The Encode/Decode tool's buttons and messages now match what each tool actually does (Encrypt/Decrypt, Escape/Unescape, Convert, Reverse, Decode-only for JWT/SAML, etc.) instead of a generic Encode/Decode everywhere
+- **Live search suggestions** – Instant matching-tool suggestions while typing in the Encode/Decode search bar, plus a cleaner category filter
+- **Swap button repositioned** between the input and output fields on the Encode/Decode tool
+- **Top-right toast notifications** instead of inline messages
+- **Redesigned Notepad** – Color-accented note cards, live character count, an unsaved-changes guard before closing the editor, and better empty states
+- **Floating "back to top" button** on the Documentation page
+- **Haptic feedback** – A short vibration on copy actions on supported mobile devices
 
 ---
 
@@ -39,14 +64,14 @@ A comprehensive web-based security and cryptography toolkit featuring hash gener
 - **History Tracking** - Separate history for hash generation and verification
 - **Performance** - Batch processing with progress tracking for large wordlists
 
-### 🆕 Hash Analyzer (NEW!)
+### 🆕 Hash Analyzer
 
 - **Auto-detect Hash Type** - Automatically identify hash algorithms
 - **Detailed Analysis** - Get comprehensive information about hash format
 - **File Upload Support** - Analyze hashes from text files
 - **Manual Input** - Paste hashes directly for instant analysis
 
-### 📝 Notepad (NEW!)
+### 📝 Notepad
 
 - **Simple Note Taking** - Clean and intuitive interface for quick notes
 - **Search Functionality** - Quickly find your notes with built-in search
@@ -59,19 +84,20 @@ A comprehensive web-based security and cryptography toolkit featuring hash gener
 - **40+ Encoding Methods** - Comprehensive encoding/decoding toolkit
 - **Real-time Processing** - Instant encode/decode operations
 - **Category Filtering** - Organized by Base, ASCII, URL, Data, Cipher, and Utilities
-- **Search Functionality** - Quick tool lookup
+- **Live Search Suggestions** - Instant tool suggestions as you type
 - **Swap Feature** - Easily exchange input and output
+- **Download Output** - Save results directly as a .txt file
+- **History** - Every encode/decode is saved, with restore, copy, and delete
 
-### 🎨 Enhanced User Interface
+### 🎨 Modern, Redesigned Interface
 
 - **Dark/Light Mode** - Toggle between themes with persistent preference
-- **Animated Background** - Beautiful floating shapes and Matrix-style canvas effect
 - **Fully Responsive** - Perfect on mobile, tablet, and desktop
 - **Smooth Animations** - Modern UI with engaging transitions
-- **Mobile Menu** - Collapsible navigation for small screens
-- **Floating TOC** - Easy navigation in documentation
 - **Gradient Buttons** - Eye-catching gradient effects on action buttons
-- **Brand Animation** - Animated color-shifting logo text
+- **Floating Back-to-Top** - Quick scroll-to-top button on the Documentation page
+- **Top-Right Toasts** - Non-intrusive status notifications
+- **Context-Aware Actions** - Buttons and messages adapt to what each tool actually does
 
 ---
 
@@ -112,7 +138,7 @@ A comprehensive web-based security and cryptography toolkit featuring hash gener
 4. Click "Start Cracking"
 5. View results - match found or not found
 
-#### Analyze Hash (NEW!)
+#### Analyze Hash
 
 1. Upload hash file (.txt) or paste hash directly
 2. Click "Analyze"
@@ -293,31 +319,14 @@ Output: "... --- ..."
 - **Glassmorphism** - Modern blur effects on navigation and modals
 - **Smooth Transitions** - Fluid animations throughout the interface
 
+---
+
 ### Theme System
 
 - **Dark Mode** - Default elegant dark theme with Matrix effect
 - **Light Mode** - Clean light alternative with floating shapes
 - **Persistent** - Preference saved in localStorage
 - **Smooth Transition** - Animated theme switching
-
-### Responsive Design
-
-- **Mobile First** - Optimized for all screen sizes
-- **Breakpoints:**
-  - Mobile: < 500px
-  - Tablet: 500px - 768px
-  - Desktop: > 768px
-- **Touch Friendly** - Large buttons and easy navigation
-- **Bottom Navigation** - Fixed navigation bar for easy access
-
-### Navigation
-
-- **Tab Navigation** - Quick switching between tools
-- **Bottom Nav Bar** - Always accessible navigation with icons
-- **History Modal** - Separate tabs for hash and crack history
-- **Confirm Dialogs** - Beautiful confirmation modals for destructive actions
-
----
 
 ## 🛡️ Security & Privacy
 
@@ -343,12 +352,6 @@ Output: "... --- ..."
 3. URL encode all query parameters
 4. Don't use encoding for security - use encryption
 5. Test wordlist attacks only on your own data
-
----
-
-## 🚀 Demo
-
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=google-chrome)](https://abdurrahman101bd.github.io/Hash-Cracker)
 
 ---
 
@@ -398,7 +401,7 @@ Properties:
 - **Vanilla JavaScript** - No frameworks or dependencies
 - **Web Crypto API** - Native hash algorithms
 - **localStorage** - Theme, notes, and history persistence
-- **Canvas API** - Matrix rain effect
+- **Google Fonts** - Inter (UI) & JetBrains Mono (hashes/code)
 
 ### Browser Support
 
@@ -467,24 +470,22 @@ Properties:
 
 - [x] Hash Analyzer tool
 - [x] Integrated Notepad
-- [x] Animated background effects
 - [x] File upload for hashes
-- [x] Improved UI/UX with gradients
+- [x] Complete UI/UX redesign (v2.5.0)
+- [x] Terms & Notes consent dialog
+- [x] Full history system (Generate, Crack, Analyze, Encode/Decode)
+- [x] Output download as .txt
 - [x] Clear input buttons
-- [x] Confirm delete modals
+- [x] Confirm delete/clear modals
 
 ### Planned Features
 
-- [ ] Additional hash algorithms (BLAKE2, SHA-3)
 - [ ] More cipher types (Vigenère, Playfair)
 - [ ] File hash generation (drag & drop)
-- [ ] Batch processing for multiple hashes
+- [ ] Batch hash generation for multiple inputs
 - [ ] Hash comparison tool
-- [ ] Rainbow table integration
 - [ ] Export/Import history
 - [ ] Custom wordlist builder
-- [ ] API documentation
-- [ ] Browser extension
 - [ ] Note export/import
 - [ ] Note categories/tags
 
@@ -618,15 +619,6 @@ This tool is provided for **educational and authorized security testing purposes
 
 ---
 
-### Get Help
-
-- 📖 Read the [Documentation](docs.html)
-- 🐛 [Report Issues](https://github.com/abdurrahman101bd/Hash-Cracker/issues)
-- 💬 [Discussions](https://github.com/abdurrahman101bd/Hash-Cracker/discussions)
-- ⭐ Star this repo if you find it useful!
-
----
-
 ## 🙏 Acknowledgments
 
 ### Resources & Inspiration
@@ -636,28 +628,7 @@ This tool is provided for **educational and authorized security testing purposes
 - [CyberChef](https://gchq.github.io/CyberChef/) - Inspiration for encoding tools
 - [SecLists](https://github.com/danielmiessler/SecLists) - Wordlist resources
 
-### Special Thanks
-
-- All contributors who help improve this project
-- The open-source community
-- Everyone who provides feedback and suggestions
-
 ---
-
-## 📊 Stats
-
-![GitHub Stars](https://img.shields.io/github/stars/abdurrahman101bd/Hash-Cracker?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/abdurrahman101bd/Hash-Cracker?style=social)
-![GitHub Issues](https://img.shields.io/github/issues/abdurrahman101bd/Hash-Cracker)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr/abdurrahman101bd/Hash-Cracker)
-
----
-
-## 🌟 Star History
-
-If you find this project useful, please consider giving it a star ⭐
-
-[![Star History Chart](https://api.star-history.com/svg?repos=abdurrahman101bd/Hash-Cracker&type=Date)](https://star-history.com/#abdurrahman101bd/Hash-Cracker&Date)
 
 <div align="center">
 
