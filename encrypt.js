@@ -579,7 +579,7 @@ encHistoryList.addEventListener('click', async (e) => {
   const btn = e.target.closest('[data-act]');
   if (!btn) return;
   const list = readEncHistory();
-  const index = list.length - 1 - Number(btn.dataset.i); // list is rendered reversed
+  const index = Number(btn.dataset.i);
   const item = list[index];
   if (!item) return;
 
