@@ -18,11 +18,11 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/abdurrahman101bd/Hash-Cracker)
 ![GitHub issues](https://img.shields.io/github/issues/abdurrahman101bd/Hash-Cracker)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/abdurrahman101bd/Hash-Cracker)
-![Version](https://img.shields.io/badge/version-2.5.0-green.svg)
+![Version](https://img.shields.io/badge/version-2.5.5-green.svg)
 
 A comprehensive web-based security and cryptography toolkit featuring hash generation, verification, analysis, 40+ encoding/decoding methods, and a built-in notepad. All operations are performed locally in your browser - no data is ever sent to any server.
 
-> **🎉 v2.5.0** is a full interface redesign — same tools and logic, a cleaner and more professional look. See "What's New in v2.5.0" below.
+> **🎉 v2.5.5** is a bug-fix release that corrects the Encode/Decode history actions, building on the v2.5.0 interface redesign. See "What's New in v2.5.5" below.
 
 <p align="center">
   <a href="https://abdurrahman101bd.github.io/Hash-Cracker">
@@ -34,9 +34,17 @@ A comprehensive web-based security and cryptography toolkit featuring hash gener
 
 ---
 
-## 🎉 What's New in v2.5.0
+## 🎉 What's New in v2.5.5
 
-This release is a complete visual redesign of the whole app — no tool or logic was changed, every page just looks and feels more professional now.
+This is a bug-fix release. No tool or logic was changed.
+
+- **Fixed: Encode/Decode history actions hit the wrong entry** – The Restore, Copy and Delete buttons on a history item acted on the mirrored entry instead of the one that was clicked. With several saved items, deleting the newest removed the oldest, and Copy and Restore returned the wrong output. Each button now targets exactly the item it belongs to.
+
+---
+
+## 🎨 v2.5.0 Highlights
+
+This release was a complete visual redesign of the whole app — no tool or logic was changed, every page just looks and feels more professional now.
 
 - **New design system** – Proper typography (Inter for the UI, JetBrains Mono for hashes/code) replacing the old copy-pasted fancy-Unicode text, plus a consistent color system across every page
 - **Removed the Matrix rain / floating-shapes background** for a cleaner, modern look
@@ -477,6 +485,7 @@ Properties:
 - [x] Output download as .txt
 - [x] Clear input buttons
 - [x] Confirm delete/clear modals
+- [x] Correct item targeting for history Restore, Copy and Delete (v2.5.5)
 
 ### Planned Features
 
